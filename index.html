@@ -82,6 +82,8 @@ img,svg{ display:block; max-width:100%; }
   opacity:.18;
   mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1   0 0 0 0 1   0 0 0 0 1   0 0 0 0.7 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  transform:translateZ(0);
+  -webkit-transform:translateZ(0);
 }
 
 /* ============================================================
@@ -92,17 +94,20 @@ img,svg{ display:block; max-width:100%; }
   z-index:-1;
   width:70vmax; height:70vmax;
   left:50%; top:30%;
-  transform:translate(-50%,-50%);
+  transform:translate3d(-50%,-50%,0);
   background:var(--grad-aura);
   filter:blur(60px);
   opacity:.55;
   pointer-events:none;
   animation:aura-drift 22s var(--ease-in-out) infinite alternate;
+  will-change:transform, background;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
 }
 @keyframes aura-drift{
-  0%   { transform:translate(-70%,-40%) scale(1); }
-  50%  { transform:translate(-30%,-20%) scale(1.15); background:radial-gradient(closest-side,#9b5de5,transparent 70%); }
-  100% { transform:translate(-60%,-60%) scale(1.05); background:radial-gradient(closest-side,#f4845f,transparent 70%); }
+  0%   { transform:translate3d(-70%,-40%,0) scale(1); }
+  50%  { transform:translate3d(-30%,-20%,0) scale(1.15); background:radial-gradient(closest-side,#9b5de5,transparent 70%); }
+  100% { transform:translate3d(-60%,-60%,0) scale(1.05); background:radial-gradient(closest-side,#f4845f,transparent 70%); }
 }
 
 /* ============================================================
@@ -161,7 +166,7 @@ body.pressing .cursor-ring{ transform:translate(-50%,-50%) scale(.75); }
   z-index:-1;
   width:60vmax; height:60vmax;
   border-radius:50%;
-  transform:translate(-50%,-50%);
+  transform:translate3d(-50%,-50%,0);
   background: radial-gradient(closest-side,
               rgba(244,132,95,.38) 0%,
               rgba(232,105,138,.28) 30%,
@@ -171,6 +176,8 @@ body.pressing .cursor-ring{ transform:translate(-50%,-50%) scale(.75); }
   opacity:.9;
   will-change:transform,background;
   transition: background 1.2s linear;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
 }
 
 /* ============================================================
@@ -451,6 +458,9 @@ section.hero{
   opacity:.55;
   mix-blend-mode:screen;
   will-change:transform;
+  transform:translateZ(0);
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
 }
 .hero .paralayer.p1{ width:420px; height:420px; top:12%; right:-80px; background:radial-gradient(closest-side, var(--pink), transparent 70%); }
 .hero .paralayer.p2{ width:320px; height:320px; bottom:-60px; left:10%; background:radial-gradient(closest-side, var(--orange), transparent 70%); }
@@ -931,8 +941,12 @@ section.skills{
   filter:blur(40px);
   opacity:.45;
   transition:opacity .5s, transform .7s var(--ease-out);
+  transform:translateZ(0);
+  will-change:transform;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
 }
-.skill-card:hover::before{ opacity:.8; transform:translate(-10%,-8%); }
+.skill-card:hover::before{ opacity:.8; transform:translate3d(-10%,-8%,0); }
 .skill-card .num{
   font-family:var(--serif); font-style:italic;
   font-size:48px;
