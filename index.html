@@ -773,7 +773,10 @@ section.featured{
   border-radius:20px;
   background:#15101f;
   aspect-ratio:4/5;
-  transition:aspect-ratio .35s ease;
+  width:100%;
+  margin:0 auto;
+  max-height:80vh;
+  transition:aspect-ratio .35s ease, max-width .35s ease;
   box-shadow:0 40px 80px -20px rgba(155,93,229,.25);
 }
 .carousel-track{
@@ -1812,8 +1815,8 @@ const PROJECTS = {
     slides:[{img:'assets/identidad-p0.jpg', type:'poster'}]
   },
   smart:{
-    num:'006', title:'smart', sub:'anuncio', label:'2024 · motion · publicidad',
-    ratio:'16/9',
+    num:'006', title:'smart', sub:'anuncio', label:'2024 · motion · concept',
+    ratio:'9/16',
     kicker:'pieza publicitaria audiovisual para Smart, explorando el lenguaje visual de la movilidad eléctrica.',
     p1:'dirección de arte y diseño de un spot publicitario: concept, storyboard, animación y postproducción.',
     p2:'',
@@ -1849,7 +1852,7 @@ const PROJECTS = {
   },
   animacion:{
     num:'010', title:'animación', sub:'motion', label:'2025 · motion · digital',
-    ratio:'16/9',
+    ratio:'25/24',
     kicker:'pieza de animación digital realizada en Photoshop: exploración del movimiento y la narrativa visual frame a frame.',
     p1:'secuencia animada cuadro a cuadro con tratamiento pictórico. experimentación con el tiempo, el ritmo y la transformación visual.',
     p2:'',
@@ -1949,7 +1952,14 @@ function openProject(key, scroll){
   const p2 = document.getElementById('featP2');
   p2.textContent = p.p2; p2.style.display = p.p2 ? '' : 'none';
   document.getElementById('featTags').innerHTML = p.tags.map(t => `<span class="tag">${t}</span>`).join('');
-  document.querySelector('.proj-carousel').style.aspectRatio = p.ratio || '4/5';
+  const ratio = p.ratio || '4/5';
+  const carousel = document.querySelector('.proj-carousel');
+  carousel.style.aspectRatio = ratio;
+  
+  // Limitar altura a 80vh conservando el aspect ratio
+  const [rw, rh] = ratio.split('/').map(Number);
+  carousel.style.maxWidth = `calc(80vh * (${rw} / ${rh}))`;
+
   buildCarousel(p.slides);
   if(scroll) document.getElementById('featured').scrollIntoView({behavior:'smooth'});
 }
