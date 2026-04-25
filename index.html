@@ -894,6 +894,7 @@ section.skills{
   overflow-y:hidden;
   scroll-snap-type: x mandatory;
   scrollbar-width:none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
   cursor:grab;
 }
 .skills-scroll.active{
@@ -903,7 +904,12 @@ section.skills{
 .skills-scroll.active *{
   pointer-events:none;
 }
-.skills-scroll::-webkit-scrollbar{ display:none; /* Chrome, Safari, Edge */ }
+.skills-scroll::-webkit-scrollbar{ 
+  display:none !important; 
+  width:0 !important; 
+  height:0 !important; 
+  background:transparent !important;
+}
 
 .skill-card{
   scroll-snap-align:start;
@@ -1302,7 +1308,7 @@ section.contact{
   <!-- floating preview follows cursor on hover -->
   <div class="floating-preview" id="floatingPreview" aria-hidden="true">
     <div class="slide" data-key="hilando">
-      <img src="assets/hilando-photo1.jpg" alt="" loading="lazy">
+      <img src="assets/hilando-photo1.jpg" alt="" loading="lazy" decoding="async">
       <div class="ph-label"><span>ux/ui · 2024</span><b>hilando</b></div>
     </div>
     <div class="slide" data-key="arboretum">
@@ -1310,15 +1316,15 @@ section.contact{
       <div class="ph-label"><span>branding · 2025</span><b>arboretum</b></div>
     </div>
     <div class="slide" data-key="berlioz">
-      <img src="assets/berlioz-poster.jpg" alt="" loading="lazy">
+      <img src="assets/berlioz-poster.jpg" alt="" loading="lazy" decoding="async">
       <div class="ph-label"><span>cartel · 2023</span><b>berlioz</b></div>
     </div>
     <div class="slide" data-key="cheerfy">
-      <img src="assets/cheerfy-p1.jpg" alt="" loading="lazy">
+      <img src="assets/cheerfy-p1.jpg" alt="" loading="lazy" decoding="async">
       <div class="ph-label"><span>branding · 2024</span><b>cheerfy</b></div>
     </div>
     <div class="slide" data-key="identidad">
-      <img src="assets/identidad-p0.jpg" alt="" loading="lazy">
+      <img src="assets/identidad-p0.jpg" alt="" loading="lazy" decoding="async">
       <div class="ph-label"><span>identidad · 2023</span><b>punto</b></div>
     </div>
     <div class="slide" data-key="smart">
@@ -1326,15 +1332,15 @@ section.contact{
       <div class="ph-label"><span>motion · 2024</span><b>smart</b></div>
     </div>
     <div class="slide" data-key="eye">
-      <img src="assets/eye-p0.png" alt="" loading="lazy">
+      <img src="assets/eye-p0.png" alt="" loading="lazy" decoding="async">
       <div class="ph-label"><span>branding · 2023</span><b>la pausa</b></div>
     </div>
     <div class="slide" data-key="procesos">
-      <img src="assets/procesos-p0.jpg" alt="" loading="lazy">
+      <img src="assets/procesos-p0.jpg" alt="" loading="lazy" decoding="async">
       <div class="ph-label"><span>cartel · 2022</span><b>mercado</b></div>
     </div>
     <div class="slide" data-key="triptico">
-      <img src="assets/triptico-p0.jpg" alt="" loading="lazy">
+      <img src="assets/triptico-p0.jpg" alt="" loading="lazy" decoding="async">
       <div class="ph-label"><span>infografía · 2022</span><b>tokio</b></div>
     </div>
     <div class="slide" data-key="animacion">
@@ -1342,7 +1348,7 @@ section.contact{
       <div class="ph-label"><span>motion · 2025</span><b>animación</b></div>
     </div>
     <div class="slide" data-key="portada">
-      <img src="assets/portada-p0.jpg" alt="" loading="lazy">
+      <img src="assets/portada-p0.jpg" alt="" loading="lazy" decoding="async">
       <div class="ph-label"><span>editorial · 2022</span><b>lolita</b></div>
     </div>
   </div>
@@ -1905,10 +1911,10 @@ function buildCarousel(slides){
       div.innerHTML = `<video src="${s.video}" autoplay playsinline muted loop preload="auto"></video>`;
     } else if(s.img && s.type === 'phone'){
       div.className = 'carousel-slide is-phone';
-      div.innerHTML = `<figure class="phone"><div class="notch"></div><img src="${s.img}" alt="" loading="lazy"></figure>`;
+      div.innerHTML = `<figure class="phone"><div class="notch"></div><img src="${s.img}" alt="" loading="lazy" decoding="async"></figure>`;
     } else if(s.img){
       div.className = 'carousel-slide is-poster';
-      div.innerHTML = `<img src="${s.img}" alt="" loading="lazy">`;
+      div.innerHTML = `<img src="${s.img}" alt="" loading="lazy" decoding="async">`;
     } else {
       div.className = 'carousel-slide is-grad';
       div.innerHTML = `<div class="ph-grad ${s.grad}"></div>`;
@@ -2049,6 +2055,25 @@ openProject('hilando', false);
     slider.scrollLeft = scrollLeft - walk;
   });
 })();
+
+/* ========== 29 · ASYNC PRELOADER ========================== */
+window.addEventListener('load', () => {
+  // Preload en segundo plano una vez que la página ha cargado por completo
+  setTimeout(() => {
+    Object.values(PROJECTS).forEach(p => {
+      p.slides.forEach(s => {
+        if (s.img) {
+          const img = new Image();
+          img.src = s.img;
+        } else if (s.video) {
+          const vid = document.createElement('video');
+          vid.preload = 'auto';
+          vid.src = s.video;
+        }
+      });
+    });
+  }, 1000); // 1 segundo después del load para no competir con los recursos vitales
+});
 
 </script>
 </body>
