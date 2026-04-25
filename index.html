@@ -889,14 +889,21 @@ section.skills{
   grid-auto-columns: min(72vw, 480px);
   gap:24px;
   padding:0 clamp(20px,4vw,56px) 24px;
+  scroll-padding-inline: clamp(20px,4vw,56px);
   overflow-x:auto;
+  overflow-y:hidden;
   scroll-snap-type: x mandatory;
-  scrollbar-width:thin;
-  scrollbar-color: var(--hairline) transparent;
+  scrollbar-width:none; /* Firefox */
+  cursor:grab;
 }
-.skills-scroll::-webkit-scrollbar{ height:8px; }
-.skills-scroll::-webkit-scrollbar-thumb{ background:var(--hairline); border-radius:8px; }
-.skills-scroll::-webkit-scrollbar-track{ background:transparent; }
+.skills-scroll.active{
+  cursor:grabbing;
+  scroll-snap-type:none;
+}
+.skills-scroll.active *{
+  pointer-events:none;
+}
+.skills-scroll::-webkit-scrollbar{ display:none; /* Chrome, Safari, Edge */ }
 
 .skill-card{
   scroll-snap-align:start;
@@ -2009,6 +2016,37 @@ openProject('hilando', false);
         x.classList.toggle('active', x.dataset.lang === b.dataset.lang)
       );
     });
+  });
+})();
+
+/* ========== 28 · DRAG TO SCROLL (SKILLS) ========================== */
+(function dragToScrollSkills() {
+  const slider = document.querySelector('.skills-scroll');
+  if (!slider) return;
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  slider.addEventListener('mousedown', (e) => {
+    isDown = true;
+    slider.classList.add('active');
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+  });
+  slider.addEventListener('mouseleave', () => {
+    isDown = false;
+    slider.classList.remove('active');
+  });
+  slider.addEventListener('mouseup', () => {
+    isDown = false;
+    slider.classList.remove('active');
+  });
+  slider.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * 1.5; // Scroll speed multiplier
+    slider.scrollLeft = scrollLeft - walk;
   });
 })();
 
