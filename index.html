@@ -1162,7 +1162,7 @@ section.contact{
   <div class="paralayer p3" data-depth="0.02"></div>
 
   <header class="meta-top">
-    <span><span class="dot"></span><span data-i18n="hero.avail">disponible · 2026</span></span>
+    <span><span class="dot"></span><span data-i18n="hero.avail">disponible · <span class="dyn-year">2026</span></span></span>
     <span>bilbao · 43.26° n  —  2.93° w</span>
   </header>
 
@@ -1506,10 +1506,10 @@ section.contact{
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 18L18 6M9 6h9v9"/></svg>
   </a>
   <div class="links reveal" data-delay="3">
-    <a href="#">linkedin</a>
-    <a href="#">instagram</a>
+    <a href="https://es.linkedin.com/in/aida-guti%C3%A9rrez-garc%C3%ADa-100988326" target="_blank" rel="noopener">linkedin</a>
+    <!-- <a href="#">instagram</a>
     <a href="#">behance</a>
-    <a href="#">vimeo</a>
+    <a href="#">vimeo</a> -->
     <a href="mailto:gutierrezgarciaaida7@gmail.com">email</a>
   </div>
 </section>
@@ -1578,9 +1578,9 @@ const I18N = {
     'nav.projects':'proiektuak',
     'nav.skills':'diziplinak',
     'nav.contact':'kontaktua',
-    'hero.avail':'libre · 2026',
+    'hero.avail':'libre · <span class="dyn-year">2026</span>',
     'hero.tag':'diseinatzaile grafikoa. identitatea, <em>ux/ui</em> eta editoriala, erabaki bisual bakoitzaren zergatia bilatzen duen oinarri artistikoarekin.',
-    'hero.role':'diseinatzaile grafikoa · 24 urte · bilbo',
+    'hero.role':'diseinatzaile grafikoa · <span class="dyn-age">24</span> urte · bilbo',
     'hero.scroll':'jaitsi',
     'about.eyebrow':'01 · niri buruz',
     'about.title.a':'sistemetan',
@@ -1619,6 +1619,21 @@ const I18N = {
   }
 };
 
+function updateDynamics() {
+  const currentYear = new Date().getFullYear();
+  const birthDate = new Date('2002-02-07');
+  const today = new Date();
+  let age = today.getFullYear() - birthDate.getFullYear();
+  if (today.getMonth() < birthDate.getMonth() || (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  document.querySelectorAll('.dyn-year').forEach(el => el.textContent = currentYear);
+  document.querySelectorAll('.dyn-age').forEach(el => el.textContent = age);
+}
+
+// Update the initial DOM nodes before capturing the Spanish translation
+updateDynamics();
+
 /* Snapshot the authored Spanish text so we can restore it */
 (function captureES(){
   const dict = {};
@@ -1639,6 +1654,7 @@ function setLang(code){
   document.querySelectorAll('.lang button').forEach(b=>{
     b.classList.toggle('active', b.dataset.lang === code);
   });
+  updateDynamics();
 }
 document.querySelectorAll('.lang button').forEach(b=>{
   b.addEventListener('click', ()=> setLang(b.dataset.lang));
