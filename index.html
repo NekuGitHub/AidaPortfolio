@@ -1892,7 +1892,7 @@ function buildCarousel(slides){
     const div = document.createElement('div');
     if(s.video){
       div.className = 'carousel-slide is-video';
-      div.innerHTML = `<video src="${s.video}" playsinline muted loop preload="auto"></video>`;
+      div.innerHTML = `<video src="${s.video}" autoplay playsinline muted loop preload="auto"></video>`;
     } else if(s.img && s.type === 'phone'){
       div.className = 'carousel-slide is-phone';
       div.innerHTML = `<figure class="phone"><div class="notch"></div><img src="${s.img}" alt="" loading="lazy"></figure>`;
