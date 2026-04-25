@@ -329,6 +329,21 @@ nav.top ul a:hover::after{ right:0; }
   .proj-carousel{ border-radius:14px; }
   .carousel-slide.is-phone .phone{ width:52%; }
 
+  /* featured-head: título arriba full-width, botones nav en fila debajo */
+  .featured-head{
+    display:grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto;
+    gap:12px 8px;
+    align-items:center;
+    margin-bottom:36px;
+  }
+  .featured-head h3{ grid-column:1/-1; grid-row:1; }
+  .feat-head-side:first-child{ grid-column:1; grid-row:2; }
+  .feat-head-side:last-child{ grid-column:3; grid-row:2; }
+  #featYear{ display:none; }
+  .feat-nav-btn{ width:36px; height:36px; }
+
   /* email: escala con el viewport, siempre en una línea */
   .contact .email{
     font-size:min(4.2vw, 18px) !important;
@@ -684,6 +699,7 @@ section.projects{ padding-bottom:clamp(80px,10vh,140px); }
 .ph-grad.n{ background:linear-gradient(170deg,#4a0e8f,#e8698a 60%,#f4845f); }
 .ph-grad.o{ background:linear-gradient(150deg,#0f3460,#9b5de5 50%,#e8698a); }
 .ph-grad.p{ background:linear-gradient(165deg,#2c3e50,#c77dff 60%,#2a1540); }
+.ph-grad.arb{ background:linear-gradient(160deg,#1b3626,#2c5238 55%,#1a3020); }
 
 .ph-label{
   position:absolute; left:22px; bottom:22px; right:22px;
@@ -729,6 +745,20 @@ section.featured{
   font-size:11px; letter-spacing:.2em; text-transform:uppercase;
   color:var(--ink-dim);
 }
+.feat-head-side{
+  display:flex; align-items:center; gap:10px;
+}
+.feat-nav-btn{
+  flex-shrink:0;
+  background:none; border:1px solid var(--hairline); border-radius:50%;
+  width:36px; height:36px;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; color:var(--ink-dim); padding:0;
+  transition:color .3s, border-color .3s, background .3s;
+}
+.feat-nav-btn svg{ width:14px; height:14px; }
+.feat-nav-btn:hover{ color:var(--lilac); border-color:var(--lilac); background:rgba(199,125,255,.06); }
+.feat-nav-btn:disabled{ opacity:0; pointer-events:none; }
 .featured-head h3{
   font-family:var(--sans);
   font-weight:800;
@@ -775,6 +805,29 @@ section.featured{
   transition:border-color .3s, color .3s, background .3s;
 }
 .tag:hover{ border-color:var(--lilac); background:rgba(199,125,255,.08); }
+.carousel-link-overlay{
+  position:absolute; inset:0; z-index:10;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(0,0,0,.28);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  border-radius:20px;
+  text-decoration:none;
+  transition:background .3s;
+}
+.carousel-link-overlay:hover{ background:rgba(0,0,0,.18); }
+.carousel-link-overlay span{
+  font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+  color:#fff;
+  border:1px solid rgba(255,255,255,.55);
+  border-radius:100px;
+  padding:12px 24px;
+  transition:background .3s, border-color .3s;
+}
+.carousel-link-overlay:hover span{
+  background:rgba(255,255,255,.1);
+  border-color:rgba(255,255,255,.9);
+}
 
 /* ── CAROUSEL ─────────────────────────────────────── */
 .proj-carousel{
@@ -832,6 +885,15 @@ section.featured{
   width:100%; height:100%;
   object-fit:cover;
 }
+/* logo/brand slide — contain so it doesn't stretch */
+.carousel-slide.is-logo-poster{
+  background:#fff;
+}
+.carousel-slide.is-logo-poster img{
+  width:100%; height:100%;
+  object-fit:contain;
+  padding:14%;
+}
 /* video slide */
 .carousel-slide.is-video{
   background:#000;
@@ -840,6 +902,23 @@ section.featured{
   width:100%; height:100%;
   object-fit:cover;
   display:block;
+}
+/* logo slide */
+.carousel-slide.is-logo{
+  background:#fff;
+  padding:clamp(24px,10%,64px);
+}
+.logo-display{
+  display:flex; flex-direction:column; align-items:center; gap:20px;
+}
+.logo-display svg{
+  width:44%; max-width:160px;
+}
+.logo-display .logo-text{
+  font-family:var(--sans); font-weight:300;
+  font-size:clamp(18px,2.4vw,30px);
+  letter-spacing:.06em;
+  color:#4a3b33;
 }
 /* gradient placeholder slide */
 .carousel-slide.is-grad .ph-grad{
@@ -1263,7 +1342,7 @@ section.contact{
     <li class="project-item reveal" data-delay="2" data-preview="berlioz">
       <a href="#">
         <span class="num">003</span>
-        <span class="title">cartel <em>berlioz</em></span>
+        <span class="title">cartel<em> · berlioz</em></span>
         <span class="cat">ilustración editorial</span>
         <span class="year">2025</span>
       </a>
@@ -1336,12 +1415,12 @@ section.contact{
 
   <!-- floating preview follows cursor on hover -->
   <div class="floating-preview" id="floatingPreview" aria-hidden="true">
-    <div class="slide" data-key="hilando">
-      <img src="assets/hilando-photo1.jpg" alt="" loading="lazy" decoding="async">
-      <div class="ph-label"><span>ux/ui · 2024</span><b>hilando</b></div>
+    <div class="slide" data-key="hilando" style="background:#fff;">
+      <img src="assets/hilando.png" alt="" loading="lazy" decoding="async" style="object-fit:contain; padding:12%;">
+      <div class="ph-label" style="color:#4a3b33;"><span>ux/ui · 2024</span><b>hilando</b></div>
     </div>
     <div class="slide" data-key="arboretum">
-      <div class="ph-grad b"></div>
+      <img src="assets/arboretum.png" alt="" loading="lazy" decoding="async">
       <div class="ph-label"><span>ux/ui · 2023</span><b>arboretum</b></div>
     </div>
     <div class="slide" data-key="berlioz">
@@ -1349,7 +1428,7 @@ section.contact{
       <div class="ph-label"><span>ilustración · 2025</span><b>berlioz</b></div>
     </div>
     <div class="slide" data-key="cheerfy">
-      <img src="assets/cheerfy-p1.jpg" alt="" loading="lazy" decoding="async">
+      <img src="assets/cheerfy.png" alt="" loading="lazy" decoding="async">
       <div class="ph-label"><span>branding · 2026</span><b>cheerfy</b></div>
     </div>
     <div class="slide" data-key="identidad">
@@ -1357,7 +1436,7 @@ section.contact{
       <div class="ph-label"><span>identidad · 2024</span><b>punto</b></div>
     </div>
     <div class="slide" data-key="smart">
-      <div class="ph-grad k"></div>
+      <img src="assets/smartapple.png" alt="" loading="lazy" decoding="async">
       <div class="ph-label"><span>animación · 2025</span><b>smartapple</b></div>
     </div>
     <div class="slide" data-key="eye">
@@ -1373,7 +1452,7 @@ section.contact{
       <div class="ph-label"><span>editorial · 2023</span><b>helvetica</b></div>
     </div>
     <div class="slide" data-key="animacion">
-      <div class="ph-grad o"></div>
+      <img src="assets/animacion.png" alt="" loading="lazy" decoding="async">
       <div class="ph-label"><span>motion · 2025</span><b>animación</b></div>
     </div>
     <div class="slide" data-key="portada">
@@ -1392,9 +1471,19 @@ section.contact{
     <span>proyectos</span>
   </button>
   <div class="featured-head">
-    <span class="label" id="featLabel"></span>
+    <div class="feat-head-side">
+      <button class="feat-nav-btn" id="featPrev" aria-label="proyecto anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <span class="label" id="featLabel"></span>
+    </div>
     <h3 id="featTitle"></h3>
-    <span class="label" id="featYear"></span>
+    <div class="feat-head-side">
+      <span class="label" id="featYear"></span>
+      <button class="feat-nav-btn" id="featNext" aria-label="proyecto siguiente">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
   </div>
 
   <div class="featured-body">
@@ -1826,11 +1915,8 @@ const PROJECTS = {
     p1:'hilando nació como propuesta universitaria presentada en la convocatoria GreenGlam de La Perrera, Bilbao. localiza talleres y arreglos cercanos, ofrece noticias sobre moda ecofriendly e información sobre talleres relacionados.',
     p2:'incluye una sección de tips con ilustraciones y consejos prácticos de cuidado, lavado y lectura de etiquetas. prototipo funcional desarrollado en figma.',
     tags:['ux research','information architecture','branding','ui system','figma prototype'],
-    slides:[
-      {img:'assets/hilando-photo1.jpg', type:'phone'},
-      {img:'assets/hilando-photo2.png', type:'phone'},
-      {img:'assets/hilando-photo3.jpg', type:'phone'}
-    ]
+    link:'https://www.figma.com/proto/9H1g3vYG1UxBbPk5cY4I1W/Hilando-app?page-id=0%3A1&type=design&node-id=28-741&scaling=scale-down&starting-point-node-id=28%3A741&show-proto-sidebar=1',
+    slides:[{img:'assets/hilando.png', type:'logo-poster'}]
   },
   arboretum:{
     num:'002', title:'arboretum', sub:'app', label:'2023 · ux/ui',
@@ -1839,10 +1925,11 @@ const PROJECTS = {
     p1:'aplicación móvil universitaria con mapa de navegación, leyenda de especies y organización por zonas. la sección de juego convierte el aprendizaje botánico en una experiencia lúdica.',
     p2:'prototipo desarrollado en figma.',
     tags:['ux/ui','information architecture','figma prototype','diseño de interacción'],
-    slides:[{grad:'b'}]
+    link:'https://www.figma.com/proto/w1UlOD3SRqQqM8lyH155aw/Arboretum---Mikel-y-Aida?node-id=515-125&p=f&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=515%3A125',
+    slides:[{img:'assets/arboretum.png', type:'poster'}]
   },
   berlioz:{
-    num:'003', title:'cartel berlioz', sub:'', label:'2025 · ilustración editorial',
+    num:'003', title:'cartel', sub:'berlioz', label:'2025 · ilustración editorial',
     ratio:'5/7',
     kicker:'cartel ficticio para un concierto real del grupo Berlioz en Seattle, con la estética de la Bauhaus reinterpretada desde una mirada contemporánea.',
     p1:'geometría, tipografía y composición fusionadas en un resultado visual limpio y de fuerte carácter.',
@@ -1857,11 +1944,7 @@ const PROJECTS = {
     p1:'desarrollado en el marco del Red Projectum, iniciativa que conecta estudiantes con empresas reales. el proyecto parte de un briefing auténtico proporcionado por la empresa y combina investigación teórica y práctica.',
     p2:'el resultado abarca el rediseño del logotipo y el manual de identidad completo de una de las principales plataformas tecnológicas del sector hostelero español.',
     tags:['branding','manual corporativo','identidad','tfm'],
-    slides:[
-      {img:'assets/cheerfy-p1.jpg', type:'poster'},
-      {img:'assets/cheerfy-p0.jpg', type:'poster'},
-      {img:'assets/cheerfy-p2.jpg', type:'poster'}
-    ]
+    slides:[{img:'assets/cheerfy.png', type:'poster'}]
   },
   identidad:{
     num:'005', title:'punto', sub:'identidad', label:'2024 · identidad visual',
@@ -1930,6 +2013,7 @@ const PROJECTS = {
 
 /* ========== 25 · CAROUSEL ============================== */
 let carIdx = 0, carTotal = 0;
+let currentProjectKey = 'hilando';
 
 function goTo(i){
   carIdx = Math.max(0, Math.min(i, carTotal - 1));
@@ -1951,9 +2035,20 @@ function buildCarousel(slides){
 
   slides.forEach((s, i) => {
     const div = document.createElement('div');
-    if(s.video){
+    if(s.type === 'logo'){
+      div.className = 'carousel-slide is-logo';
+      div.innerHTML = `<div class="logo-display">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 214.060 214.940" fill="none">
+          <path d="M 141.071 2.503 L 152.737 10.965 L 134.61 35.813 L 130.302 41.713 L 136.883 38.435 C 139.097 37.363 141.729 36.767 144.541 36.767 C 149.028 36.767 153.695 38.257 157.344 40.938 C 167.156 48.029 167.754 61.616 158.72 74.011 L 147.712 89.087 L 146.276 91.053 L 148.609 91.828 L 211.786 112.267 L 207.299 125.973 L 177.984 116.498 L 170.985 114.234 L 176.19 119.478 C 180.856 124.185 182.471 132.468 180.138 139.619 C 177.446 147.961 169.788 152.967 159.797 152.967 C 156.327 152.967 152.678 152.371 149.028 151.179 L 131.2 145.399 L 128.867 144.624 L 128.867 213.272 L 114.389 213.272 L 114.389 175.254 L 110.978 181.749 C 107.927 187.589 100.509 191.7 92.971 191.7 C 80.826 191.7 72.33 181.034 72.33 165.779 L 72.33 144.684 L 69.997 145.459 L 6.82 165.898 L 2.333 152.192 L 31.648 142.718 L 38.648 140.453 L 31.409 139.261 C 24.888 138.189 18.726 132.468 16.333 125.317 C 12.564 113.817 20.162 102.494 34.699 97.727 L 52.528 91.947 L 54.861 91.172 L 53.425 89.206 L 14.418 35.575 L 26.084 27.113 L 44.212 51.962 L 48.519 57.862 L 47.443 50.651 C 46.485 44.096 50.015 36.469 56.117 32.059 C 59.408 29.676 63.057 28.484 67.006 28.484 C 74.604 28.484 82.322 33.013 88.125 40.998 L 99.133 56.074 L 100.569 58.04 L 102.004 56.074 L 141.071 2.503 Z M 46.126 135.09 C 40.084 135.09 35.118 131.932 33.323 126.688 C 31.289 120.431 35.178 114.472 42.656 112.088 L 63.117 105.474 L 64.493 104.997 L 79.091 100.29 L 81.125 99.634 L 79.689 97.608 L 70.835 85.511 L 69.997 84.379 L 58.57 68.707 C 53.365 61.556 53.964 53.035 59.946 48.685 C 61.801 47.314 63.895 46.659 65.989 46.659 C 69.818 46.659 73.826 48.864 76.817 52.975 L 89.441 70.316 L 90.278 71.448 L 100.09 84.856 L 100.569 85.571 L 101.047 84.915 L 110.799 71.508 L 111.696 70.316 L 123.123 54.644 C 126.533 49.996 131.26 47.493 135.747 47.493 C 138.2 47.493 140.593 48.208 142.687 49.757 C 147.951 53.631 148.37 60.722 143.763 67.039 L 131.14 84.379 L 130.302 85.511 L 121.388 97.787 L 120.012 99.634 L 121.508 100.111 L 136.644 104.997 L 138.08 105.474 L 156.566 111.433 C 165.062 114.174 169.549 121.444 167.275 128.416 C 165.78 133.064 161.652 135.686 156.507 135.686 C 154.772 135.686 152.977 135.388 151.062 134.792 L 130.661 128.178 L 129.345 127.761 L 112.654 122.338 L 112.654 160.595 C 112.654 169.473 107.09 176.028 99.731 176.028 C 93.21 176.028 88.663 170.486 88.663 162.68 L 88.663 122.397 L 71.971 127.761 L 70.595 128.178 L 52.109 134.137 C 50.075 134.792 48.101 135.09 46.186 135.09 L 46.126 135.09 Z" fill="#7bafd1" fill-rule="nonzero"/>
+        </svg>
+        <span class="logo-text">hilando</span>
+      </div>`;
+    } else if(s.video){
       div.className = 'carousel-slide is-video';
       div.innerHTML = `<video src="${s.video}" autoplay playsinline muted loop preload="auto"></video>`;
+    } else if(s.img && s.type === 'logo-poster'){
+      div.className = 'carousel-slide is-logo-poster';
+      div.innerHTML = `<img src="${s.img}" alt="" loading="lazy" decoding="async">`;
     } else if(s.img && s.type === 'phone'){
       div.className = 'carousel-slide is-phone';
       div.innerHTML = `<figure class="phone"><div class="notch"></div><img src="${s.img}" alt="" loading="lazy" decoding="async"></figure>`;
@@ -1998,6 +2093,17 @@ document.getElementById('featBack').addEventListener('click', () => {
   document.getElementById('projects').scrollIntoView({behavior:'smooth'});
 });
 
+document.getElementById('featPrev').addEventListener('click', () => {
+  const keys = Object.keys(PROJECTS);
+  const idx = keys.indexOf(currentProjectKey);
+  if(idx > 0) openProject(keys[idx - 1], false);
+});
+document.getElementById('featNext').addEventListener('click', () => {
+  const keys = Object.keys(PROJECTS);
+  const idx = keys.indexOf(currentProjectKey);
+  if(idx < keys.length - 1) openProject(keys[idx + 1], false);
+});
+
 /* ========== 26 · OPEN PROJECT ========================== */
 function openProject(key, scroll){
   const p = PROJECTS[key];
@@ -2019,6 +2125,25 @@ function openProject(key, scroll){
   carousel.style.maxWidth = `calc(80vh * (${rw} / ${rh}))`;
 
   buildCarousel(p.slides);
+
+  currentProjectKey = key;
+  const keys = Object.keys(PROJECTS);
+  const idx = keys.indexOf(key);
+  document.getElementById('featPrev').disabled = idx === 0;
+  document.getElementById('featNext').disabled = idx === keys.length - 1;
+
+  const existingOverlay = carousel.querySelector('.carousel-link-overlay');
+  if(existingOverlay) existingOverlay.remove();
+  if(p.link){
+    const overlay = document.createElement('a');
+    overlay.className = 'carousel-link-overlay';
+    overlay.href = p.link;
+    overlay.target = '_blank';
+    overlay.rel = 'noopener';
+    overlay.innerHTML = '<span>ver prototipo →</span>';
+    carousel.appendChild(overlay);
+  }
+
   if(scroll) document.getElementById('featured').scrollIntoView({behavior:'smooth'});
 }
 
