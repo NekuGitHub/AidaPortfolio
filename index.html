@@ -1,0 +1,2007 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Aida Gutiérrez — Diseñadora gráfica</title>
+<meta name="description" content="Portfolio de Aida Gutiérrez · Diseñadora gráfica · Bilbao · Identidad, UX/UI, editorial, motion." />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%23f4845f'/><stop offset='40%25' stop-color='%23e8698a'/><stop offset='75%25' stop-color='%239b5de5'/><stop offset='100%25' stop-color='%23c77dff'/></linearGradient></defs><rect width='64' height='64' rx='16' fill='%230d0a14'/><text x='32' y='45' font-family='Georgia,serif' font-style='italic' font-size='44' text-anchor='middle' fill='url(%23g)'>a</text></svg>" />
+
+<!-- =========================================================
+     FONTS · Montserrat (geom. sans) + DM Serif Display (serif)
+     ========================================================= -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Montserrat:wght@200;300;400;500;800&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   1 · TOKENS — color, type, motion
+   ============================================================ */
+:root{
+  /* sunset palette */
+  --bg:           #0d0a14;
+  --bg-2:         #15101f;
+  --ink:          #f5f0eb;
+  --ink-dim:      rgba(245,240,235,.62);
+  --ink-faint:    rgba(245,240,235,.22);
+  --hairline:     rgba(245,240,235,.12);
+  --orange:       #f4845f;
+  --pink:         #e8698a;
+  --violet:       #9b5de5;
+  --lilac:        #c77dff;
+  --grad-hero:    linear-gradient(96deg, #f4845f 0%, #e8698a 38%, #9b5de5 72%, #c77dff 100%);
+  --grad-aura:    radial-gradient(closest-side, #e8698a, transparent 70%);
+  /* type */
+  --sans: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+  --serif: 'DM Serif Display', 'Times New Roman', serif;
+  /* motion */
+  --ease-out: cubic-bezier(.2,.7,.2,1);
+  --ease-in-out: cubic-bezier(.7,0,.2,1);
+}
+
+/* ============================================================
+   2 · BASE
+   ============================================================ */
+*,*::before,*::after{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+html{ scroll-behavior:smooth; overflow-x:hidden; }
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-weight:300;
+  font-size:16px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+  cursor:none;             /* custom cursor takes over */
+}
+a{ color:inherit; text-decoration:none; }
+button{
+  font-family:inherit;
+  background:none;
+  border:0;
+  color:inherit;
+  padding:0;
+  cursor:none;
+}
+img,svg{ display:block; max-width:100%; }
+
+/* lowercase aesthetic nudged via CSS, not in markup */
+.lc{ text-transform:lowercase; }
+
+/* ============================================================
+   3 · GRAIN — full-screen SVG noise overlay
+   ============================================================ */
+.grain{
+  position:fixed; inset:0;
+  pointer-events:none;
+  z-index:80;
+  opacity:.18;
+  mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1   0 0 0 0 1   0 0 0 0 1   0 0 0 0.7 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* ============================================================
+   4 · AMBIENT AURA — slow-breathing gradient that drifts behind
+   ============================================================ */
+.aura{
+  position:fixed;
+  z-index:-1;
+  width:70vmax; height:70vmax;
+  left:50%; top:30%;
+  transform:translate(-50%,-50%);
+  background:var(--grad-aura);
+  filter:blur(60px);
+  opacity:.55;
+  pointer-events:none;
+  animation:aura-drift 22s var(--ease-in-out) infinite alternate;
+}
+@keyframes aura-drift{
+  0%   { transform:translate(-70%,-40%) scale(1); }
+  50%  { transform:translate(-30%,-20%) scale(1.15); background:radial-gradient(closest-side,#9b5de5,transparent 70%); }
+  100% { transform:translate(-60%,-60%) scale(1.05); background:radial-gradient(closest-side,#f4845f,transparent 70%); }
+}
+
+/* ============================================================
+   5 · CUSTOM CURSOR — sparkle dot + halo glow with lag
+   ============================================================ */
+.cursor-dot, .cursor-ring{
+  position:fixed; left:0; top:0;
+  pointer-events:none;
+  z-index:120;
+}
+.cursor-dot{
+  width:22px; height:22px;
+  transform:translate(-50%,-50%);
+  transition:transform .14s var(--ease-out), width .25s, height .25s;
+}
+.cursor-dot svg{
+  width:100%; height:100%;
+  filter: drop-shadow(0 0 6px #fff) drop-shadow(0 0 14px var(--lilac));
+  animation: spark 3.6s var(--ease-in-out) infinite;
+}
+@keyframes spark{
+  0%,100%{ transform:rotate(0deg) scale(1); }
+  50%{ transform:rotate(90deg) scale(1.12); }
+}
+.cursor-ring{
+  width:80px; height:80px;
+  border-radius:50%;
+  transform:translate(-50%,-50%) scale(1);
+  transition:transform .4s var(--ease-out), width .35s, height .35s, opacity .3s;
+  opacity:.9;
+  /* halo of light — no border, just soft glow */
+  background: radial-gradient(closest-side,
+              rgba(255,255,255,.28) 0%,
+              rgba(199,125,255,.20) 35%,
+              rgba(232,105,138,.14) 60%,
+              transparent 75%);
+  filter: blur(2px);
+  mix-blend-mode: screen;
+}
+body.hovering .cursor-dot{ width:30px; height:30px; }
+body.hovering .cursor-ring{
+  width:130px; height:130px;
+  background: radial-gradient(closest-side,
+              rgba(255,255,255,.38) 0%,
+              rgba(199,125,255,.30) 35%,
+              rgba(244,132,95,.22) 60%,
+              transparent 78%);
+}
+body.pressing .cursor-ring{ transform:translate(-50%,-50%) scale(.75); }
+@media (hover:none){ body{ cursor:auto; } .cursor-dot,.cursor-ring,.cursor-aura,.grain{ display:none; } }
+
+/* cursor-following aura — soft sunset pool that tracks the mouse */
+.cursor-aura{
+  position:fixed; left:0; top:0;
+  pointer-events:none;
+  z-index:-1;
+  width:60vmax; height:60vmax;
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  background: radial-gradient(closest-side,
+              rgba(244,132,95,.38) 0%,
+              rgba(232,105,138,.28) 30%,
+              rgba(155,93,229,.22) 55%,
+              transparent 72%);
+  filter: blur(50px);
+  opacity:.9;
+  will-change:transform,background;
+  transition: background 1.2s linear;
+}
+
+/* ============================================================
+   6 · NAV — thin, persistent, locale switcher on right
+   ============================================================ */
+nav.top{
+  position:fixed; top:0; left:0; right:0;
+  z-index:60;
+  padding:22px clamp(20px,4vw,56px);
+  display:flex; align-items:center; justify-content:space-between;
+  mix-blend-mode:difference;
+  color:var(--ink);
+}
+nav.top .mark{
+  font-family:var(--serif);
+  font-size:20px;
+  letter-spacing:.01em;
+}
+nav.top .mark em{ font-style:italic; color:var(--lilac); }
+nav.top ul{
+  list-style:none; padding:0; margin:0;
+  display:flex; gap:28px;
+  font-size:12px; font-weight:400;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+nav.top ul a{ position:relative; padding:4px 0; }
+nav.top ul a::after{
+  content:""; position:absolute; left:0; right:100%; bottom:0;
+  height:1px; background:var(--ink);
+  transition:right .4s var(--ease-out);
+}
+nav.top ul a:hover::after{ right:0; }
+.lang{
+  display:flex; gap:8px; font-size:11px; letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.lang button{
+  opacity:.4;
+  transition:opacity .3s;
+}
+.lang button.active{ opacity:1; }
+.lang button:hover{ opacity:.85; }
+.lang span{ opacity:.3; }
+
+@media (max-width:720px){
+  nav.top ul{ display:none; }
+  .lang{ display:none; }
+  nav.top .mark{ padding-left:48px; }
+}
+
+/* hamburger button — fixed, fuera del nav blend-mode */
+.hamburger{
+  display:none;
+  position:fixed;
+  top:22px;
+  left:clamp(20px,4vw,56px);
+  z-index:70;
+  flex-direction:column; gap:5px;
+  padding:8px; margin:-8px 0 -8px -8px;
+  background:none; border:0;
+  cursor:pointer;
+}
+.hamburger span{
+  display:block; width:22px; height:1.5px;
+  background:var(--ink);
+  transition:transform .3s var(--ease-out), opacity .25s;
+}
+.hamburger.open span:nth-child(1){ transform:translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2){ opacity:0; }
+.hamburger.open span:nth-child(3){ transform:translateY(-6.5px) rotate(-45deg); }
+
+/* mobile full-screen nav overlay */
+.mobile-nav{
+  position:fixed; inset:0;
+  z-index:55;
+  background:var(--bg);
+  display:flex; flex-direction:column;
+  justify-content:center; align-items:flex-start;
+  padding:0 clamp(28px,8vw,56px);
+  gap:40px;
+  pointer-events:none; opacity:0;
+  transition:opacity .35s var(--ease-out);
+}
+.mobile-nav.open{ pointer-events:auto; opacity:1; }
+.mobile-nav ul{
+  list-style:none; margin:0; padding:0;
+  display:flex; flex-direction:column; gap:18px;
+}
+.mobile-nav ul a{
+  font-size:clamp(38px,12vw,56px);
+  font-weight:800;
+  letter-spacing:-.02em;
+  text-transform:lowercase;
+  color:var(--ink);
+  transition:color .3s;
+}
+.mobile-nav ul a:hover{ color:var(--lilac); }
+.mobile-nav .lang-m{
+  display:flex; gap:12px;
+  font-size:14px; letter-spacing:.2em; text-transform:uppercase;
+}
+.mobile-nav .lang-m button{ opacity:.4; transition:opacity .3s; background:none; border:0; color:var(--ink); font-family:inherit; cursor:pointer; }
+.mobile-nav .lang-m button.active{ opacity:1; }
+.mobile-nav .lang-m span{ opacity:.3; color:var(--ink); }
+
+@media (max-width:720px){
+  .hamburger{ display:flex; }
+
+  /* — hamburguesa — */
+  .hamburger{ top:30px; }
+
+  /* — projects list: legible en mobile — */
+  .project-item a{
+    display:grid;
+    grid-template-columns: 32px 1fr auto;
+    grid-template-rows: auto auto;
+    gap:6px 12px;
+    padding:20px 0;
+    align-items:start;
+  }
+  .project-item .num{
+    grid-column:1; grid-row:1/3;
+    align-self:center;
+    width:auto; font-size:11px;
+  }
+  .project-item .title{
+    grid-column:2; grid-row:1;
+    font-size:clamp(20px,5.5vw,28px) !important;
+    white-space:normal !important;
+    overflow:visible !important;
+    text-overflow:clip !important;
+    line-height:1.1;
+  }
+  .project-item .cat{
+    grid-column:2; grid-row:2;
+    font-size:10px; display:block;
+  }
+  .project-item .year{
+    grid-column:3; grid-row:1/3;
+    align-self:center; font-size:11px;
+  }
+
+  /* preview flotante: ocultar en touch, links siguen navegando */
+  .floating-preview{ display:none !important; }
+
+  /* featured: columna única en móvil */
+  .featured-body{ grid-template-columns:1fr; }
+  .proj-carousel{ border-radius:14px; }
+  .carousel-slide.is-phone .phone{ width:52%; }
+
+  /* email: escala con el viewport, siempre en una línea */
+  .contact .email{
+    font-size:min(4.2vw, 18px) !important;
+    gap:8px;
+    white-space:nowrap;
+    display:inline-flex;
+  }
+  .contact .email svg{ display:none; }
+}
+
+/* ============================================================
+   7 · HERO — giant type with gradient fill + letter reveal
+   ============================================================ */
+section.hero{
+  position:relative;
+  min-height:100vh;
+  padding:120px clamp(20px,4vw,56px) 80px;
+  display:flex; flex-direction:column; justify-content:space-between;
+  overflow:visible;
+}
+.hero .meta-top{
+  display:flex; justify-content:space-between; align-items:flex-start;
+  gap:32px;
+  font-size:12px; font-weight:400;
+  letter-spacing:.18em; text-transform:uppercase;
+  color:var(--ink-dim);
+}
+.hero .meta-top .dot{
+  display:inline-block; width:8px; height:8px; border-radius:50%;
+  background:var(--orange);
+  box-shadow:0 0 20px var(--orange);
+  margin-right:10px;
+  vertical-align:middle;
+  animation:pulse 2s var(--ease-in-out) infinite;
+}
+@keyframes pulse{ 50%{ opacity:.35; } }
+
+.hero h1{
+  font-family:var(--sans);
+  font-weight:800;
+  font-size:clamp(52px, 13vw, 200px);
+  line-height:0.8;
+  letter-spacing:-.03em;
+  margin:0 0 0 clamp(12px, 2vw, 40px);
+  padding:.2em 0 .4em;
+  text-transform:lowercase;
+  overflow:visible;
+}
+.hero h1 .line{
+  display:block;
+  overflow:visible;
+}
+.hero h1 .line-1 .ch{
+  color:#ffffff;
+  -webkit-text-fill-color:#ffffff;
+  background:none;
+}
+.hero h1 .second{
+  font-family:var(--serif);
+  font-style:italic;
+  font-weight:400;
+  letter-spacing:-.02em;
+  padding-left:.72em;
+}
+.hero h1 .second .ch{
+  animation:ch-in 1.4s var(--ease-out) forwards;
+}
+@keyframes grad-shift{ to{ background-position:100% 0; } }
+
+/* per-letter entry — smooth fade+rise, no blur/rotate jerk */
+.hero h1 .ch{
+  display:inline-block;
+  transform:translateY(.45em);
+  opacity:0;
+  animation:ch-in 1.4s var(--ease-out) forwards;
+  will-change:transform,opacity;
+}
+@keyframes ch-in{
+  0%{ transform:translateY(.45em); opacity:0; }
+  100%{ transform:translateY(0); opacity:1; }
+}
+
+.hero .tagline{
+  max-width:540px;
+  font-size:clamp(16px, 1.5vw, 22px);
+  line-height:1.4;
+  font-weight:300;
+  color:var(--ink);
+  opacity:0;
+  transform:translateY(20px);
+  animation:fade-up 1.2s .9s var(--ease-out) forwards;
+}
+.hero .tagline em{
+  font-family:var(--serif);
+  font-weight:400;
+  font-style:italic;
+  color:var(--lilac);
+}
+@keyframes fade-up{ to{ opacity:1; transform:translateY(0); } }
+
+.hero .meta-bottom{
+  display:grid;
+  grid-template-columns: 1fr auto;
+  align-items:end;
+  gap:24px;
+  font-size:12px; font-weight:400;
+  letter-spacing:.18em; text-transform:uppercase;
+  color:var(--ink-dim);
+}
+.hero .meta-bottom .scroll-hint{
+  display:flex; align-items:center; gap:12px;
+}
+.hero .meta-bottom .scroll-hint .bar{
+  width:48px; height:1px; background:var(--ink);
+  transform-origin:left; animation:bar 2.4s var(--ease-in-out) infinite;
+}
+@keyframes bar{
+  0%,100%{ transform:scaleX(1); } 50%{ transform:scaleX(.3); }
+}
+
+/* parallax layers */
+.hero .paralayer{
+  position:absolute;
+  pointer-events:none;
+  border-radius:50%;
+  filter:blur(60px);
+  opacity:.55;
+  mix-blend-mode:screen;
+  will-change:transform;
+}
+.hero .paralayer.p1{ width:420px; height:420px; top:12%; right:-80px; background:radial-gradient(closest-side, var(--pink), transparent 70%); }
+.hero .paralayer.p2{ width:320px; height:320px; bottom:-60px; left:10%; background:radial-gradient(closest-side, var(--orange), transparent 70%); }
+.hero .paralayer.p3{ width:260px; height:260px; top:40%; left:40%; background:radial-gradient(closest-side, var(--violet), transparent 70%); opacity:.4; }
+
+/* ============================================================
+   8 · SECTION scaffolding
+   ============================================================ */
+section{ position:relative; padding:clamp(90px,14vh,180px) clamp(20px,4vw,56px); }
+.eyebrow{
+  font-size:11px; font-weight:500; letter-spacing:.24em;
+  text-transform:uppercase; color:var(--ink-dim);
+  display:flex; align-items:center; gap:14px;
+  margin-bottom:32px;
+}
+.eyebrow::before{
+  content:""; width:28px; height:1px; background:var(--ink-dim);
+}
+h2.section-title{
+  font-family:var(--sans);
+  font-weight:800;
+  font-size:clamp(44px, 7vw, 112px);
+  line-height:.95;
+  letter-spacing:-.025em;
+  margin:0 0 48px;
+  text-transform:lowercase;
+}
+h2.section-title em{
+  font-family:var(--serif);
+  font-style:italic;
+  font-weight:400;
+  background:var(--grad-hero);
+  -webkit-background-clip:text; background-clip:text;
+  color:transparent;
+}
+
+/* reveal-on-scroll */
+.reveal{
+  opacity:0; transform:translateY(40px);
+  transition:opacity .9s var(--ease-out), transform .9s var(--ease-out);
+}
+.reveal.in{ opacity:1; transform:translateY(0); }
+.reveal[data-delay="1"]{ transition-delay:.08s; }
+.reveal[data-delay="2"]{ transition-delay:.16s; }
+.reveal[data-delay="3"]{ transition-delay:.24s; }
+.reveal[data-delay="4"]{ transition-delay:.32s; }
+
+/* ============================================================
+   9 · ABOUT
+   ============================================================ */
+section.about{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap:48px;
+}
+.about-grid{
+  display:grid;
+  grid-template-columns: minmax(0,1.1fr) minmax(0,1fr);
+  gap:clamp(32px,6vw,96px);
+  align-items:start;
+}
+.about-copy p{
+  font-size:clamp(18px,1.6vw,26px);
+  line-height:1.45;
+  font-weight:300;
+  max-width:62ch;
+  margin:0 0 1.2em;
+  color:var(--ink);
+}
+.about-copy p:last-child{ color:var(--ink-dim); font-size:clamp(15px,1.1vw,18px); }
+.about-copy .big-q{
+  font-family:var(--serif);
+  font-size:clamp(28px,3vw,46px);
+  line-height:1.2;
+  font-style:italic;
+  color:var(--lilac);
+  margin-bottom:32px;
+}
+.about-side{
+  position:sticky; top:120px;
+  display:flex; flex-direction:column; gap:24px;
+  font-size:13px; letter-spacing:.08em;
+  color:var(--ink-dim);
+}
+.about-side dl{ display:grid; grid-template-columns: 80px 1fr; gap:10px 18px; margin:0; }
+.about-side dt{
+  text-transform:uppercase; font-size:11px; letter-spacing:.2em;
+  color:var(--ink-faint);
+}
+.about-side dd{ margin:0; color:var(--ink); font-size:14px; }
+.about-side hr{ border:0; border-top:1px solid var(--hairline); margin:0; }
+
+@media (max-width:860px){
+  .about-grid{ grid-template-columns:1fr; }
+  .about-side{ position:static; }
+}
+
+/* ============================================================
+   10 · PROJECTS — big typographic list with hover image
+       Chosen layout: future-proof for adding many more.
+   ============================================================ */
+section.projects{ padding-bottom:clamp(80px,10vh,140px); }
+.project-list{
+  list-style:none;
+  margin:0; padding:0;
+  border-top:1px solid var(--hairline);
+}
+.project-item{
+  border-bottom:1px solid var(--hairline);
+  position:relative;
+}
+.project-item a{
+  display:grid;
+  grid-template-columns: auto 1fr auto auto;
+  gap:clamp(20px,4vw,56px);
+  align-items:center;
+  padding:clamp(22px,3.6vw,42px) 0;
+  transition:padding .5s var(--ease-out);
+}
+.project-item .num{
+  font-size:12px; letter-spacing:.2em; color:var(--ink-faint);
+  font-variant-numeric:tabular-nums;
+  width:32px;
+}
+.project-item .title{
+  font-family:var(--sans);
+  font-weight:800;
+  font-size:clamp(30px, 5vw, 80px);
+  line-height:.98;
+  letter-spacing:-.02em;
+  text-transform:lowercase;
+  transition:transform .55s var(--ease-out), color .4s, letter-spacing .55s var(--ease-out);
+  will-change:transform;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.project-item .title em{
+  font-family:var(--serif);
+  font-style:italic;
+  font-weight:400;
+}
+.project-item .cat{
+  font-size:11px; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--ink-dim);
+  font-weight:500;
+}
+.project-item .year{
+  font-size:11px; letter-spacing:.14em;
+  color:var(--ink-faint);
+  font-variant-numeric:tabular-nums;
+}
+/* hover: title shifts & glows with gradient */
+.project-item:hover .title{
+  background:var(--grad-hero);
+  -webkit-background-clip:text; background-clip:text;
+  color:transparent;
+  transform:translateX(14px);
+  letter-spacing:-.018em;
+}
+.project-item:hover .num,
+.project-item:hover .cat,
+.project-item:hover .year{ color:var(--ink); }
+
+/* dim other items on hover — 'focus one' effect */
+.project-list:hover .project-item{ opacity:.35; transition:opacity .4s; }
+.project-list .project-item:hover{ opacity:1; }
+
+/* floating preview that follows cursor */
+.floating-preview{
+  position:fixed;
+  left:0; top:0;
+  width:min(34vw, 460px);
+  aspect-ratio: 4/5;
+  pointer-events:none;
+  z-index:40;
+  opacity:0;
+  transform:translate(-50%,-50%) scale(.92);
+  transition:opacity .35s var(--ease-out), transform .45s var(--ease-out);
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:
+    0 40px 80px -30px rgba(232,105,138,.35),
+    0 20px 40px -20px rgba(155,93,229,.35);
+}
+.floating-preview.on{ opacity:1; transform:translate(-50%,-50%) scale(1); }
+.floating-preview .slide{
+  position:absolute; inset:0;
+  opacity:0;
+  transition:opacity .3s;
+}
+.floating-preview .slide.on{ opacity:1; }
+.floating-preview .slide .ph{
+  position:absolute; inset:0;
+  display:flex; align-items:flex-end;
+  padding:24px;
+  color:var(--ink);
+  font-size:12px; letter-spacing:.2em; text-transform:uppercase;
+}
+.floating-preview .slide img{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+}
+
+/* fallback placeholder visuals (no imagery yet) */
+.ph-grad{ position:absolute; inset:0; }
+.ph-grad.a{ background:linear-gradient(135deg,#f4845f,#9b5de5); }
+.ph-grad.b{ background:linear-gradient(160deg,#e8698a,#c77dff); }
+.ph-grad.c{ background:linear-gradient(110deg,#9b5de5,#f4845f); }
+.ph-grad.d{ background:linear-gradient(200deg,#c77dff,#e8698a); }
+.ph-grad.e{ background:linear-gradient(135deg,#2a1540,#f4845f); }
+.ph-grad.f{ background:linear-gradient(180deg,#e8698a,#9b5de5 70%); }
+.ph-grad.g{ background:linear-gradient(140deg,#f4845f,#e8698a 60%,#9b5de5); }
+.ph-grad.h{ background:linear-gradient(170deg,#c77dff,#9b5de5 60%,#2a1540); }
+.ph-grad.i{ background:linear-gradient(135deg,#1a1a2e,#e8698a); }
+.ph-grad.j{ background:linear-gradient(160deg,#0f3460,#c77dff); }
+.ph-grad.k{ background:linear-gradient(110deg,#533483,#f4845f); }
+.ph-grad.l{ background:linear-gradient(200deg,#2c3e50,#9b5de5); }
+.ph-grad.m{ background:linear-gradient(140deg,#1a1a2e,#c77dff 60%,#e8698a); }
+.ph-grad.n{ background:linear-gradient(170deg,#4a0e8f,#e8698a 60%,#f4845f); }
+.ph-grad.o{ background:linear-gradient(150deg,#0f3460,#9b5de5 50%,#e8698a); }
+.ph-grad.p{ background:linear-gradient(165deg,#2c3e50,#c77dff 60%,#2a1540); }
+
+.ph-label{
+  position:absolute; left:22px; bottom:22px; right:22px;
+  display:flex; justify-content:space-between; align-items:flex-end;
+  color:var(--ink);
+  font-size:11px; letter-spacing:.22em; text-transform:uppercase;
+  font-weight:500;
+}
+.ph-label b{
+  font-family:var(--serif);
+  font-weight:400; font-style:italic;
+  font-size:22px; letter-spacing:0;
+  text-transform:none;
+  display:block;
+}
+
+/* ============================================================
+   11 · FEATURED — larger case for Hilando (real work)
+   ============================================================ */
+section.featured{
+  padding-top:clamp(40px,6vh,80px);
+}
+.feat-back{
+  display:inline-flex; align-items:center; gap:8px;
+  background:none; border:none; padding:0;
+  color:var(--ink-dim); font-size:11px;
+  letter-spacing:.16em; text-transform:uppercase;
+  cursor:pointer; margin-bottom:28px;
+  transition:color .3s;
+}
+.feat-back:hover{ color:var(--lilac); }
+.feat-back svg{ width:14px; height:14px; }
+.featured-head{
+  display:grid;
+  grid-template-columns: auto 1fr auto;
+  gap:24px;
+  align-items:end;
+  border-top:1px solid var(--hairline);
+  padding-top:24px;
+  margin-bottom:56px;
+}
+.featured-head .label{
+  font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--ink-dim);
+}
+.featured-head h3{
+  font-family:var(--sans);
+  font-weight:800;
+  font-size:clamp(40px,6vw,96px);
+  line-height:.95;
+  letter-spacing:-.02em;
+  margin:0;
+  text-transform:lowercase;
+}
+.featured-head h3 em{
+  font-family:var(--serif); font-style:italic; font-weight:400;
+  background:var(--grad-hero);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.featured-body{
+  display:grid;
+  grid-template-columns: minmax(0,1fr) minmax(0,1.4fr);
+  gap:clamp(32px,5vw,80px);
+  align-items:start;
+}
+.featured-copy .kicker{
+  font-family:var(--serif); font-style:italic;
+  font-size:clamp(22px,2.4vw,34px);
+  line-height:1.25;
+  color:var(--lilac);
+  margin:0 0 28px;
+}
+.featured-copy p{
+  font-size:15px; line-height:1.6;
+  max-width:56ch;
+  color:var(--ink);
+  margin:0 0 18px;
+}
+.tag-row{
+  display:flex; flex-wrap:wrap; gap:8px;
+  margin-top:28px;
+}
+.tag{
+  font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--ink);
+  border:1px solid var(--hairline);
+  border-radius:100px;
+  padding:8px 14px;
+  transition:border-color .3s, color .3s, background .3s;
+}
+.tag:hover{ border-color:var(--lilac); background:rgba(199,125,255,.08); }
+
+/* ── CAROUSEL ─────────────────────────────────────── */
+.proj-carousel{
+  position:relative;
+  overflow:hidden;
+  border-radius:20px;
+  background:#15101f;
+  aspect-ratio:4/5;
+  transition:aspect-ratio .35s ease;
+  box-shadow:0 40px 80px -20px rgba(155,93,229,.25);
+}
+.carousel-track{
+  display:flex;
+  height:100%;
+  transition:transform .48s cubic-bezier(.4,0,.2,1);
+  will-change:transform;
+}
+.carousel-slide{
+  min-width:100%; height:100%;
+  position:relative;
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+}
+/* phone mockup slide */
+.carousel-slide.is-phone{
+  background:#15101f;
+  padding:20px;
+}
+.carousel-slide.is-phone .phone{
+  width:55%;
+  aspect-ratio:9/19.5;
+  border-radius:28px;
+  overflow:hidden;
+  position:relative;
+  background:#0d0a16;
+  border:1px solid var(--hairline);
+  box-shadow:0 24px 56px -12px rgba(232,105,138,.35),
+             0 10px 24px -8px rgba(155,93,229,.3);
+}
+.carousel-slide.is-phone .phone img{
+  width:100%; height:100%;
+  object-fit:cover; object-position:top center;
+}
+.carousel-slide.is-phone .phone .notch{
+  position:absolute; top:8px; left:50%;
+  width:48px; height:5px; border-radius:10px;
+  background:rgba(0,0,0,.75);
+  transform:translateX(-50%); z-index:2;
+}
+/* poster/image slide */
+.carousel-slide.is-poster img{
+  width:100%; height:100%;
+  object-fit:contain;
+}
+/* video slide */
+.carousel-slide.is-video{
+  background:#000;
+}
+.carousel-slide.is-video video{
+  width:100%; height:100%;
+  object-fit:contain;
+  display:block;
+}
+/* gradient placeholder slide */
+.carousel-slide.is-grad .ph-grad{
+  position:absolute; inset:0;
+}
+/* nav arrows */
+.carousel-btn{
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:40px; height:40px; border-radius:50%;
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.14);
+  color:#fff; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  z-index:3; transition:background .2s, opacity .3s;
+}
+.carousel-btn:hover{ background:rgba(255,255,255,.18); }
+.carousel-btn.prev{ left:10px; }
+.carousel-btn.next{ right:10px; }
+.carousel-btn.hidden{ opacity:0; pointer-events:none; }
+.carousel-btn svg{ width:18px; height:18px; }
+/* dots */
+.carousel-dots{
+  position:absolute; bottom:14px; left:50%;
+  transform:translateX(-50%);
+  display:flex; gap:6px; z-index:3;
+}
+.carousel-dot{
+  width:6px; height:6px; border-radius:50%;
+  background:rgba(255,255,255,.32);
+  border:none; padding:0; cursor:pointer;
+  transition:background .3s, transform .3s;
+}
+.carousel-dot.active{
+  background:#fff; transform:scale(1.5);
+}
+
+@media (max-width:900px){
+  .featured-body{ grid-template-columns:1fr; }
+  .proj-carousel{ border-radius:16px; }
+}
+
+/* ============================================================
+   12 · SKILLS — horizontal scroll section
+   ============================================================ */
+section.skills{
+  padding-left:0; padding-right:0;
+}
+.skills-head{
+  padding:0 clamp(20px,4vw,56px);
+  display:flex; justify-content:space-between; align-items:flex-end;
+  gap:24px; margin-bottom:56px;
+}
+.skills-scroll{
+  display:grid;
+  grid-auto-flow:column;
+  grid-auto-columns: min(72vw, 480px);
+  gap:24px;
+  padding:0 clamp(20px,4vw,56px) 24px;
+  overflow-x:auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width:thin;
+  scrollbar-color: var(--hairline) transparent;
+}
+.skills-scroll::-webkit-scrollbar{ height:8px; }
+.skills-scroll::-webkit-scrollbar-thumb{ background:var(--hairline); border-radius:8px; }
+.skills-scroll::-webkit-scrollbar-track{ background:transparent; }
+
+.skill-card{
+  scroll-snap-align:start;
+  background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));
+  border:1px solid var(--hairline);
+  border-radius:28px;
+  padding:36px 32px;
+  min-height:440px;
+  display:flex; flex-direction:column; justify-content:space-between;
+  position:relative;
+  overflow:hidden;
+  transition:transform .55s var(--ease-out), border-color .4s;
+}
+.skill-card:hover{ transform:translateY(-6px); border-color:rgba(199,125,255,.35); }
+.skill-card::before{
+  content:""; position:absolute; inset:auto -40% -60% auto;
+  width:380px; height:380px; border-radius:50%;
+  background:radial-gradient(closest-side, var(--color, var(--pink)), transparent 70%);
+  filter:blur(40px);
+  opacity:.45;
+  transition:opacity .5s, transform .7s var(--ease-out);
+}
+.skill-card:hover::before{ opacity:.8; transform:translate(-10%,-8%); }
+.skill-card .num{
+  font-family:var(--serif); font-style:italic;
+  font-size:48px;
+  color:var(--ink-faint);
+}
+.skill-card h4{
+  font-family:var(--sans);
+  font-weight:800;
+  font-size:40px;
+  line-height:1;
+  letter-spacing:-.02em;
+  margin:18px 0 12px;
+  text-transform:lowercase;
+}
+.skill-card h4 em{
+  font-family:var(--serif); font-style:italic; font-weight:400;
+}
+.skill-card p{
+  font-size:15px;
+  line-height:1.55;
+  color:var(--ink-dim);
+  margin:0 0 24px;
+  max-width:38ch;
+}
+.skill-card ul{
+  list-style:none; margin:0; padding:0;
+  display:flex; flex-wrap:wrap; gap:6px 10px;
+  font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--ink);
+}
+.skill-card ul li{
+  padding:6px 10px;
+  border:1px solid var(--hairline);
+  border-radius:20px;
+}
+.skill-card[data-c="1"]{ --color: var(--orange); }
+.skill-card[data-c="2"]{ --color: var(--pink); }
+.skill-card[data-c="3"]{ --color: var(--violet); }
+.skill-card[data-c="4"]{ --color: var(--lilac); }
+
+/* ============================================================
+   13 · CONTACT
+   ============================================================ */
+section.contact{
+  min-height:90vh;
+  display:flex; flex-direction:column; justify-content:center;
+  position:relative;
+  padding-top:clamp(80px,12vh,160px);
+  padding-bottom:80px;
+}
+.contact h2{
+  font-family:var(--sans);
+  font-weight:800;
+  font-size:clamp(52px,10vw,200px);
+  line-height:.9;
+  letter-spacing:-.03em;
+  margin:0 0 32px;
+  text-transform:lowercase;
+}
+.contact h2 em{
+  font-family:var(--serif); font-style:italic; font-weight:400;
+  background:var(--grad-hero);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.contact .email{
+  display:inline-flex; align-items:center; gap:18px;
+  font-family:var(--serif); font-style:italic;
+  font-size:clamp(28px,4vw,52px);
+  color:var(--ink);
+  transition:transform .4s var(--ease-out);
+  position:relative;
+}
+.contact .email:hover{ transform:translateX(8px); color:var(--lilac); }
+.contact .email svg{ width:.9em; height:.9em; }
+.contact .links{
+  display:flex; flex-wrap:wrap; gap:28px 42px;
+  margin-top:56px;
+  font-size:12px; letter-spacing:.22em; text-transform:uppercase;
+}
+.contact .links a{
+  position:relative; padding:10px 0;
+  color:var(--ink);
+}
+.contact .links a::before{
+  content:""; position:absolute; left:0; right:100%; bottom:0;
+  height:1px; background:var(--ink);
+  transition:right .45s var(--ease-out);
+}
+.contact .links a:hover{ color:var(--lilac); }
+.contact .links a:hover::before{ right:0; background:var(--lilac); }
+
+.footer{
+  border-top:1px solid var(--hairline);
+  padding:28px clamp(20px,4vw,56px);
+  display:flex; justify-content:space-between; gap:18px;
+  font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--ink-faint);
+}
+
+/* ============================================================
+   14 · CLOSING MARQUEE  — "available for work" ticker
+   ============================================================ */
+.marquee{
+  border-top:1px solid var(--hairline);
+  border-bottom:1px solid var(--hairline);
+  overflow:hidden;
+  padding:24px 0;
+  display:flex;
+}
+.marquee .track{
+  display:flex; gap:48px;
+  white-space:nowrap;
+  animation:marq 38s linear infinite;
+  font-family:var(--serif); font-style:italic;
+  font-size:clamp(28px, 4vw, 56px);
+  color:var(--ink);
+}
+.marquee .track span{ display:inline-flex; align-items:center; gap:48px; }
+.marquee .track .sep{
+  width:10px; height:10px; border-radius:50%;
+  background:var(--grad-hero);
+  display:inline-block;
+}
+@keyframes marq{ to{ transform:translateX(-50%); } }
+
+/* ============================================================
+   15 · UTILS
+   ============================================================ */
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration:.01ms !important;
+    transition-duration:.01ms !important;
+  }
+  .reveal{ opacity:1; transform:none; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     CUSTOM CURSOR · AMBIENT AURA · CURSOR AURA · GRAIN
+     ===================================================== -->
+<div class="aura" aria-hidden="true"></div>
+<div class="cursor-aura" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+<div class="cursor-dot" aria-hidden="true">
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <!-- 4-point sparkle / star-burst -->
+    <path d="M12 1.5 C12.9 7.6 16.4 11.1 22.5 12 C16.4 12.9 12.9 16.4 12 22.5 C11.1 16.4 7.6 12.9 1.5 12 C7.6 11.1 11.1 7.6 12 1.5 Z" fill="#ffffff"/>
+  </svg>
+</div>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- =====================================================
+     TOP NAV · mix-blend-mode so it inverts over any bg
+     ===================================================== -->
+<nav class="top" aria-label="primary">
+  <a href="#hero" class="mark lc">aida<em>.</em>gutiérrez</a>
+  <ul>
+    <li><a href="#about" data-i18n="nav.about">sobre mí</a></li>
+    <li><a href="#projects" data-i18n="nav.projects">proyectos</a></li>
+    <li><a href="#skills" data-i18n="nav.skills">disciplinas</a></li>
+    <li><a href="#contact" data-i18n="nav.contact">contacto</a></li>
+  </ul>
+  <div class="lang" role="group" aria-label="language">
+    <button data-lang="es" class="active">es</button><span>/</span>
+    <button data-lang="en">en</button><span>/</span>
+    <button data-lang="eu">eu</button>
+  </div>
+</nav>
+<!-- hamburger fuera del nav para evitar mix-blend-mode:difference -->
+<button class="hamburger" aria-label="Menú" aria-expanded="false">
+  <span></span><span></span><span></span>
+</button>
+
+<!-- mobile full-screen menu -->
+<div class="mobile-nav" aria-label="Navegación móvil">
+  <ul>
+    <li><a href="#about" class="mob-link" data-i18n="nav.about">sobre mí</a></li>
+    <li><a href="#projects" class="mob-link" data-i18n="nav.projects">proyectos</a></li>
+    <li><a href="#skills" class="mob-link" data-i18n="nav.skills">disciplinas</a></li>
+    <li><a href="#contact" class="mob-link" data-i18n="nav.contact">contacto</a></li>
+  </ul>
+  <div class="lang-m" role="group" aria-label="language">
+    <button data-lang="es" class="active">es</button><span>/</span>
+    <button data-lang="en">en</button><span>/</span>
+    <button data-lang="eu">eu</button>
+  </div>
+</div>
+
+<!-- =====================================================
+     HERO
+     ===================================================== -->
+<section id="hero" class="hero" data-screen-label="01 Hero">
+  <div class="paralayer p1" data-depth="0.04"></div>
+  <div class="paralayer p2" data-depth="0.08"></div>
+  <div class="paralayer p3" data-depth="0.02"></div>
+
+  <header class="meta-top">
+    <span><span class="dot"></span><span data-i18n="hero.avail">disponible · 2026</span></span>
+    <span>bilbao · 43.26° n  —  2.93° w</span>
+  </header>
+
+  <h1 aria-label="aida gutiérrez">
+    <span class="line line-1" data-text="aida"></span>
+    <span class="second line line-2" data-text="gutiérrez"></span>
+  </h1>
+
+  <p class="tagline" data-i18n="hero.tag">
+    diseñadora gráfica. identidad, <em>ux/ui</em> y editorial,
+    con una base artística que busca el porqué detrás de cada decisión visual.
+  </p>
+
+  <footer class="meta-bottom">
+    <span data-i18n="hero.role">diseñadora gráfica · 24 años · bilbao</span>
+    <span class="scroll-hint">
+      <span data-i18n="hero.scroll">desliza</span>
+      <span class="bar" aria-hidden="true"></span>
+    </span>
+  </footer>
+</section>
+
+<!-- =====================================================
+     ABOUT
+     ===================================================== -->
+<section id="about" class="about" data-screen-label="02 About">
+  <div class="eyebrow reveal"><span data-i18n="about.eyebrow">01 · sobre mí</span></div>
+  <h2 class="section-title reveal" data-delay="1">
+    <span data-i18n="about.title.a">pienso en</span> <em data-i18n="about.title.b">sistemas</em>,<br>
+    <span data-i18n="about.title.c">no en piezas sueltas.</span>
+  </h2>
+
+  <div class="about-grid">
+    <div class="about-copy">
+      <p class="big-q reveal" data-i18n="about.quote">
+        “diseño con intención. identidad, ux y editorial.”
+      </p>
+      <p class="reveal" data-delay="1" data-i18n="about.p1">
+        me formé en la intersección entre el arte y el diseño. grado en creación
+        y diseño en la facultad de bellas artes de la upv/ehu (leioa, 2020–2024),
+        con mención en diseño gráfico, partiendo de una base artística compartida
+        con el grado en arte durante los dos primeros años.
+      </p>
+      <p class="reveal" data-delay="2" data-i18n="about.p2">
+        después cursé el máster en diseño gráfico digital en unir (2025), donde
+        profundicé en diseño de información, ux/ui, composición tipográfica,
+        motion, producción gráfica digital e interacción.
+      </p>
+      <p class="reveal" data-delay="3" data-i18n="about.p3">
+        actualmente diseño en elements digital (bilbao): identidad, fotografía
+        y vídeo para eventos y redes. no me interesa el diseño rápido del
+        marketing: me interesa el que investiga, construye sistemas
+        visuales coherentes y tiene algo que decir.
+      </p>
+    </div>
+
+    <aside class="about-side reveal" data-delay="2">
+      <dl>
+        <dt data-i18n="about.meta.now">ahora</dt>
+        <dd>Elements Digital · Bilbao</dd>
+        <dt data-i18n="about.meta.edu">formación</dt>
+        <dd>UPV/EHU, 2020–2024<br>UNIR, Máster DGD 2025</dd>
+        <dt data-i18n="about.meta.focus">foco</dt>
+        <dd data-i18n="about.meta.focus.v">identidad · ux/ui · editorial · motion</dd>
+        <dt data-i18n="about.meta.langs">idiomas</dt>
+        <dd>es · en · eu</dd>
+      </dl>
+    </aside>
+  </div>
+</section>
+
+<!-- =====================================================
+     PROJECTS · big typographic list, future-proof for many more
+     ===================================================== -->
+<section id="projects" class="projects" data-screen-label="03 Projects">
+  <div class="eyebrow reveal"><span data-i18n="proj.eyebrow">02 · proyectos seleccionados</span></div>
+  <h2 class="section-title reveal" data-delay="1">
+    <span data-i18n="proj.title.a">trabajo</span> <em data-i18n="proj.title.b">seleccionado</em>
+  </h2>
+
+  <ul class="project-list" id="projectList">
+    <li class="project-item reveal" data-preview="hilando">
+      <a href="#featured">
+        <span class="num">001</span>
+        <span class="title">hilando<em> · app</em></span>
+        <span class="cat">ux/ui · research</span>
+        <span class="year">2024</span>
+      </a>
+    </li>
+    <li class="project-item reveal" data-delay="1" data-preview="arboretum">
+      <a href="#">
+        <span class="num">002</span>
+        <span class="title">arboretum<em> · identidad</em></span>
+        <span class="cat">branding</span>
+        <span class="year">2025</span>
+      </a>
+    </li>
+    <li class="project-item reveal" data-delay="2" data-preview="berlioz">
+      <a href="#">
+        <span class="num">003</span>
+        <span class="title">cartel <em>berlioz</em></span>
+        <span class="cat">cartel · tipografía</span>
+        <span class="year">2023</span>
+      </a>
+    </li>
+    <li class="project-item reveal" data-delay="3" data-preview="cheerfy">
+      <a href="#">
+        <span class="num">004</span>
+        <span class="title">cheerfy<em> · manual</em></span>
+        <span class="cat">branding · identidad</span>
+        <span class="year">2024</span>
+      </a>
+    </li>
+    <li class="project-item reveal" data-delay="4" data-preview="identidad">
+      <a href="#">
+        <span class="num">005</span>
+        <span class="title">punto<em> · identidad</em></span>
+        <span class="cat">identidad visual</span>
+        <span class="year">2023</span>
+      </a>
+    </li>
+    <li class="project-item reveal" data-delay="0" data-preview="smart">
+      <a href="#">
+        <span class="num">006</span>
+        <span class="title">smart<em> · anuncio</em></span>
+        <span class="cat">motion · publicidad</span>
+        <span class="year">2024</span>
+      </a>
+    </li>
+    <li class="project-item reveal" data-delay="1" data-preview="eye">
+      <a href="#">
+        <span class="num">007</span>
+        <span class="title">la pausa<em> · branding</em></span>
+        <span class="cat">branding · packaging</span>
+        <span class="year">2023</span>
+      </a>
+    </li>
+    <li class="project-item reveal" data-delay="2" data-preview="procesos">
+      <a href="#">
+        <span class="num">008</span>
+        <span class="title">mercado<em> · cartel</em></span>
+        <span class="cat">cartel · diseño</span>
+        <span class="year">2022</span>
+      </a>
+    </li>
+    <li class="project-item reveal" data-delay="3" data-preview="triptico">
+      <a href="#">
+        <span class="num">009</span>
+        <span class="title">tokio<em> · infografía</em></span>
+        <span class="cat">infografía · editorial</span>
+        <span class="year">2022</span>
+      </a>
+    </li>
+    <li class="project-item reveal" data-delay="4" data-preview="animacion">
+      <a href="#">
+        <span class="num">010</span>
+        <span class="title">animación<em> · motion</em></span>
+        <span class="cat">motion · digital</span>
+        <span class="year">2025</span>
+      </a>
+    </li>
+    <li class="project-item reveal" data-delay="0" data-preview="portada">
+      <a href="#">
+        <span class="num">011</span>
+        <span class="title">lolita<em> · portada</em></span>
+        <span class="cat">editorial · diseño</span>
+        <span class="year">2022</span>
+      </a>
+    </li>
+  </ul>
+
+  <!-- floating preview follows cursor on hover -->
+  <div class="floating-preview" id="floatingPreview" aria-hidden="true">
+    <div class="slide" data-key="hilando">
+      <img src="assets/hilando-photo1.jpg" alt="" loading="lazy">
+      <div class="ph-label"><span>ux/ui · 2024</span><b>hilando</b></div>
+    </div>
+    <div class="slide" data-key="arboretum">
+      <div class="ph-grad b"></div>
+      <div class="ph-label"><span>branding · 2025</span><b>arboretum</b></div>
+    </div>
+    <div class="slide" data-key="berlioz">
+      <img src="assets/berlioz-poster.jpg" alt="" loading="lazy">
+      <div class="ph-label"><span>cartel · 2023</span><b>berlioz</b></div>
+    </div>
+    <div class="slide" data-key="cheerfy">
+      <img src="assets/cheerfy-p1.jpg" alt="" loading="lazy">
+      <div class="ph-label"><span>branding · 2024</span><b>cheerfy</b></div>
+    </div>
+    <div class="slide" data-key="identidad">
+      <img src="assets/identidad-p0.jpg" alt="" loading="lazy">
+      <div class="ph-label"><span>identidad · 2023</span><b>punto</b></div>
+    </div>
+    <div class="slide" data-key="smart">
+      <div class="ph-grad k"></div>
+      <div class="ph-label"><span>motion · 2024</span><b>smart</b></div>
+    </div>
+    <div class="slide" data-key="eye">
+      <img src="assets/eye-p0.png" alt="" loading="lazy">
+      <div class="ph-label"><span>branding · 2023</span><b>la pausa</b></div>
+    </div>
+    <div class="slide" data-key="procesos">
+      <img src="assets/procesos-p0.jpg" alt="" loading="lazy">
+      <div class="ph-label"><span>cartel · 2022</span><b>mercado</b></div>
+    </div>
+    <div class="slide" data-key="triptico">
+      <img src="assets/triptico-p0.jpg" alt="" loading="lazy">
+      <div class="ph-label"><span>infografía · 2022</span><b>tokio</b></div>
+    </div>
+    <div class="slide" data-key="animacion">
+      <div class="ph-grad o"></div>
+      <div class="ph-label"><span>motion · 2025</span><b>animación</b></div>
+    </div>
+    <div class="slide" data-key="portada">
+      <img src="assets/portada-p0.jpg" alt="" loading="lazy">
+      <div class="ph-label"><span>editorial · 2022</span><b>lolita</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     FEATURED · case study dinámico (JS lo rellena)
+     ===================================================== -->
+<section id="featured" class="featured" data-screen-label="04 Featured">
+  <button class="feat-back" id="featBack">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    <span>proyectos</span>
+  </button>
+  <div class="featured-head">
+    <span class="label" id="featLabel"></span>
+    <h3 id="featTitle"></h3>
+    <span class="label" id="featYear"></span>
+  </div>
+
+  <div class="featured-body">
+    <div class="featured-copy">
+      <p class="kicker" id="featKicker"></p>
+      <p id="featP1"></p>
+      <p id="featP2"></p>
+      <div class="tag-row" id="featTags"></div>
+    </div>
+
+    <div class="proj-carousel">
+      <div class="carousel-track" id="carTrack"></div>
+      <button class="carousel-btn prev" id="carPrev" aria-label="anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="carousel-btn next" id="carNext" aria-label="siguiente">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+      <div class="carousel-dots" id="carDots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     SKILLS · horizontal scroll
+     ===================================================== -->
+<section id="skills" class="skills" data-screen-label="05 Skills">
+  <div class="skills-head">
+    <div>
+      <div class="eyebrow reveal"><span data-i18n="sk.eyebrow">03 · disciplinas</span></div>
+      <h2 class="section-title reveal" data-delay="1">
+        <span data-i18n="sk.title.a">cuatro</span> <em data-i18n="sk.title.b">territorios</em>.
+      </h2>
+    </div>
+    <span class="label reveal" data-delay="2" style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-dim);" data-i18n="sk.hint">← desliza horizontal →</span>
+  </div>
+
+  <div class="skills-scroll">
+    <article class="skill-card reveal" data-c="1">
+      <span class="num">01</span>
+      <div>
+        <h4 data-i18n="sk.c1.t"><em>identidad</em> visual</h4>
+        <p data-i18n="sk.c1.p">mi área principal. sistemas de marca con nombre, voz y criterio. logotipos, marcos visuales, guidelines y aplicaciones.</p>
+        <ul><li>naming</li><li>logotype</li><li>sistema</li><li>guidelines</li></ul>
+      </div>
+    </article>
+    <article class="skill-card reveal" data-c="2" data-delay="1">
+      <span class="num">02</span>
+      <div>
+        <h4 data-i18n="sk.c2.t">diseño <em>ux / ui</em></h4>
+        <p data-i18n="sk.c2.p">investigación con usuarios, arquitectura de información, prototipado y librerías ui. un diseño útil antes que bonito — y también bonito.</p>
+        <ul><li>research</li><li>wireframing</li><li>figma</li><li>design systems</li></ul>
+      </div>
+    </article>
+    <article class="skill-card reveal" data-c="3" data-delay="2">
+      <span class="num">03</span>
+      <div>
+        <h4 data-i18n="sk.c3.t">diseño <em>editorial</em></h4>
+        <p data-i18n="sk.c3.p">revistas, maquetación, diseño de información. el placer de una página bien construida: retícula, jerarquía, ritmo tipográfico.</p>
+        <ul><li>indesign</li><li>retícula</li><li>tipografía</li><li>data viz</li></ul>
+      </div>
+    </article>
+    <article class="skill-card reveal" data-c="4" data-delay="3">
+      <span class="num">04</span>
+      <div>
+        <h4>motion <em>&amp; 3d</em></h4>
+        <p data-i18n="sk.c4.p">área emergente: dar tiempo al diseño. transiciones, reels de marca y pequeños experimentos 3d que aportan textura.</p>
+        <ul><li>after effects</li><li>blender</li><li>cinema 4d</li><li>reels</li></ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- =====================================================
+     MARQUEE
+     ===================================================== -->
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    <span>
+      <span>available for work 2026</span><i class="sep"></i>
+      <span>identidad</span><i class="sep"></i>
+      <span>ux/ui</span><i class="sep"></i>
+      <span>editorial</span><i class="sep"></i>
+      <span>motion</span><i class="sep"></i>
+      <span>bilbao · remote</span><i class="sep"></i>
+    </span>
+    <span>
+      <span>available for work 2026</span><i class="sep"></i>
+      <span>identidad</span><i class="sep"></i>
+      <span>ux/ui</span><i class="sep"></i>
+      <span>editorial</span><i class="sep"></i>
+      <span>motion</span><i class="sep"></i>
+      <span>bilbao · remote</span><i class="sep"></i>
+    </span>
+  </div>
+</div>
+
+<!-- =====================================================
+     CONTACT
+     ===================================================== -->
+<section id="contact" class="contact" data-screen-label="06 Contact">
+  <div class="eyebrow reveal"><span data-i18n="ct.eyebrow">04 · contacto</span></div>
+  <h2 class="reveal" data-delay="1">
+    <span data-i18n="ct.title.a">trabajemos</span><br>
+    <em data-i18n="ct.title.b">juntas.</em>
+  </h2>
+  <a href="mailto:gutierrezgarciaaida7@gmail.com" class="email reveal" data-delay="2">
+    gutierrezgarciaaida7@gmail.com
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 18L18 6M9 6h9v9"/></svg>
+  </a>
+  <div class="links reveal" data-delay="3">
+    <a href="#">linkedin</a>
+    <a href="#">instagram</a>
+    <a href="#">behance</a>
+    <a href="#">vimeo</a>
+    <a href="mailto:gutierrezgarciaaida7@gmail.com">email</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <span>© 2026 aida gutiérrez</span>
+  <span data-i18n="ft.note">hecho en bilbao · con mucho café</span>
+  <span>v1.0</span>
+</footer>
+
+<!-- =====================================================
+     SCRIPTS — i18n, cursor, parallax, reveal, letter anim, preview
+     ===================================================== -->
+<script>
+/* ========== 15 · i18n DICTIONARY ==========================
+   Spanish is authored inline so it renders without JS.
+   EN / EU get applied on lang switch.                         */
+const I18N = {
+  es: null, /* source-of-truth lives in DOM */
+  en: {
+    'nav.about':'about',
+    'nav.projects':'projects',
+    'nav.skills':'disciplines',
+    'nav.contact':'contact',
+    'hero.avail':'available · 2026',
+    'hero.tag':'graphic designer. identity, <em>ux/ui</em> and editorial, with an art-school foundation that looks for the why behind every visual decision.',
+    'hero.role':'graphic designer · 24 · bilbao',
+    'hero.scroll':'scroll',
+    'about.eyebrow':'01 · about',
+    'about.title.a':'i think in',
+    'about.title.b':'systems',
+    'about.title.c':'not loose pieces.',
+    'about.quote':'“design with intent. identity, ux and editorial.”',
+    'about.p1':'trained at the intersection of art and design. ba in creation & design at the faculty of fine arts of upv/ehu (leioa, 2020–2024), major in graphic design, with an art-school base shared with the fine arts degree in the first two years.',
+    'about.p2':'ma in digital graphic design at unir (2025), where i dug into information design, ux/ui, typographic composition, motion, digital production and interaction.',
+    'about.p3':'currently designing at elements digital (bilbao): identity, photography and video for events and social. i am not interested in fast marketing design — i want design that researches, builds coherent visual systems and has something to say.',
+    'about.meta.now':'now',
+    'about.meta.edu':'education',
+    'about.meta.focus':'focus',
+    'about.meta.focus.v':'identity · ux/ui · editorial · motion',
+    'about.meta.langs':'languages',
+    'proj.eyebrow':'02 · selected work',
+    'proj.title.a':'selected',
+    'proj.title.b':'work',
+    'feat.kicker':'an app to extend the life of your clothes: find where to repair them, learn how to care for them and discover fashion with criteria.',
+    'feat.p1':'hilando started as my degree project, researching the textile industry impact (20% of global water and 10% of CO₂). i designed the whole system: user research, information architecture, visual identity and a functional figma prototype.',
+    'feat.p2':'the app combines a map of repair workshops in bilbao, a tips section by fabric type, and a curated press feed on sustainable fashion. warm typography, cream + gold + sky palette, custom iconography.',
+    'sk.eyebrow':'03 · disciplines',
+    'sk.title.a':'four',
+    'sk.title.b':'territories',
+    'sk.hint':'← scroll horizontal →',
+    'sk.c1.t':'visual <em>identity</em>',
+    'sk.c1.p':'my main area. brand systems with name, voice and criteria. logotypes, visual frameworks, guidelines and applications.',
+    'sk.c2.t':'<em>ux / ui</em> design',
+    'sk.c2.p':'user research, information architecture, prototyping and ui libraries. useful before pretty — and also pretty.',
+    'sk.c3.t':'<em>editorial</em> design',
+    'sk.c3.p':'magazines, layout, information design. the pleasure of a well-built page: grid, hierarchy, typographic rhythm.',
+    'sk.c4.p':'emerging area: giving time to design. transitions, brand reels and small 3d experiments that add texture.',
+    'ct.eyebrow':'04 · contact',
+    'ct.title.a':"let's work",
+    'ct.title.b':'together.',
+    'ft.note':'made in bilbao · with plenty of coffee',
+  },
+  eu: {
+    'nav.about':'niri buruz',
+    'nav.projects':'proiektuak',
+    'nav.skills':'diziplinak',
+    'nav.contact':'kontaktua',
+    'hero.avail':'libre · 2026',
+    'hero.tag':'diseinatzaile grafikoa. identitatea, <em>ux/ui</em> eta editoriala, erabaki bisual bakoitzaren zergatia bilatzen duen oinarri artistikoarekin.',
+    'hero.role':'diseinatzaile grafikoa · 24 urte · bilbo',
+    'hero.scroll':'jaitsi',
+    'about.eyebrow':'01 · niri buruz',
+    'about.title.a':'sistemetan',
+    'about.title.b':'pentsatzen',
+    'about.title.c':'dut, ez pieza solteetan.',
+    'about.quote':'“asmoz diseinatzen dut. identitatea, ux eta editoriala.”',
+    'about.p1':'arte eta diseinuaren arteko bidegurutzean hezi nintzen. sorkuntza eta diseinuko gradua upv/ehuko arte ederren fakultatean (leioa, 2020–2024), diseinu grafikoko aipamenarekin, lehen bi urteetan arte ederren graduarekin partekatutako oinarri artistikoarekin.',
+    'about.p2':'ondoren, diseinu grafiko digitaleko masterra egin nuen unir-en (2025), non informazio diseinua, ux/ui, konposizio tipografikoa, motion, ekoizpen grafiko digitala eta interakzioa landu nituen.',
+    'about.p3':'gaur egun elements digital-en (bilbo) diseinatzen dut: identitatea, argazkiak eta bideoa ekitaldi eta sare sozialetarako. marketin azkarraren diseinua ez zait interesatzen — ikertu, sistema bisual koherenteak eraiki eta zerbait esateko duena bai.',
+    'about.meta.now':'orain',
+    'about.meta.edu':'formakuntza',
+    'about.meta.focus':'fokua',
+    'about.meta.focus.v':'identitatea · ux/ui · editoriala · motion',
+    'about.meta.langs':'hizkuntzak',
+    'proj.eyebrow':'02 · lan hautatuak',
+    'proj.title.a':'hautatutako',
+    'proj.title.b':'lanak',
+    'feat.kicker':'arroparen bizitza luzatzeko app bat: non konpondu, nola zaindu eta irizpidedun moda aurkitzeko.',
+    'feat.p1':'hilando nire gradu amaierako proiektua izan zen, ehungintzaren inpaktua ikertzen (% 20 urarena eta % 10 CO₂arena). sistema osoa diseinatu nuen: erabiltzaile ikerketa, informazio arkitektura, identitate bisuala eta figma prototipoa.',
+    'feat.p2':'appak bilboko konponketa tailerren mapa, ehun motaren araberako aholkuak eta moda jasangarriaren gaineko prentsa feed bat biltzen ditu. tipografia epela, krema + urrea + urdin paleta, ikonografia propioa.',
+    'sk.eyebrow':'03 · diziplinak',
+    'sk.title.a':'lau',
+    'sk.title.b':'lurralde',
+    'sk.hint':'← lerratu alboetara →',
+    'sk.c1.t':'identitate <em>bisuala</em>',
+    'sk.c1.p':'nire arlo nagusia. izena, ahotsa eta irizpidea dituzten marka sistemak. logotipoak, marko bisualak, gidaliburuak eta aplikazioak.',
+    'sk.c2.t':'<em>ux / ui</em> diseinua',
+    'sk.c2.p':'erabiltzaile ikerketa, informazio arkitektura, prototipoak eta ui liburutegiak. baliagarria lehenik, ederra gero — eta ederra ere bai.',
+    'sk.c3.t':'diseinu <em>editoriala</em>',
+    'sk.c3.p':'aldizkariak, maketa, informazio diseinua. ondo eraikitako orri baten plazera: sareta, hierarkia, erritmo tipografikoa.',
+    'sk.c4.p':'arlo berria: diseinuari denbora ematea. trantsizioak, markaren reel-ak eta ehundura gehitzen duten 3d esperimentu txikiak.',
+    'ct.eyebrow':'04 · kontaktua',
+    'ct.title.a':'elkar',
+    'ct.title.b':'gaitezen.',
+    'ft.note':'bilbon egina · kafe askorekin',
+  }
+};
+
+/* Snapshot the authored Spanish text so we can restore it */
+(function captureES(){
+  const dict = {};
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    dict[el.getAttribute('data-i18n')] = el.innerHTML;
+  });
+  I18N.es = dict;
+})();
+
+function setLang(code){
+  const dict = I18N[code];
+  if(!dict) return;
+  document.documentElement.lang = code;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k = el.getAttribute('data-i18n');
+    if(dict[k] != null) el.innerHTML = dict[k];
+  });
+  document.querySelectorAll('.lang button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.lang === code);
+  });
+}
+document.querySelectorAll('.lang button').forEach(b=>{
+  b.addEventListener('click', ()=> setLang(b.dataset.lang));
+});
+
+/* ========== 16 · HERO LETTER REVEAL ======================= */
+(function letterReveal(){
+  /* gradient stops: orange → pink → violet → lilac */
+  const stops = [
+    [244,132, 95],   /* #f4845f */
+    [232,105,138],   /* #e8698a */
+    [155, 93,229],   /* #9b5de5 */
+    [199,125,255]    /* #c77dff */
+  ];
+  function gradColor(t){
+    const seg  = stops.length - 1;
+    const idx  = Math.min(Math.floor(t * seg), seg - 1);
+    const s    = t * seg - idx;
+    const a = stops[idx], b = stops[idx+1];
+    return `rgb(${Math.round(a[0]+(b[0]-a[0])*s)},${Math.round(a[1]+(b[1]-a[1])*s)},${Math.round(a[2]+(b[2]-a[2])*s)})`;
+  }
+
+  document.querySelectorAll('.hero h1 .line').forEach((line,lineIdx)=>{
+    const text  = line.dataset.text;
+    const isGrad = line.classList.contains('second');
+    const total  = [...text].length;
+    line.textContent = '';
+    [...text].forEach((ch,i)=>{
+      const s = document.createElement('span');
+      s.className = 'ch';
+      s.textContent = ch === ' ' ? '\u00A0' : ch;
+      s.style.animationDelay = (0.06*i + 0.4*lineIdx) + 's';
+      if(isGrad){
+        const col = gradColor(total > 1 ? i/(total-1) : 0);
+        s.style.cssText += `;color:${col};-webkit-text-fill-color:${col}`;
+      }
+      line.appendChild(s);
+    });
+  });
+})();
+
+/* ========== 17 · REVEAL ON SCROLL ======================== */
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold:0.12, rootMargin:'0px 0px -5% 0px' });
+document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+/* ========== 18 · CUSTOM CURSOR w/ lag + hover state ======= */
+(function cursor(){
+  const dot  = document.querySelector('.cursor-dot');
+  const ring = document.querySelector('.cursor-ring');
+  const caura= document.querySelector('.cursor-aura');
+  let mx = innerWidth/2, my = innerHeight/2;
+  let dx = mx, dy = my, rx = mx, ry = my, ax = mx, ay = my;
+  addEventListener('mousemove', e=>{ mx = e.clientX; my = e.clientY; });
+  addEventListener('mousedown', ()=> document.body.classList.add('pressing'));
+  addEventListener('mouseup',   ()=> document.body.classList.remove('pressing'));
+
+  /* cycle cursor-aura hue across the sunset palette as it moves */
+  const hues = [
+    'radial-gradient(closest-side, rgba(244,132,95,.38), rgba(232,105,138,.28) 30%, rgba(155,93,229,.22) 55%, transparent 72%)',
+    'radial-gradient(closest-side, rgba(232,105,138,.38), rgba(199,125,255,.28) 30%, rgba(155,93,229,.22) 55%, transparent 72%)',
+    'radial-gradient(closest-side, rgba(199,125,255,.38), rgba(155,93,229,.28) 30%, rgba(244,132,95,.22) 55%, transparent 72%)',
+    'radial-gradient(closest-side, rgba(155,93,229,.38), rgba(232,105,138,.28) 30%, rgba(244,132,95,.22) 55%, transparent 72%)'
+  ];
+  let hueIdx = 0;
+  setInterval(()=>{ hueIdx = (hueIdx+1) % hues.length; caura.style.background = hues[hueIdx]; }, 2400);
+
+  function tick(){
+    dx += (mx - dx) * 0.5;
+    dy += (my - dy) * 0.5;
+    rx += (mx - rx) * 0.18;
+    ry += (my - ry) * 0.18;
+    ax += (mx - ax) * 0.06;          /* slow lag for ambient pool */
+    ay += (my - ay) * 0.06;
+    dot.style.transform  = `translate(${dx}px, ${dy}px) translate(-50%,-50%)`;
+    ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%,-50%)`;
+    caura.style.transform= `translate(${ax}px, ${ay}px) translate(-50%,-50%)`;
+    requestAnimationFrame(tick);
+  }
+  tick();
+
+  const hoverables = 'a, button, .project-item, .skill-card, .phone, .tag, .email';
+  document.querySelectorAll(hoverables).forEach(el=>{
+    el.addEventListener('mouseenter', ()=> document.body.classList.add('hovering'));
+    el.addEventListener('mouseleave', ()=> document.body.classList.remove('hovering'));
+  });
+})();
+
+/* ========== 19 · HERO PARALLAX (mouse) =================== */
+(function parallax(){
+  const hero = document.querySelector('.hero');
+  const layers = document.querySelectorAll('.paralayer');
+  let tx = 0, ty = 0, cx = 0, cy = 0;
+  hero.addEventListener('mousemove', e=>{
+    const r = hero.getBoundingClientRect();
+    tx = ((e.clientX - r.left)/r.width - .5) * 2;   /* -1..1 */
+    ty = ((e.clientY - r.top)/r.height - .5) * 2;
+  });
+  function loop(){
+    cx += (tx - cx) * 0.06;
+    cy += (ty - cy) * 0.06;
+    layers.forEach(l=>{
+      const d = parseFloat(l.dataset.depth) * 140;
+      l.style.transform = `translate(${cx*d}px, ${cy*d}px)`;
+    });
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+
+/* ========== 20 · PROJECT HOVER PREVIEW =================== */
+(function previewer(){
+  const preview = document.getElementById('floatingPreview');
+  const slides = preview.querySelectorAll('.slide');
+  const list = document.getElementById('projectList');
+  let mx = 0, my = 0, px = 0, py = 0, running = false, on = false;
+
+  function show(key){
+    slides.forEach(s=> s.classList.toggle('on', s.dataset.key === key));
+    preview.classList.add('on'); on = true;
+  }
+  function hide(){ preview.classList.remove('on'); on = false; }
+
+  list.querySelectorAll('.project-item').forEach(item=>{
+    item.addEventListener('mouseenter', ()=> show(item.dataset.preview));
+    item.addEventListener('mouseleave', ()=>{});
+  });
+  list.addEventListener('mouseleave', hide);
+
+  addEventListener('mousemove', e=>{ mx = e.clientX; my = e.clientY; });
+
+  function loop(){
+    px += (mx - px) * 0.12;
+    py += (my - py) * 0.12;
+    if(on) preview.style.left = px + 'px', preview.style.top = py + 'px';
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+
+/* ========== 21 · SCROLL-DRIVEN AURA SHIFT ================ */
+(function scrollAura(){
+  const aura = document.querySelector('.aura');
+  addEventListener('scroll', ()=>{
+    const y = scrollY;
+    const h = document.body.scrollHeight - innerHeight;
+    const t = y / Math.max(h,1);            /* 0..1 */
+    aura.style.setProperty('top', (20 + t*60) + '%');
+    const hue = 10 + t*280;
+    aura.style.filter = `blur(60px) hue-rotate(${hue}deg)`;
+  }, { passive:true });
+})();
+
+/* ========== 22 · NAV anchors → smooth (native)============ */
+/* relying on html{scroll-behavior:smooth} + mix-blend nav   */
+
+/* ========== 24 · PROJECT DATA ========================== */
+const PROJECTS = {
+  hilando:{
+    num:'001', title:'hilando', sub:'app', label:'2024 · tfg',
+    ratio:'3/4',
+    kicker:'una app para alargar la vida de la ropa: encuentra dónde arreglar tus prendas, aprende a cuidarlas y descubre moda con criterio.',
+    p1:'hilando nació como proyecto de fin de grado investigando el impacto textil (20 % del agua y 10 % del CO₂ global). diseñé el sistema completo: investigación de usuarios, arquitectura de información, identidad visual y prototipo funcional en figma.',
+    p2:'la app combina un mapa de talleres de reparación en bilbao, una sección de tips por tipo de tejido, y un feed curado de prensa sobre moda sostenible. tipografía cálida, paleta crema + dorado + azul, iconografía propia.',
+    tags:['ux research','information architecture','branding','ui system','figma prototype'],
+    slides:[
+      {img:'assets/hilando-photo1.jpg', type:'phone'},
+      {img:'assets/hilando-photo2.png', type:'phone'},
+      {img:'assets/hilando-photo3.jpg', type:'phone'}
+    ]
+  },
+  arboretum:{
+    num:'002', title:'arboretum', sub:'identidad', label:'2025 · branding',
+    ratio:'3/4',
+    kicker:'sistema de identidad visual para un espacio dedicado a la naturaleza y la cultura botánica.',
+    p1:'desarrollo de marca completo: naming, logotipo, paleta cromática y sistema tipográfico. la identidad traduce la relación entre lo orgánico y lo estructurado.',
+    p2:'',
+    tags:['branding','naming','logotipo','sistema visual'],
+    slides:[{grad:'b'}]
+  },
+  berlioz:{
+    num:'003', title:'cartel berlioz', sub:'', label:'2023 · cartel · tipografía',
+    ratio:'5/7',
+    kicker:'cartel de concierto para la Symphonie Fantastique de Berlioz, jugando con la dramaturgia visual de la época romántica.',
+    p1:'composición tipográfica y fotográfica que captura la intensidad emocional de la obra. paleta oscura, tipografía expresiva y tratamiento de imagen contrastado.',
+    p2:'',
+    tags:['cartel','tipografía','diseño gráfico'],
+    slides:[{img:'assets/berlioz-poster.jpg', type:'poster'}]
+  },
+  cheerfy:{
+    num:'004', title:'cheerfy', sub:'manual', label:'2024 · branding · identidad',
+    ratio:'16/9',
+    kicker:'rediseño de identidad visual y manual corporativo para Cheerfy, plataforma tecnológica del sector hostelero.',
+    p1:'desarrollo del manual de identidad corporativa: usos del logotipo, paleta cromática, tipografía, tono de voz y aplicaciones digitales y offline.',
+    p2:'',
+    tags:['branding','manual corporativo','identidad'],
+    slides:[
+      {img:'assets/cheerfy-p1.jpg', type:'poster'},
+      {img:'assets/cheerfy-p0.jpg', type:'poster'},
+      {img:'assets/cheerfy-p2.jpg', type:'poster'}
+    ]
+  },
+  identidad:{
+    num:'005', title:'punto', sub:'identidad', label:'2023 · identidad visual',
+    ratio:'5/7',
+    kicker:'diseño de identidad visual para Restaurante Punto: sistema de marca completo con logotipo, señalética y aplicaciones.',
+    p1:'a partir del concepto de "punto" como elemento mínimo y esencial, se construye una identidad versátil con paleta cálida y pictogramas propios aplicados en diferentes soportes.',
+    p2:'',
+    tags:['identidad visual','logotipo','señalética','restaurante'],
+    slides:[{img:'assets/identidad-p0.jpg', type:'poster'}]
+  },
+  smart:{
+    num:'006', title:'smart', sub:'anuncio', label:'2024 · motion · publicidad',
+    ratio:'16/9',
+    kicker:'pieza publicitaria audiovisual para Smart, explorando el lenguaje visual de la movilidad eléctrica.',
+    p1:'dirección de arte y diseño de un spot publicitario: concept, storyboard, animación y postproducción.',
+    p2:'',
+    tags:['motion','publicidad','dirección de arte'],
+    slides:[{video:'assets/smart.mp4'}]
+  },
+  eye:{
+    num:'007', title:'la pausa', sub:'branding', label:'2023 · branding · packaging',
+    ratio:'16/9',
+    kicker:'desarrollo de marca y packaging para La Pausa: identidad de una línea de productos gourmet.',
+    p1:'proyecto de branding grupal: definición de marca, sistema de packaging y presentación de concepto. exploración de tipografía, gama cromática y aplicaciones.',
+    p2:'',
+    tags:['branding','packaging','identidad'],
+    slides:[{img:'assets/eye-p0.png', type:'poster'}]
+  },
+  procesos:{
+    num:'008', title:'mercado', sub:'cartel', label:'2022 · cartel · diseño',
+    ratio:'5/7',
+    kicker:'cartel bilingüe (castellano/euskera) para el Mercado Agrícola Local de Portugalete.',
+    p1:'diseño de cartel para la promoción del mercado local: composición con ilustración, tipografía bilingüe y paleta amarilla que evoca frescura y proximidad.',
+    p2:'',
+    tags:['cartel','bilingüe','diseño gráfico','ilustración'],
+    slides:[{img:'assets/procesos-p0.jpg', type:'poster'}]
+  },
+  triptico:{
+    num:'009', title:'tokio', sub:'infografía', label:'2022 · infografía · editorial',
+    ratio:'7/5',
+    kicker:'infografía editorial sobre "Tokio en 4 días": ruta visual por los barrios y experiencias clave de la ciudad.',
+    p1:'diseño de información con mapas, iconografía y tipografía bilingüe. estructura clara y jerarquía visual para guiar al lector día a día por la ciudad.',
+    p2:'',
+    tags:['infografía','editorial','diseño de información'],
+    slides:[{img:'assets/triptico-p0.jpg', type:'poster'}]
+  },
+  animacion:{
+    num:'010', title:'animación', sub:'motion', label:'2025 · motion · digital',
+    ratio:'16/9',
+    kicker:'pieza de animación digital realizada en Photoshop: exploración del movimiento y la narrativa visual frame a frame.',
+    p1:'secuencia animada cuadro a cuadro con tratamiento pictórico. experimentación con el tiempo, el ritmo y la transformación visual.',
+    p2:'',
+    tags:['motion','animación','photoshop','digital'],
+    slides:[{video:'assets/animacion.mp4'}]
+  },
+  portada:{
+    num:'011', title:'lolita', sub:'portada', label:'2022 · editorial · diseño',
+    ratio:'5/7',
+    kicker:'diseño de portada para Lolita de Vladimir Nabokov: reinterpretación visual de una de las novelas más controvertidas del siglo XX.',
+    p1:'composición fotográfica y tipográfica minimalista que traduce la tensión y ambigüedad de la novela. fotografía de objeto, uso consciente del espacio en blanco.',
+    p2:'',
+    tags:['editorial','portada','tipografía','fotografía'],
+    slides:[{img:'assets/portada-p0.jpg', type:'poster'}]
+  }
+};
+
+/* ========== 25 · CAROUSEL ============================== */
+let carIdx = 0, carTotal = 0;
+
+function goTo(i){
+  carIdx = Math.max(0, Math.min(i, carTotal - 1));
+  document.getElementById('carTrack').style.transform = `translateX(-${carIdx * 100}%)`;
+  document.querySelectorAll('.carousel-dot').forEach((d,j) => d.classList.toggle('active', j === carIdx));
+  document.getElementById('carPrev').classList.toggle('hidden', carIdx === 0);
+  document.getElementById('carNext').classList.toggle('hidden', carIdx === carTotal - 1);
+  document.querySelectorAll('#carTrack video').forEach((v, vi) => {
+    vi === carIdx ? v.play().catch(() => {}) : v.pause();
+  });
+}
+
+function buildCarousel(slides){
+  carTotal = slides.length; carIdx = 0;
+  const track = document.getElementById('carTrack');
+  const dots  = document.getElementById('carDots');
+  track.innerHTML = ''; dots.innerHTML = '';
+  track.style.transform = 'translateX(0)';
+
+  slides.forEach((s, i) => {
+    const div = document.createElement('div');
+    if(s.video){
+      div.className = 'carousel-slide is-video';
+      div.innerHTML = `<video src="${s.video}" playsinline muted loop preload="auto"></video>`;
+    } else if(s.img && s.type === 'phone'){
+      div.className = 'carousel-slide is-phone';
+      div.innerHTML = `<figure class="phone"><div class="notch"></div><img src="${s.img}" alt="" loading="lazy"></figure>`;
+    } else if(s.img){
+      div.className = 'carousel-slide is-poster';
+      div.innerHTML = `<img src="${s.img}" alt="" loading="lazy">`;
+    } else {
+      div.className = 'carousel-slide is-grad';
+      div.innerHTML = `<div class="ph-grad ${s.grad}"></div>`;
+    }
+    track.appendChild(div);
+
+    if(slides.length > 1){
+      const dot = document.createElement('button');
+      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', `slide ${i + 1}`);
+      dot.addEventListener('click', () => goTo(i));
+      dots.appendChild(dot);
+    }
+  });
+
+  document.getElementById('carPrev').classList.toggle('hidden', carTotal <= 1);
+  document.getElementById('carNext').classList.toggle('hidden', carTotal <= 1 || carIdx === carTotal - 1);
+}
+
+/* touch swipe */
+(function carouselTouch(){
+  const el = document.querySelector('.proj-carousel');
+  if(!el) return;
+  let sx = 0;
+  el.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, {passive:true});
+  el.addEventListener('touchend',   e => {
+    const dx = sx - e.changedTouches[0].clientX;
+    if(Math.abs(dx) > 40) dx > 0 ? goTo(carIdx + 1) : goTo(carIdx - 1);
+  }, {passive:true});
+})();
+
+document.getElementById('carPrev').addEventListener('click', () => goTo(carIdx - 1));
+document.getElementById('carNext').addEventListener('click', () => goTo(carIdx + 1));
+
+document.getElementById('featBack').addEventListener('click', () => {
+  document.getElementById('projects').scrollIntoView({behavior:'smooth'});
+});
+
+/* ========== 26 · OPEN PROJECT ========================== */
+function openProject(key, scroll){
+  const p = PROJECTS[key];
+  if(!p) return;
+  document.getElementById('featLabel').textContent  = p.num + ' / case study';
+  document.getElementById('featTitle').innerHTML    = p.sub ? `${p.title}<em> — ${p.sub}.</em>` : p.title;
+  document.getElementById('featYear').textContent   = p.label;
+  document.getElementById('featKicker').textContent = p.kicker;
+  document.getElementById('featP1').textContent     = p.p1;
+  const p2 = document.getElementById('featP2');
+  p2.textContent = p.p2; p2.style.display = p.p2 ? '' : 'none';
+  document.getElementById('featTags').innerHTML = p.tags.map(t => `<span class="tag">${t}</span>`).join('');
+  document.querySelector('.proj-carousel').style.aspectRatio = p.ratio || '4/5';
+  buildCarousel(p.slides);
+  if(scroll) document.getElementById('featured').scrollIntoView({behavior:'smooth'});
+}
+
+/* click handlers on project list */
+document.querySelectorAll('.project-item').forEach(item => {
+  item.querySelector('a').addEventListener('click', e => {
+    e.preventDefault();
+    openProject(item.dataset.preview, true);
+  });
+});
+
+/* default on load */
+openProject('hilando', false);
+
+/* ========== 23 · MOBILE HAMBURGER MENU =================== */
+(function mobileMenu(){
+  const btn     = document.querySelector('.hamburger');
+  const overlay = document.querySelector('.mobile-nav');
+  if(!btn || !overlay) return;
+
+  function close(){
+    btn.classList.remove('open');
+    btn.setAttribute('aria-expanded','false');
+    overlay.classList.remove('open');
+  }
+  function open(){
+    btn.classList.add('open');
+    btn.setAttribute('aria-expanded','true');
+    overlay.classList.add('open');
+  }
+
+  btn.addEventListener('click', ()=>{
+    btn.classList.contains('open') ? close() : open();
+  });
+
+  /* close on link click */
+  overlay.querySelectorAll('.mob-link').forEach(a=>{
+    a.addEventListener('click', close);
+  });
+
+  /* lang buttons inside mobile menu */
+  overlay.querySelectorAll('[data-lang]').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      setLang(b.dataset.lang);
+      overlay.querySelectorAll('[data-lang]').forEach(x=>
+        x.classList.toggle('active', x.dataset.lang === b.dataset.lang)
+      );
+    });
+  });
+})();
+
+</script>
+</body>
+</html>
