@@ -57,6 +57,8 @@ body{
   text-rendering:optimizeLegibility;
   overflow-x:hidden;
   cursor:none;             /* custom cursor takes over */
+  user-select:none;
+  -webkit-user-select:none;
 }
 a{ color:inherit; text-decoration:none; }
 button{
@@ -981,14 +983,14 @@ section.skills{
   scroll-padding-inline: clamp(20px,4vw,56px);
   overflow-x:auto;
   overflow-y:hidden;
-  scroll-snap-type: x mandatory;
   scrollbar-width:none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
   cursor:grab;
 }
 .skills-scroll.active{
   cursor:grabbing;
-  scroll-snap-type:none;
+  user-select:none;
+  -webkit-user-select:none;
 }
 .skills-scroll.active *{
   pointer-events:none;
@@ -1001,7 +1003,6 @@ section.skills{
 }
 
 .skill-card{
-  scroll-snap-align:start;
   background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));
   border:1px solid var(--hairline);
   border-radius:28px;
@@ -1915,7 +1916,7 @@ const PROJECTS = {
     p1:'hilando nació como propuesta universitaria presentada en la convocatoria GreenGlam de La Perrera, Bilbao. localiza talleres y arreglos cercanos, ofrece noticias sobre moda ecofriendly e información sobre talleres relacionados.',
     p2:'incluye una sección de tips con ilustraciones y consejos prácticos de cuidado, lavado y lectura de etiquetas. prototipo funcional desarrollado en figma.',
     tags:['ux research','information architecture','branding','ui system','figma prototype'],
-    link:'https://www.figma.com/proto/9H1g3vYG1UxBbPk5cY4I1W/Hilando-app?page-id=0%3A1&type=design&node-id=28-741&scaling=scale-down&starting-point-node-id=28%3A741&show-proto-sidebar=1',
+    link:'https://www.figma.com/proto/c2IP4jdP7YZmd3Zge3bWeJ/Hilando-app--Copia-?node-id=1-3&p=f&t=UpwOeYKIfF3QBDEG-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A3&show-proto-sidebar=1',
     slides:[{img:'assets/hilando.png', type:'logo-poster'}]
   },
   arboretum:{
@@ -2230,6 +2231,13 @@ openProject('hilando', false);
     const x = e.pageX - slider.offsetLeft;
     const walk = (x - startX) * 1.5; // Scroll speed multiplier
     slider.scrollLeft = scrollLeft - walk;
+  });
+
+  slider.addEventListener('wheel', (e) => {
+    if (e.deltaY !== 0 && e.deltaX === 0) {
+      e.preventDefault();
+      slider.scrollLeft += e.deltaY;
+    }
   });
 })();
 
