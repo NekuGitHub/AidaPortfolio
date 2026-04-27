@@ -341,6 +341,7 @@ nav.top ul a:hover::after{ right:0; }
     margin-bottom:36px;
   }
   .featured-head h3{ grid-column:1/-1; grid-row:1; }
+  .featured-head h3 em{ display:block; }
   .feat-head-side:first-child{ grid-column:1; grid-row:2; }
   .feat-head-side:last-child{ grid-column:3; grid-row:2; }
   #featYear{ display:none; }
@@ -547,7 +548,6 @@ section.about{
   margin:0 0 1.2em;
   color:var(--ink);
 }
-.about-copy p:last-child{ color:var(--ink-dim); font-size:clamp(15px,1.1vw,18px); }
 .about-copy .big-q{
   font-family:var(--serif);
   font-size:clamp(28px,3vw,46px);
@@ -565,7 +565,7 @@ section.about{
 .about-side dl{ display:grid; grid-template-columns: 80px 1fr; gap:10px 18px; margin:0; }
 .about-side dt{
   text-transform:uppercase; font-size:11px; letter-spacing:.2em;
-  color:var(--ink-faint);
+  color:var(--ink-dim);
 }
 .about-side dd{ margin:0; color:var(--ink); font-size:14px; }
 .about-side hr{ border:0; border-top:1px solid var(--hairline); margin:0; }
@@ -752,14 +752,17 @@ section.featured{
 }
 .feat-nav-btn{
   flex-shrink:0;
-  background:none; border:1px solid var(--hairline); border-radius:50%;
+  background:rgba(199,125,255,.06); border:1px solid var(--lilac); border-radius:50%;
   width:36px; height:36px;
   display:flex; align-items:center; justify-content:center;
-  cursor:pointer; color:var(--ink-dim); padding:0;
-  transition:color .3s, border-color .3s, background .3s;
+  cursor:pointer; color:var(--lilac); padding:0;
+  transition:color .8s ease-out, border-color .8s ease-out, background .8s ease-out, transform .3s;
 }
 .feat-nav-btn svg{ width:14px; height:14px; }
-.feat-nav-btn:hover{ color:var(--lilac); border-color:var(--lilac); background:rgba(199,125,255,.06); }
+@media (hover: hover) {
+  .feat-nav-btn:hover{ background:rgba(199,125,255,.15); transform:scale(1.08); transition-duration:.3s; }
+}
+.feat-nav-btn:active{ transform:scale(0.95); background:var(--lilac); color:#fff; transition:0s; }
 .feat-nav-btn:disabled{ opacity:0; pointer-events:none; }
 .featured-head h3{
   font-family:var(--sans);
@@ -930,18 +933,22 @@ section.featured{
 .carousel-btn{
   position:absolute; top:50%; transform:translateY(-50%);
   width:40px; height:40px; border-radius:50%;
-  background:rgba(255,255,255,.08);
-  backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,.14);
+  background:rgba(0,0,0,.25);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.25);
   color:#fff; cursor:pointer;
   display:flex; align-items:center; justify-content:center;
-  z-index:3; transition:background .2s, opacity .3s;
+  z-index:3; transition:background .2s, opacity .3s, transform .2s;
 }
-.carousel-btn:hover{ background:rgba(255,255,255,.18); }
+@media (hover: hover) {
+  .carousel-btn:hover{ background:rgba(0,0,0,.45); transform:translateY(-50%) scale(1.05); }
+}
+.carousel-btn:active{ transform:translateY(-50%) scale(0.95); background:rgba(0,0,0,.6); }
 .carousel-btn.prev{ left:10px; }
 .carousel-btn.next{ right:10px; }
 .carousel-btn.hidden{ opacity:0; pointer-events:none; }
-.carousel-btn svg{ width:18px; height:18px; }
+.carousel-btn svg{ width:18px; height:18px; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.4)); }
 /* dots */
 .carousel-dots{
   position:absolute; bottom:14px; left:50%;
@@ -1162,6 +1169,18 @@ section.contact{
   }
   .reveal{ opacity:1; transform:none; }
 }
+
+@media (max-width:720px){
+  .hero h1{
+    font-size:clamp(64px, 18vw, 130px);
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .hero .tagline {
+    margin-top: 0;
+    margin-bottom: 48px;
+  }
+}
 </style>
 <link rel="preload" href="assets/animacion.mp4" as="video" type="video/mp4" />
 <link rel="preload" href="assets/berlioz-poster.jpg" as="image" />
@@ -1252,8 +1271,7 @@ section.contact{
   </h1>
 
   <p class="tagline" data-i18n="hero.tag">
-    diseñadora gráfica. identidad, <em>ux/ui</em> y editorial,
-    con una base artística que busca el porqué detrás de cada decisión visual.
+    diseñadora gráfica, especializada en branding, ux/ui y diseño editorial con una base artística que busca el porqué detrás de cada decisión visual.
   </p>
 
   <footer class="meta-bottom">
@@ -1278,10 +1296,10 @@ section.contact{
   <div class="about-grid">
     <div class="about-copy">
       <p class="big-q reveal" data-i18n="about.quote">
-        “diseño con intención. identidad, ux y editorial.”
+        “diseño con intención, branding, ux y editorial.”
       </p>
       <p class="reveal" data-delay="1" data-i18n="about.p1">
-        me formé en la intersección entre el arte y el diseño. grado en creación
+        me formé en la intersección entre el arte y el diseño. graduada en creación
         y diseño en la facultad de bellas artes de la upv/ehu (leioa, 2020–2024),
         con mención en diseño gráfico, partiendo de una base artística compartida
         con el grado en arte durante los dos primeros años.
@@ -1290,12 +1308,6 @@ section.contact{
         después cursé el máster en diseño gráfico digital en unir (2025), donde
         profundicé en diseño de información, ux/ui, composición tipográfica,
         motion, producción gráfica digital e interacción.
-      </p>
-      <p class="reveal" data-delay="3" data-i18n="about.p3">
-        actualmente diseño en elements digital (bilbao): identidad, fotografía
-        y vídeo para eventos y redes. no me interesa el diseño rápido del
-        marketing: me interesa el que investiga, construye sistemas
-        visuales coherentes y tiene algo que decir.
       </p>
     </div>
 
@@ -1306,7 +1318,7 @@ section.contact{
         <dt data-i18n="about.meta.edu">formación</dt>
         <dd>UPV/EHU, 2020–2024<br>UNIR, Máster DGD 2025</dd>
         <dt data-i18n="about.meta.focus">foco</dt>
-        <dd data-i18n="about.meta.focus.v">identidad · ux/ui · editorial · motion</dd>
+        <dd data-i18n="about.meta.focus.v">branding · ux/ui · editorial · motion</dd>
         <dt data-i18n="about.meta.langs">idiomas</dt>
         <dd>es · en · eu</dd>
       </dl>
@@ -1359,8 +1371,8 @@ section.contact{
     <li class="project-item reveal" data-delay="4" data-preview="identidad">
       <a href="#">
         <span class="num">005</span>
-        <span class="title">punto<em> · identidad</em></span>
-        <span class="cat">identidad visual</span>
+        <span class="title">punto<em> · branding</em></span>
+        <span class="cat">branding</span>
         <span class="year">2024</span>
       </a>
     </li>
@@ -1434,7 +1446,7 @@ section.contact{
     </div>
     <div class="slide" data-key="identidad">
       <img src="assets/identidad-p0.jpg" alt="" loading="lazy" decoding="async">
-      <div class="ph-label"><span>identidad · 2024</span><b>punto</b></div>
+      <div class="ph-label"><span>branding · 2024</span><b>punto</b></div>
     </div>
     <div class="slide" data-key="smart">
       <img src="assets/smartapple.png" alt="" loading="lazy" decoding="async">
@@ -1526,7 +1538,7 @@ section.contact{
     <article class="skill-card reveal" data-c="1">
       <span class="num">01</span>
       <div>
-        <h4 data-i18n="sk.c1.t"><em>identidad</em> visual</h4>
+        <h4 data-i18n="sk.c1.t"><em>branding</em></h4>
         <p data-i18n="sk.c1.p">mi área principal. sistemas de marca con nombre, voz y criterio. logotipos, marcos visuales, guidelines y aplicaciones.</p>
         <ul><li>naming</li><li>logotype</li><li>sistema</li><li>guidelines</li></ul>
       </div>
@@ -1565,7 +1577,7 @@ section.contact{
   <div class="track">
     <span>
       <span>available for work 2026</span><i class="sep"></i>
-      <span>identidad</span><i class="sep"></i>
+      <span>branding</span><i class="sep"></i>
       <span>ux/ui</span><i class="sep"></i>
       <span>editorial</span><i class="sep"></i>
       <span>motion</span><i class="sep"></i>
@@ -1573,7 +1585,7 @@ section.contact{
     </span>
     <span>
       <span>available for work 2026</span><i class="sep"></i>
-      <span>identidad</span><i class="sep"></i>
+      <span>branding</span><i class="sep"></i>
       <span>ux/ui</span><i class="sep"></i>
       <span>editorial</span><i class="sep"></i>
       <span>motion</span><i class="sep"></i>
@@ -1625,21 +1637,20 @@ const I18N = {
     'nav.skills':'disciplines',
     'nav.contact':'contact',
     'hero.avail':'available · 2026',
-    'hero.tag':'graphic designer. identity, <em>ux/ui</em> and editorial, with an art-school foundation that looks for the why behind every visual decision.',
+    'hero.tag':'diseinatzaile grafikoa, branding, ux/ui eta diseinu editorialean espezializatua, erabaki bisual bakoitzaren zergatia bilatzen duen oinarri artistikoarekin.',
     'hero.role':'graphic designer · 24 · bilbao',
     'hero.scroll':'scroll',
     'about.eyebrow':'01 · about',
     'about.title.a':'i think in',
     'about.title.b':'systems',
     'about.title.c':'not loose pieces.',
-    'about.quote':'“design with intent. identity, ux and editorial.”',
+    'about.quote':'“asmoz diseinatzen dut, branding, ux eta editoriala.”',
     'about.p1':'trained at the intersection of art and design. ba in creation & design at the faculty of fine arts of upv/ehu (leioa, 2020–2024), major in graphic design, with an art-school base shared with the fine arts degree in the first two years.',
     'about.p2':'ma in digital graphic design at unir (2025), where i dug into information design, ux/ui, typographic composition, motion, digital production and interaction.',
-    'about.p3':'currently designing at elements digital (bilbao): identity, photography and video for events and social. i am not interested in fast marketing design — i want design that researches, builds coherent visual systems and has something to say.',
     'about.meta.now':'now',
     'about.meta.edu':'education',
     'about.meta.focus':'focus',
-    'about.meta.focus.v':'identity · ux/ui · editorial · motion',
+    'about.meta.focus.v':'branding · ux/ui · editorial · motion',
     'about.meta.langs':'languages',
     'proj.eyebrow':'02 · selected work',
     'proj.title.a':'selected',
@@ -1651,7 +1662,7 @@ const I18N = {
     'sk.title.a':'four',
     'sk.title.b':'territories',
     'sk.hint':'← scroll horizontal →',
-    'sk.c1.t':'visual <em>identity</em>',
+    'sk.c1.t':'<em>branding</em>',
     'sk.c1.p':'my main area. brand systems with name, voice and criteria. logotypes, visual frameworks, guidelines and applications.',
     'sk.c2.t':'<em>ux / ui</em> design',
     'sk.c2.p':'user research, information architecture, prototyping and ui libraries. useful before pretty — and also pretty.',
@@ -1669,21 +1680,20 @@ const I18N = {
     'nav.skills':'diziplinak',
     'nav.contact':'kontaktua',
     'hero.avail':'libre · <span class="dyn-year">2026</span>',
-    'hero.tag':'diseinatzaile grafikoa. identitatea, <em>ux/ui</em> eta editoriala, erabaki bisual bakoitzaren zergatia bilatzen duen oinarri artistikoarekin.',
+    'hero.tag':'diseinatzaile grafikoa. branding, <em>ux/ui</em> eta editoriala, erabaki bisual bakoitzaren zergatia bilatzen duen oinarri artistikoarekin.',
     'hero.role':'diseinatzaile grafikoa · <span class="dyn-age">24</span> urte · bilbo',
     'hero.scroll':'jaitsi',
     'about.eyebrow':'01 · niri buruz',
     'about.title.a':'sistemetan',
     'about.title.b':'pentsatzen',
     'about.title.c':'dut, ez pieza solteetan.',
-    'about.quote':'“asmoz diseinatzen dut. identitatea, ux eta editoriala.”',
+    'about.quote':'“asmoz diseinatzen dut. branding, ux eta editoriala.”',
     'about.p1':'arte eta diseinuaren arteko bidegurutzean hezi nintzen. sorkuntza eta diseinuko gradua upv/ehuko arte ederren fakultatean (leioa, 2020–2024), diseinu grafikoko aipamenarekin, lehen bi urteetan arte ederren graduarekin partekatutako oinarri artistikoarekin.',
     'about.p2':'ondoren, diseinu grafiko digitaleko masterra egin nuen unir-en (2025), non informazio diseinua, ux/ui, konposizio tipografikoa, motion, ekoizpen grafiko digitala eta interakzioa landu nituen.',
-    'about.p3':'gaur egun elements digital-en (bilbo) diseinatzen dut: identitatea, argazkiak eta bideoa ekitaldi eta sare sozialetarako. marketin azkarraren diseinua ez zait interesatzen — ikertu, sistema bisual koherenteak eraiki eta zerbait esateko duena bai.',
     'about.meta.now':'orain',
     'about.meta.edu':'formakuntza',
     'about.meta.focus':'fokua',
-    'about.meta.focus.v':'identitatea · ux/ui · editoriala · motion',
+    'about.meta.focus.v':'branding · ux/ui · editoriala · motion',
     'about.meta.langs':'hizkuntzak',
     'proj.eyebrow':'02 · lan hautatuak',
     'proj.title.a':'hautatutako',
@@ -1695,7 +1705,7 @@ const I18N = {
     'sk.title.a':'lau',
     'sk.title.b':'lurralde',
     'sk.hint':'← lerratu alboetara →',
-    'sk.c1.t':'identitate <em>bisuala</em>',
+    'sk.c1.t':'<em>branding</em>',
     'sk.c1.p':'nire arlo nagusia. izena, ahotsa eta irizpidea dituzten marka sistemak. logotipoak, marko bisualak, gidaliburuak eta aplikazioak.',
     'sk.c2.t':'<em>ux / ui</em> diseinua',
     'sk.c2.p':'erabiltzaile ikerketa, informazio arkitektura, prototipoak eta ui liburutegiak. baliagarria lehenik, ederra gero — eta ederra ere bai.',
@@ -1745,6 +1755,37 @@ function setLang(code){
     b.classList.toggle('active', b.dataset.lang === code);
   });
   updateDynamics();
+  
+  // Update project list sub and label dynamically based on language
+  document.querySelectorAll('.project-item').forEach(item => {
+    const key = item.dataset.preview;
+    const p = PROJECTS[key];
+    if(p) {
+        const lang = document.documentElement.lang || 'es';
+        const getLoc = (prop) => (prop && typeof prop === 'object') ? (prop[lang] || prop['es']) : prop;
+        
+        // title em
+        const titleEl = item.querySelector('.title em');
+        if(titleEl) {
+            titleEl.textContent = ' · ' + getLoc(p.sub);
+        }
+        
+        // cat
+        const catEl = item.querySelector('.cat');
+        if(catEl) {
+            const labelParts = getLoc(p.label).split(' · ');
+            if(labelParts.length > 1) {
+                catEl.textContent = labelParts[1];
+            }
+        }
+    }
+  });
+  
+  // Re-open current project to translate it instantly
+  if(typeof currentProjectKey !== 'undefined') {
+      openProject(currentProjectKey, false);
+  }
+
 }
 document.querySelectorAll('.lang button').forEach(b=>{
   b.addEventListener('click', ()=> setLang(b.dataset.lang));
@@ -1910,86 +1951,86 @@ document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
 /* ========== 24 · PROJECT DATA ========================== */
 const PROJECTS = {
   hilando:{
-    num:'001', title:'hilando', sub:'app', label:'2024 · ux/ui',
+    num:'001', title:'hilando', sub:{es:'app', en:'app', eu:'app'}, label:{es:'2024 · ux/ui', en:'2024 · ux/ui', eu:'2024 · ux/ui'},
     ratio:'3/4',
-    kicker:'app de moda consciente que anima a reparar y alargar la vida de las prendas en lugar de reemplazarlas.',
-    p1:'hilando nació como propuesta universitaria presentada en la convocatoria GreenGlam de La Perrera, Bilbao. localiza talleres y arreglos cercanos, ofrece noticias sobre moda ecofriendly e información sobre talleres relacionados.',
-    p2:'incluye una sección de tips con ilustraciones y consejos prácticos de cuidado, lavado y lectura de etiquetas. prototipo funcional desarrollado en figma.',
-    tags:['ux research','information architecture','branding','ui system','figma prototype'],
+    kicker:{es:'app de moda consciente que anima a reparar y alargar la vida de las prendas en lugar de reemplazarlas.', en:'app to extend the life of your clothes: find where to repair them, learn how to care for them and discover fashion with criteria.', eu:'arroparen bizitza luzatzeko app bat: non konpondu, nola zaindu eta irizpidedun moda aurkitzeko.'},
+    p1:{es:'hilando nació como propuesta universitaria y posteriormente fue presentada en la convocatoria GreenGlam de La Perrera, Bilbao. localiza talleres y arreglos cercanos, ofrece noticias sobre moda ecofriendly e información sobre talleres relacionados.', en:'hilando started as a university proposal and was later presented at the GreenGlam call in La Perrera, Bilbao. it locates nearby repair shops, offers news on ecofriendly fashion and information about related workshops.', eu:'hilando unibertsitateko proposamen gisa jaio zen eta geroago Bilboko La Perrera-ko GreenGlam deialdian aurkeztu zen. inguruko konponketa tailerrak kokatzen ditu, moda ekologikoari buruzko albisteak eskaintzen ditu eta erlazionatutako tailerren inguruko informazioa ematen du.'},
+    p2:{es:'incluye una sección de tips con ilustraciones y consejos prácticos de cuidado, lavado y lectura de etiquetas. prototipo funcional desarrollado en figma.', en:'it includes a tips section with illustrations and practical advice on care, washing and reading labels. functional prototype developed in figma.', eu:'aholku atal bat dakar, zainketa, garbiketa eta etiketak irakurtzeko ilustrazio eta gomendio praktikoekin. figman garatutako prototipo funtzionala.'},
+    tags:{es:['ux research','information architecture','branding','ui system','figma prototype'], en:['ux research','information architecture','branding','ui system','figma prototype'], eu:['ux research','informazio arkitektura','branding','ui sistema','figma prototipoa']},
     link:'https://www.figma.com/proto/c2IP4jdP7YZmd3Zge3bWeJ/Hilando-app--Copia-?node-id=1-3&p=f&t=UpwOeYKIfF3QBDEG-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A3&show-proto-sidebar=1',
     slides:[{img:'assets/hilando.png', type:'logo-poster'}]
   },
   arboretum:{
-    num:'002', title:'arboretum', sub:'app', label:'2023 · ux/ui',
+    num:'002', title:'arboretum', sub:{es:'app', en:'app', eu:'app'}, label:{es:'2023 · ux/ui', en:'2023 · ux/ui', eu:'2023 · ux/ui'},
     ratio:'3/4',
-    kicker:'guía interactiva para explorar y conocer la flora del Arboretum de la UPV/EHU en Leioa.',
-    p1:'aplicación móvil universitaria con mapa de navegación, leyenda de especies y organización por zonas. la sección de juego convierte el aprendizaje botánico en una experiencia lúdica.',
-    p2:'prototipo desarrollado en figma.',
-    tags:['ux/ui','information architecture','figma prototype','diseño de interacción'],
+    kicker:{es:'guía interactiva para explorar y conocer la flora del Arboretum de la UPV/EHU en Leioa.', en:'interactive guide to explore and discover the flora of the UPV/EHU Arboretum in Leioa.', eu:'Leioako UPV/EHUko Arboretumeko flora arakatu eta ezagutzeko gida interaktiboa.'},
+    p1:{es:'aplicación móvil universitaria con mapa de navegación, leyenda de especies y organización por zonas. la sección de juego convierte el aprendizaje botánico en una experiencia lúdica.', en:'university mobile app with navigation map, species legend and zoning. the game section turns botanical learning into a playful experience.', eu:'unibertsitateko app mugikorra nabigazio maparekin, espezieen kondairarekin eta gune antolaketarekin. jolas atalak ikaskuntza botanikoa esperientzia ludiko bihurtzen du.'},
+    p2:{es:'prototipo desarrollado en figma.', en:'prototype developed in figma.', eu:'figman garatutako prototipoa.'},
+    tags:{es:['ux/ui','information architecture','figma prototype','diseño de interacción'], en:['ux/ui','information architecture','figma prototype','interaction design'], eu:['ux/ui','informazio arkitektura','figma prototipoa','interakzio diseinua']},
     link:'https://www.figma.com/proto/w1UlOD3SRqQqM8lyH155aw/Arboretum---Mikel-y-Aida?node-id=515-125&p=f&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=515%3A125',
     slides:[{img:'assets/arboretum.png', type:'poster'}]
   },
   berlioz:{
-    num:'003', title:'cartel', sub:'berlioz', label:'2025 · ilustración editorial',
+    num:'003', title:'cartel', sub:{es:'berlioz', en:'berlioz', eu:'berlioz'}, label:{es:'2025 · ilustración editorial', en:'2025 · editorial illustration', eu:'2025 · ilustrazio editoriala'},
     ratio:'5/7',
-    kicker:'cartel ficticio para un concierto real del grupo Berlioz en Seattle, con la estética de la Bauhaus reinterpretada desde una mirada contemporánea.',
-    p1:'geometría, tipografía y composición fusionadas en un resultado visual limpio y de fuerte carácter.',
-    p2:'',
-    tags:['cartel','tipografía','bauhaus','diseño gráfico'],
+    kicker:{es:'cartel ficticio para un concierto real del grupo Berlioz en Seattle, con la estética de la Bauhaus reinterpretada desde una mirada contemporánea.', en:'fictional poster for a real Berlioz concert in Seattle, with Bauhaus aesthetics reinterpreted from a contemporary perspective.', eu:'fikziozko kartela Seattleko Berlioz taldearen benetako kontzertu baterako, Bauhaus estetika ikuspuntu garaikide batetik berrinterpretatuta.'},
+    p1:{es:'geometría, tipografía y composición fusionadas en un resultado visual limpio y de fuerte carácter.', en:'geometry, typography and composition merged into a clean visual result with strong character.', eu:'geometria, tipografia eta konposizioa izaera indartsuko emaitza bisual garbi batean fusionatuta.'},
+    p2:{es:'', en:'', eu:''},
+    tags:{es:['cartel','tipografía','bauhaus','diseño gráfico'], en:['poster','typography','bauhaus','graphic design'], eu:['kartela','tipografia','bauhaus','diseinu grafikoa']},
     slides:[{img:'assets/berlioz-poster.jpg', type:'poster'}]
   },
   cheerfy:{
-    num:'004', title:'cheerfy', sub:'manual', label:'2026 · branding',
+    num:'004', title:'cheerfy', sub:{es:'manual', en:'manual', eu:'eskuliburua'}, label:{es:'2026 · branding', en:'2026 · branding', eu:'2026 · branding'},
     ratio:'16/9',
-    kicker:'trabajo de fin de máster (UNIR): rediseño del logotipo y manual de identidad corporativa de Cheerfy, referente español en digitalización hostelera.',
-    p1:'desarrollado en el marco del Red Projectum, iniciativa que conecta estudiantes con empresas reales. el proyecto parte de un briefing auténtico proporcionado por la empresa y combina investigación teórica y práctica.',
-    p2:'el resultado abarca el rediseño del logotipo y el manual de identidad completo de una de las principales plataformas tecnológicas del sector hostelero español.',
-    tags:['branding','manual corporativo','identidad','tfm'],
+    kicker:{es:'trabajo de fin de máster (UNIR): rediseño del logotipo y manual de identidad corporativa de Cheerfy, referente español en digitalización hostelera.', en:'master\'s thesis (UNIR): redesign of the logo and corporate identity manual for Cheerfy, a Spanish benchmark in hospitality digitalization.', eu:'master amaierako lana (UNIR): ostalaritzaren digitalizazioan erreferente den Cheerfy enpresaren logotipoaren eta identitate korporatiboaren eskuliburuaren birdiseinua.'},
+    p1:{es:'desarrollado en el marco del Red Projectum, iniciativa que conecta estudiantes con empresas reales. el proyecto parte de un briefing auténtico proporcionado por la empresa y combina investigación teórica y práctica.', en:'developed within the framework of Red Projectum, an initiative connecting students with real companies. the project is based on an authentic briefing provided by the company and combines theoretical and practical research.', eu:'Red Projectum esparruan garatua, ikasleak benetako enpresekin lotzen dituen ekimena. proiektua enpresak emandako benetako briefing batean oinarritzen da eta ikerketa teorikoa eta praktikoa uztartzen ditu.'},
+    p2:{es:'el resultado abarca el rediseño del logotipo y el manual de identidad completo de una de las principales plataformas tecnológicas del sector hostelero español.', en:'the result covers the logo redesign and the complete identity manual for one of the main technological platforms in the Spanish hospitality sector.', eu:'emaitzak logotipoaren birdiseinua eta Espainiako ostalaritzako plataforma teknologiko nagusietako baten identitate eskuliburu osoa barne hartzen ditu.'},
+    tags:{es:['branding','manual corporativo','identidad','tfm'], en:['branding','corporate manual','identity','master thesis'], eu:['branding','eskuliburu korporatiboa','identitatea','master amaierako lana']},
     slides:[{img:'assets/cheerfy.png', type:'poster'}]
   },
   identidad:{
-    num:'005', title:'punto', sub:'identidad', label:'2024 · identidad visual',
+    num:'005', title:'punto', sub:{es:'branding', en:'branding', eu:'branding'}, label:{es:'2024 · branding', en:'2024 · branding', eu:'2024 · branding'},
     ratio:'5/7',
-    kicker:'identidad visual completa para un restaurante ficticio mediterráneo en Madrid, concebida para traer el atardecer marino al corazón de la ciudad.',
-    p1:'el nombre Punto alude al sol; su logotipo, tres puntos que se desvanecen sobre una línea de horizonte, evoca el astro hundiéndose en el mar. paleta de amarillos y naranjas, formas curvas presentes en todos los soportes.',
-    p2:'una marca que no solo identifica un restaurante, sino que recrea la atmósfera de sentarse a comer frente al atardecer, aunque la ventana dé a una calle del centro.',
-    tags:['identidad visual','logotipo','señalética','restaurante'],
+    kicker:{es:'identidad visual completa para un restaurante ficticio mediterráneo en Madrid, concebida para traer el atardecer marino al corazón de la ciudad.', en:'complete visual identity for a fictional Mediterranean restaurant in Madrid, conceived to bring the ocean sunset to the heart of the city.', eu:'Madrilgo fikziozko jatetxe mediterraneo baterako identitate bisual osoa, itsasoko ilunabarra hiriaren bihotzera ekartzeko pentsatua.'},
+    p1:{es:'el nombre Punto alude al sol; su logotipo, tres puntos que se desvanecen sobre una línea de horizonte, evoca el astro hundiéndose en el mar. paleta de amarillos y naranjas, formas curvas presentes en todos los soportes.', en:'the name Punto refers to the sun; its logo, three dots fading over a horizon line, evokes the star sinking into the sea. palette of yellows and oranges, curved shapes present across all media.', eu:'Punto izenak eguzkiari egiten dio erreferentzia; bere logotipoak, zerumuga marra baten gainean desagertzen diren hiru puntuk, itsasoan murgiltzen den astroa ekartzen du gogora. hori eta laranja paleta, forma kurbatuak euskarri guztietan presente.'},
+    p2:{es:'una marca que no solo identifica un restaurante, sino que recrea la atmósfera de sentarse a comer frente al atardecer, aunque la ventana dé a una calle del centro.', en:'a brand that not only identifies a restaurant, but recreates the atmosphere of sitting down to eat facing the sunset, even if the window looks out onto a downtown street.', eu:'jatetxe bat identifikatzeaz gain, ilunabarrari begira jateko giroa birsortzen duen marka, leihoak erdialdeko kale batera eman arren.'},
+    tags:{es:['identidad visual','logotipo','señalética','restaurante'], en:['branding','logo','signage','restaurant'], eu:['branding','logotipoa','seinaleztapena','jatetxea']},
     slides:[{img:'assets/identidad-p0.jpg', type:'poster'}]
   },
   smart:{
-    num:'006', title:'smartapple', sub:'animación', label:'2025 · animación digital',
+    num:'006', title:'smartapple', sub:{es:'animación', en:'animation', eu:'animazioa'}, label:{es:'2025 · animación digital', en:'2025 · digital animation', eu:'2025 · animazio digitala'},
     ratio:'9/16',
-    kicker:'propuesta ficticia de April Fools: Apple anuncia su último producto, una manzana inteligente con cámara y botones.',
-    p1:'anuncio animado que reflexiona con ironía sobre la superficialidad del consumismo y el poder del renombre de marca por encima de la utilidad real del producto. animación creada con procreate.',
-    p2:'',
-    tags:['animación','motion','procreate','concept'],
+    kicker:{es:'propuesta ficticia de April Fools: Apple anuncia su último producto, una manzana inteligente con cámara y botones.', en:'fictional April Fools\' proposal: Apple announces its latest product, a smart apple with a camera and buttons.', eu:'April Fools\' fikziozko proposamena: Apple-k bere azken produktua iragartzen du, kamera eta botoiak dituen sagar adimenduna.'},
+    p1:{es:'anuncio animado que reflexiona con ironía sobre la superficialidad del consumismo y el poder del renombre de marca por encima de la utilidad real del producto. animación creada con procreate.', en:'animated ad that ironically reflects on the superficiality of consumerism and the power of brand name over the actual utility of the product. animation created with procreate.', eu:'kontsumismoaren azalekotasunari eta marka-izenaren botereari buruz ironiaz hausnartzen duen iragarki animatua. procreate-rekin sortutako animazioa.'},
+    p2:{es:'', en:'', eu:''},
+    tags:{es:['animación','motion','procreate','concept'], en:['animation','motion','procreate','concept'], eu:['animazioa','motion','procreate','concept']},
     slides:[{video:'assets/smart.mp4'}]
   },
   eye:{
-    num:'007', title:'la pausa', sub:'packaging', label:'2024 · packaging',
+    num:'007', title:'la pausa', sub:{es:'packaging', en:'packaging', eu:'packaging'}, label:{es:'2024 · packaging', en:'2024 · packaging', eu:'2024 · packaging'},
     ratio:'16/9',
-    kicker:'packaging para una marca ficticia de chocolates en formato de periódico: cinco variedades, cinco colores, cinco titulares.',
-    p1:'el interior de cada caja esconde un pasatiempo —como en la prensa tradicional— vinculado a cada sabor. el conjunto invita a hacer una pausa y a disfrutar del pequeño placer cotidiano del chocolate.',
-    p2:'',
-    tags:['packaging','branding','diseño editorial'],
+    kicker:{es:'packaging para una marca ficticia de chocolates en formato de periódico: cinco variedades, cinco colores, cinco titulares.', en:'packaging for a fictional chocolate brand in newspaper format: five varieties, five colors, five headlines.', eu:'fikziozko txokolate marka baterako packaging-a egunkari formatuan: bost barietate, bost kolore, bost izenburu.'},
+    p1:{es:'el interior de cada caja esconde un pasatiempo —como en la prensa tradicional— vinculado a cada sabor. el conjunto invita a hacer una pausa y a disfrutar del pequeño placer cotidiano del chocolate.', en:'the inside of each box hides a puzzle —like in traditional press— linked to each flavor. the set invites you to take a break and enjoy the small everyday pleasure of chocolate.', eu:'kutxa bakoitzaren barrualdeak zapore bakoitzari lotutako denbora-pasa bat ezkutatzen du —prentsa tradizionalean bezala—. multzoak atseden bat hartzera eta txokolatearen eguneroko plazer txikiaz gozatzera gonbidatzen du.'},
+    p2:{es:'', en:'', eu:''},
+    tags:{es:['packaging','branding','diseño editorial'], en:['packaging','branding','editorial design'], eu:['packaging','branding','diseinu editoriala']},
     slides:[{img:'assets/eye-p0.png', type:'poster'}]
   },
   procesos:{
-    num:'008', title:'lettering', sub:'creativo', label:'2026 · lettering',
+    num:'008', title:'lettering', sub:{es:'creativo', en:'creative', eu:'sortzailea'}, label:{es:'2026 · lettering', en:'2026 · lettering', eu:'2026 · lettering'},
     ratio:'5/7',
-    kicker:'pieza de lettering creativo inspirada en la canción de Leiva, con exploración de su aplicabilidad en distintos soportes a través de mockups.',
-    p1:'el proyecto muestra el potencial de la pieza como elemento gráfico versátil, demostrando su fuerza en diferentes formatos y contextos de comunicación visual.',
-    p2:'',
-    tags:['lettering','tipografía','diseño gráfico','mockups'],
+    kicker:{es:'pieza de lettering creativo inspirada en la canción de Leiva, con exploración de su aplicabilidad en distintos soportes a través de mockups.', en:'creative lettering piece inspired by a song by Leiva, exploring its applicability on different media through mockups.', eu:'Leivaren abesti batean inspiratutako lettering sorkuntza, bere aplikagarritasuna hainbat euskarritan arakatuz mockup bidez.'},
+    p1:{es:'el proyecto muestra el potencial de la pieza como elemento gráfico versátil, demostrando su fuerza en diferentes formatos y contextos de comunicación visual.', en:'the project shows the potential of the piece as a versatile graphic element, demonstrating its strength in different formats and visual communication contexts.', eu:'proiektuak piezak elementu grafiko moldakor gisa duen potentziala erakusten du, bere indarra formatu eta komunikazio bisualeko testuinguru ezberdinetan frogatuz.'},
+    p2:{es:'', en:'', eu:''},
+    tags:{es:['lettering','tipografía','diseño gráfico','mockups'], en:['lettering','typography','graphic design','mockups'], eu:['lettering','tipografia','diseinu grafikoa','mockup-ak']},
     slides:[{img:'assets/procesos-p0.jpg', type:'poster'}]
   },
   triptico:{
-    num:'009', title:'helvetica', sub:'revista', label:'2023 · editorial',
+    num:'009', title:'helvetica', sub:{es:'revista', en:'magazine', eu:'aldizkaria'}, label:{es:'2023 · editorial', en:'2023 · editorial', eu:'2023 · editoriala'},
     ratio:'7/5',
-    kicker:'maquetación de una revista de diseño ficticia para un artículo sobre la Helvetica, compuesta íntegramente con los estilos y pesos de la fuente.',
-    p1:'la propia maqueta se convierte en una demostración de la versatilidad y riqueza expresiva de una de las tipografías más icónicas de la historia del diseño gráfico.',
-    p2:'',
-    tags:['editorial','tipografía','maquetación','helvetica'],
+    kicker:{es:'maquetación de una revista de diseño ficticia para un artículo sobre la Helvetica, compuesta íntegramente con los estilos y pesos de la fuente.', en:'layout of a fictional design magazine for an article about Helvetica, composed entirely with the styles and weights of the font.', eu:'Helvetica-ri buruzko artikulu baterako fikziozko diseinu aldizkari baten maketazioa, letra-tipoaren estilo eta pisuekin soilik osatua.'},
+    p1:{es:'la propia maqueta se convierte en una demostración de la versatilidad y riqueza expresiva de una de las tipografías más icónicas de la historia del diseño gráfico.', en:'the layout itself becomes a demonstration of the versatility and expressive richness of one of the most iconic typefaces in graphic design history.', eu:'maketa bera diseinu grafikoaren historiako tipografia ikonikoenetako baten moldakortasunaren eta aberastasun espresiboaren erakustaldi bihurtzen da.'},
+    p2:{es:'', en:'', eu:''},
+    tags:{es:['editorial','tipografía','maquetación','helvetica'], en:['editorial','typography','layout','helvetica'], eu:['editoriala','tipografia','maketazioa','helvetica']},
     slides:[
       {img:'assets/pagina_1_mockup.png', type:'poster'},
       {img:'assets/pagina_2_mockup.png', type:'poster'},
@@ -1997,21 +2038,21 @@ const PROJECTS = {
     ]
   },
   animacion:{
-    num:'010', title:'animación', sub:'motion', label:'2025 · motion · digital',
+    num:'010', title:'animación', sub:{es:'motion', en:'motion', eu:'motion'}, label:{es:'2025 · motion · digital', en:'2025 · motion · digital', eu:'2025 · motion · digitala'},
     ratio:'25/24',
-    kicker:'pieza de animación digital realizada en Photoshop: exploración del movimiento y la narrativa visual frame a frame.',
-    p1:'secuencia animada cuadro a cuadro con tratamiento pictórico. experimentación con el tiempo, el ritmo y la transformación visual.',
-    p2:'',
-    tags:['motion','animación','photoshop','digital'],
+    kicker:{es:'pieza de animación digital realizada en Photoshop: exploración del movimiento y la narrativa visual frame a frame.', en:'digital animation piece created in Photoshop: exploration of movement and visual narrative frame by frame.', eu:'Photoshop-en sortutako animazio digitaleko pieza: mugimenduaren eta kontakizun bisualaren esplorazioa framez frame.'},
+    p1:{es:'secuencia animada cuadro a cuadro con tratamiento pictórico. experimentación con el tiempo, el ritmo y la transformación visual.', en:'animated sequence frame by frame with pictorial treatment. experimentation with time, rhythm and visual transformation.', eu:'framez frame animatutako sekuentzia tratamendu piktorikoarekin. denbora, erritmo eta eraldaketa bisualarekin esperimentatzea.'},
+    p2:{es:'', en:'', eu:''},
+    tags:{es:['motion','animación','photoshop','digital'], en:['motion','animation','photoshop','digital'], eu:['motion','animazioa','photoshop','digitala']},
     slides:[{video:'assets/animacion.mp4'}]
   },
   portada:{
-    num:'011', title:'lolita', sub:'portada', label:'2024 · editorial',
+    num:'011', title:'lolita', sub:{es:'portada', en:'cover', eu:'azala'}, label:{es:'2024 · editorial', en:'2024 · editorial', eu:'2024 · editoriala'},
     ratio:'5/7',
-    kicker:'portada para Lolita de Nabokov bajo la influencia de Manuel Estrada: fotografía conceptual y enfoque minimalista.',
-    p1:'el diseño evoca la complejidad y la tensión narrativa de la obra sin recurrir a la literalidad, dejando espacio a la interpretación del lector.',
-    p2:'',
-    tags:['editorial','portada','tipografía','fotografía'],
+    kicker:{es:'portada para Lolita de Nabokov bajo la influencia de Manuel Estrada: fotografía conceptual y enfoque minimalista.', en:'cover for Nabokov\'s Lolita influenced by Manuel Estrada: conceptual photography and minimalist approach.', eu:'Nabokov-en Lolita-rako azala Manuel Estradaren eraginpean: argazkigintza kontzeptuala eta ikuspegi minimalista.'},
+    p1:{es:'el diseño evoca la complejidad y la tensión narrativa de la obra sin recurrir a la literalidad, dejando espacio a la interpretación del lector.', en:'the design evokes the complexity and narrative tension of the work without resorting to literalism, leaving room for the reader\'s interpretation.', eu:'diseinuak obraren konplexutasuna eta tentsio narratiboa ekartzen ditu gogora literaltasunera jo gabe, irakurlearen interpretaziorako lekua utziz.'},
+    p2:{es:'', en:'', eu:''},
+    tags:{es:['editorial','portada','tipografía','fotografía'], en:['editorial','cover','typography','photography'], eu:['editoriala','azala','tipografia','argazkigintza']},
     slides:[
       {img:'assets/portada-p0.jpg', type:'poster'},
       {img:'assets/lolita-libro.png', type:'poster'}
@@ -2116,14 +2157,20 @@ document.getElementById('featNext').addEventListener('click', () => {
 function openProject(key, scroll){
   const p = PROJECTS[key];
   if(!p) return;
+  const lang = document.documentElement.lang || 'es';
+  
+  const getLoc = (prop) => (prop && typeof prop === 'object') ? (prop[lang] || prop['es']) : prop;
+  
   document.getElementById('featLabel').textContent  = p.num + ' / case study';
-  document.getElementById('featTitle').innerHTML    = p.sub ? `${p.title}<em> — ${p.sub}.</em>` : p.title;
-  document.getElementById('featYear').textContent   = p.label;
-  document.getElementById('featKicker').textContent = p.kicker;
-  document.getElementById('featP1').textContent     = p.p1;
+  const sub = getLoc(p.sub);
+  document.getElementById('featTitle').innerHTML    = sub ? `${p.title}<em> — ${sub}.</em>` : p.title;
+  document.getElementById('featYear').textContent   = getLoc(p.label);
+  document.getElementById('featKicker').textContent = getLoc(p.kicker);
+  document.getElementById('featP1').textContent     = getLoc(p.p1);
+  const p2Loc = getLoc(p.p2);
   const p2 = document.getElementById('featP2');
-  p2.textContent = p.p2; p2.style.display = p.p2 ? '' : 'none';
-  document.getElementById('featTags').innerHTML = p.tags.map(t => `<span class="tag">${t}</span>`).join('');
+  p2.textContent = p2Loc; p2.style.display = p2Loc ? '' : 'none';
+  document.getElementById('featTags').innerHTML = getLoc(p.tags).map(t => `<span class="tag">${t}</span>`).join('');
   const ratio = p.ratio || '4/5';
   const carousel = document.querySelector('.proj-carousel');
   carousel.style.aspectRatio = ratio;
