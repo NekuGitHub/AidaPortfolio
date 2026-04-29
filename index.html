@@ -616,6 +616,7 @@ section.projects{ padding-bottom:clamp(80px,10vh,140px); }
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
+  padding-right:0.25em;
 }
 .project-item .title em{
   font-family:var(--serif);
@@ -780,6 +781,7 @@ section.featured{
   background:var(--grad-hero);
   -webkit-background-clip:text; background-clip:text; color:transparent;
   padding-bottom:0.15em;
+  padding-right:0.2em;
 }
 .featured-body{
   display:grid;
@@ -1211,8 +1213,10 @@ section.contact{
 <link rel="preload" href="assets/hilando-photo2.png" as="image" />
 <link rel="preload" href="assets/hilando-photo3.jpg" as="image" />
 <link rel="preload" href="assets/identidad-p0.jpg" as="image" />
-<link rel="preload" href="assets/portada-p0.jpg" as="image" />
 <link rel="preload" href="assets/procesos-p0.jpg" as="image" />
+<link rel="preload" href="assets/moclup_vinilos.jpg" as="image" />
+<link rel="preload" href="assets/mockup_tote_bag.jpg" as="image" />
+<link rel="preload" href="assets/mockup_spoti.jpg" as="image" />
 <link rel="preload" href="assets/smart.mp4" as="video" type="video/mp4" />
 <link rel="preload" href="assets/triptico-p0.jpg" as="image" />
 </head>
@@ -1442,6 +1446,14 @@ section.contact{
         <span class="year">2024</span>
       </a>
     </li>
+    <li class="project-item reveal" data-delay="1" data-preview="mercado">
+      <a href="#">
+        <span class="num">012</span>
+        <span class="title">mercado<em> · cartel</em></span>
+        <span class="cat">diseño gráfico</span>
+        <span class="year">2024</span>
+      </a>
+    </li>
   </ul>
 
   <!-- floating preview follows cursor on hover -->
@@ -1475,8 +1487,12 @@ section.contact{
       <div class="ph-label"><span>packaging · 2024</span><b>la pausa</b></div>
     </div>
     <div class="slide" data-key="procesos">
-      <img src="assets/procesos-p0.jpg" alt="" loading="lazy" decoding="async">
+      <img src="assets/moclup_vinilos.jpg" alt="" loading="lazy" decoding="async">
       <div class="ph-label"><span>lettering · 2026</span><b>lettering</b></div>
+    </div>
+    <div class="slide" data-key="mercado">
+      <img src="assets/procesos-p0.jpg" alt="" loading="lazy" decoding="async">
+      <div class="ph-label"><span>diseño gráfico · 2024</span><b>mercado</b></div>
     </div>
     <div class="slide" data-key="triptico">
       <img src="assets/pagina_1_mockup.png" alt="" loading="lazy" decoding="async">
@@ -1487,7 +1503,7 @@ section.contact{
       <div class="ph-label"><span>motion · 2025</span><b>animación</b></div>
     </div>
     <div class="slide" data-key="portada">
-      <img src="assets/portada-p0.jpg" alt="" loading="lazy" decoding="async">
+      <img src="assets/lolita-libro.png" alt="" loading="lazy" decoding="async">
       <div class="ph-label"><span>editorial · 2024</span><b>lolita</b></div>
     </div>
   </div>
@@ -1557,7 +1573,7 @@ section.contact{
       <span class="num">01</span>
       <div>
         <h4 data-i18n="sk.c1.t"><em>branding</em></h4>
-        <p data-i18n="sk.c1.p">mi área principal. sistemas de marca con nombre, voz y criterio. logotipos, marcos visuales, guidelines y aplicaciones.</p>
+        <p data-i18n="sk.c1.p">mi área principal. sistemas de marca con nombre, voz y criterio. logotipos, identidades visuales, guidelines y aplicaciones.</p>
         <ul><li>naming</li><li>logotype</li><li>sistema</li><li>guidelines</li></ul>
       </div>
     </article>
@@ -1580,7 +1596,7 @@ section.contact{
     <article class="skill-card reveal" data-c="4" data-delay="3">
       <span class="num">04</span>
       <div>
-        <h4>motion <em>&amp; 3d</em></h4>
+        <h4 data-i18n="sk.c4.t">motion <em>&amp; 3d</em></h4>
         <p data-i18n="sk.c4.p">área emergente: dar tiempo al diseño. transiciones, reels de marca y pequeños experimentos 3d que aportan textura.</p>
         <ul><li>after effects</li><li>blender</li><li>cinema 4d</li><li>reels</li></ul>
       </div>
@@ -1655,14 +1671,14 @@ const I18N = {
     'nav.skills':'disciplines',
     'nav.contact':'contact',
     'hero.avail':'available · 2026',
-    'hero.tag':'diseinatzaile grafikoa, branding, ux/ui eta diseinu editorialean espezializatua, erabaki bisual bakoitzaren zergatia bilatzen duen oinarri artistikoarekin.',
-    'hero.role':'<span>graphic designer ·</span><span class="mob-break"> 24 · bilbao</span>',
+    'hero.tag':'graphic designer, specialised in branding, ux/ui and editorial design, with an artistic background that seeks the why behind every visual decision.',
+    'hero.role':'<span>graphic designer ·</span><span class=”mob-break”> 24 · bilbao</span>',
     'hero.scroll':'scroll',
     'about.eyebrow':'01 · about',
     'about.title.a':'i think in',
     'about.title.b':'systems',
     'about.title.c':'not loose pieces.',
-    'about.quote':'“asmoz diseinatzen dut, branding, ux eta editoriala.”',
+    'about.quote':'”i design with intention: branding, ux and editorial.”',
     'about.p1':'trained at the intersection of art and design. ba in creation & design at the faculty of fine arts of upv/ehu (leioa, 2020–2024), major in graphic design, with an art-school base shared with the fine arts degree in the first two years.',
     'about.p2':'ma in digital graphic design at unir (2025), where i dug into information design, ux/ui, typographic composition, motion, digital production and interaction.',
     'about.meta.now':'now',
@@ -1673,22 +1689,20 @@ const I18N = {
     'proj.eyebrow':'02 · selected work',
     'proj.title.a':'selected',
     'proj.title.b':'work',
-    'feat.kicker':'an app to extend the life of your clothes: find where to repair them, learn how to care for them and discover fashion with criteria.',
-    'feat.p1':'hilando started as my degree project, researching the textile industry impact (20% of global water and 10% of CO₂). i designed the whole system: user research, information architecture, visual identity and a functional figma prototype.',
-    'feat.p2':'the app combines a map of repair workshops in bilbao, a tips section by fabric type, and a curated press feed on sustainable fashion. warm typography, cream + gold + sky palette, custom iconography.',
     'sk.eyebrow':'03 · disciplines',
     'sk.title.a':'four',
     'sk.title.b':'territories',
     'sk.hint':'← scroll horizontal →',
     'sk.c1.t':'<em>branding</em>',
-    'sk.c1.p':'my main area. brand systems with name, voice and criteria. logotypes, visual frameworks, guidelines and applications.',
+    'sk.c1.p':'my main area. brand systems with name, voice and criteria. logotypes, visual identities, guidelines and applications.',
     'sk.c2.t':'<em>ux / ui</em> design',
     'sk.c2.p':'user research, information architecture, prototyping and ui libraries. useful before pretty — and also pretty.',
     'sk.c3.t':'<em>editorial</em> design',
     'sk.c3.p':'magazines, layout, information design. the pleasure of a well-built page: grid, hierarchy, typographic rhythm.',
+    'sk.c4.t':'motion <em>&amp; 3d</em>',
     'sk.c4.p':'emerging area: giving time to design. transitions, brand reels and small 3d experiments that add texture.',
     'ct.eyebrow':'04 · contact',
-    'ct.title.a':"let's work",
+    'ct.title.a':'let`s work',
     'ct.title.b':'together.',
     'ft.note':'made in bilbao · with plenty of coffee',
   },
@@ -1724,11 +1738,12 @@ const I18N = {
     'sk.title.b':'lurralde',
     'sk.hint':'← lerratu alboetara →',
     'sk.c1.t':'<em>branding</em>',
-    'sk.c1.p':'nire arlo nagusia. izena, ahotsa eta irizpidea dituzten marka sistemak. logotipoak, marko bisualak, gidaliburuak eta aplikazioak.',
+    'sk.c1.p':'nire arlo nagusia. izena, ahotsa eta irizpidea dituzten marka sistemak. logotipoak, identitate bisualak, gidaliburuak eta aplikazioak.',
     'sk.c2.t':'<em>ux / ui</em> diseinua',
     'sk.c2.p':'erabiltzaile ikerketa, informazio arkitektura, prototipoak eta ui liburutegiak. baliagarria lehenik, ederra gero — eta ederra ere bai.',
     'sk.c3.t':'diseinu <em>editoriala</em>',
     'sk.c3.p':'aldizkariak, maketa, informazio diseinua. ondo eraikitako orri baten plazera: sareta, hierarkia, erritmo tipografikoa.',
+    'sk.c4.t':'motion <em>&amp; 3d</em>',
     'sk.c4.p':'arlo berria: diseinuari denbora ematea. trantsizioak, markaren reel-ak eta ehundura gehitzen duten 3d esperimentu txikiak.',
     'ct.eyebrow':'04 · kontaktua',
     'ct.title.a':'elkar',
@@ -2040,7 +2055,11 @@ const PROJECTS = {
     p1:{es:'el proyecto muestra el potencial de la pieza como elemento gráfico versátil, demostrando su fuerza en diferentes formatos y contextos de comunicación visual.', en:'the project shows the potential of the piece as a versatile graphic element, demonstrating its strength in different formats and visual communication contexts.', eu:'proiektuak piezak elementu grafiko moldakor gisa duen potentziala erakusten du, bere indarra formatu eta komunikazio bisualeko testuinguru ezberdinetan frogatuz.'},
     p2:{es:'', en:'', eu:''},
     tags:{es:['lettering','tipografía','diseño gráfico','mockups'], en:['lettering','typography','graphic design','mockups'], eu:['lettering','tipografia','diseinu grafikoa','mockup-ak']},
-    slides:[{img:'assets/procesos-p0.jpg', type:'poster'}]
+    slides:[
+      {img:'assets/moclup_vinilos.jpg', type:'poster'},
+      {img:'assets/mockup_tote_bag.jpg', type:'poster'},
+      {img:'assets/mockup_spoti.jpg', type:'poster'}
+    ]
   },
   triptico:{
     num:'009', title:'helvetica', sub:{es:'revista', en:'magazine', eu:'aldizkaria'}, label:{es:'2023 · editorial', en:'2023 · editorial', eu:'2023 · editoriala'},
@@ -2058,10 +2077,10 @@ const PROJECTS = {
   animacion:{
     num:'010', title:'animación', sub:{es:'motion', en:'motion', eu:'motion'}, label:{es:'2025 · motion · digital', en:'2025 · motion · digital', eu:'2025 · motion · digitala'},
     ratio:'25/24',
-    kicker:{es:'pieza de animación digital realizada en Photoshop: exploración del movimiento y la narrativa visual frame a frame.', en:'digital animation piece created in Photoshop: exploration of movement and visual narrative frame by frame.', eu:'Photoshop-en sortutako animazio digitaleko pieza: mugimenduaren eta kontakizun bisualaren esplorazioa framez frame.'},
+    kicker:{es:'pieza de animación digital diseñada y animada en Blender: exploración del movimiento y la narrativa visual frame a frame.', en:'digital animation piece designed and animated in Blender: exploration of movement and visual narrative frame by frame.', eu:'Blender-en diseinatutako eta animatutako animazio digitaleko pieza: mugimenduaren eta kontakizun bisualaren esplorazioa framez frame.'},
     p1:{es:'secuencia animada cuadro a cuadro con tratamiento pictórico. experimentación con el tiempo, el ritmo y la transformación visual.', en:'animated sequence frame by frame with pictorial treatment. experimentation with time, rhythm and visual transformation.', eu:'framez frame animatutako sekuentzia tratamendu piktorikoarekin. denbora, erritmo eta eraldaketa bisualarekin esperimentatzea.'},
     p2:{es:'', en:'', eu:''},
-    tags:{es:['motion','animación','photoshop','digital'], en:['motion','animation','photoshop','digital'], eu:['motion','animazioa','photoshop','digitala']},
+    tags:{es:['motion','animación','blender','digital'], en:['motion','animation','blender','digital'], eu:['motion','animazioa','blender','digitala']},
     slides:[{video:'assets/animacion.mp4'}]
   },
   portada:{
@@ -2072,9 +2091,17 @@ const PROJECTS = {
     p2:{es:'', en:'', eu:''},
     tags:{es:['editorial','portada','tipografía','fotografía'], en:['editorial','cover','typography','photography'], eu:['editoriala','azala','tipografia','argazkigintza']},
     slides:[
-      {img:'assets/portada-p0.jpg', type:'poster'},
       {img:'assets/lolita-libro.png', type:'poster'}
     ]
+  },
+  mercado:{
+    num:'012', title:'mercado', sub:{es:'cartel', en:'poster', eu:'kartela'}, label:{es:'2024 · diseño gráfico', en:'2024 · graphic design', eu:'2024 · diseinu grafikoa'},
+    ratio:'5/7',
+    kicker:{es:'cartel para el mercado agrícola local de Portugalete: diseño gráfico al servicio del comercio de proximidad, la sostenibilidad y el km0.', en:'poster for the local farmers market in Portugalete: graphic design in service of local commerce, sustainability and km0.', eu:'Portugaleteko nekazaritza merkatuko kartela: hurbiltasuneko merkataritzaren, jasangarritasunaren eta km0-aren zerbitzurako diseinu grafikoa.'},
+    p1:{es:'composición tipográfica y visual que transmite los valores del comercio local y el consumo de proximidad, destacando la relación con el entorno natural y la economía circular.', en:'typographic and visual composition conveying the values of local commerce and proximity consumption, highlighting the relationship with the natural environment and circular economy.', eu:'merkataritza lokalaren eta hurbiltasuneko kontsumoren balioak transmititzen dituen konposizio tipografiko eta bisuala, ingurune naturalarekin eta ekonomia zirkularrarekin duen harremana azpimarratuz.'},
+    p2:{es:'', en:'', eu:''},
+    tags:{es:['cartel','diseño gráfico','sostenibilidad','km0','comercio local'], en:['poster','graphic design','sustainability','km0','local commerce'], eu:['kartela','diseinu grafikoa','jasangarritasuna','km0','merkataritza lokala']},
+    slides:[{img:'assets/procesos-p0.jpg', type:'poster'}]
   }
 };
 
