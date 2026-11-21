@@ -3,8 +3,13 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Aida Gutiérrez — Diseñadora gráfica</title>
-<meta name="description" content="Portfolio de Aida Gutiérrez · Diseñadora gráfica · Bilbao · Identidad, UX/UI, editorial, motion." />
+<title>Aida Gutiérrez — Diseñadora gráfica y creadora de contenido · Social media, branding y UX/UI · Bilbao</title>
+<meta name="description" content="Portfolio de Aida Gutiérrez, diseñadora gráfica y creadora de contenido digital en Bilbao. Contenido para redes sociales, copywriting, reels, TikTok, UGC, cobertura de eventos, creatividades para paid media, IA generativa, branding, UX/UI y diseño editorial." />
+<meta name="keywords" content="diseñadora gráfica, creadora de contenido, social media, redes sociales, comunicación, reels, UGC, paid media, Meta Ads, IA generativa, motion graphics, branding, UX/UI, diseño editorial, Bilbao, Euskadi" />
+<meta property="og:title" content="Aida Gutiérrez — Diseñadora gráfica y creadora de contenido" />
+<meta property="og:description" content="Branding, redes sociales y producción audiovisual. Bilbao." />
+<meta property="og:url" content="https://aidagutierrez.com/" />
+<meta property="og:type" content="website" />
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%23f4845f'/><stop offset='40%25' stop-color='%23e8698a'/><stop offset='75%25' stop-color='%239b5de5'/><stop offset='100%25' stop-color='%23c77dff'/></linearGradient></defs><rect width='64' height='64' rx='16' fill='%230d0a14'/><text x='32' y='45' font-family='Georgia,serif' font-style='italic' font-size='44' text-anchor='middle' fill='url(%23g)'>a</text></svg>" />
 
 <!-- =========================================================
@@ -272,7 +277,7 @@ nav.top ul a:hover::after{ right:0; }
   display:flex; flex-direction:column; gap:18px;
 }
 .mobile-nav ul a{
-  font-size:clamp(38px,12vw,56px);
+  font-size:clamp(30px,9.5vw,56px);
   font-weight:800;
   letter-spacing:-.02em;
   text-transform:lowercase;
@@ -1165,6 +1170,478 @@ section.contact{
 @keyframes marq{ to{ transform:translateX(-50%); } }
 
 /* ============================================================
+   14b · SOCIAL — redes sociales y comunicación (cuentas cliente)
+   ============================================================ */
+.social-intro{
+  display:grid;
+  grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
+  gap:clamp(32px,6vw,96px);
+  align-items:start;
+  margin-bottom:clamp(48px,7vw,96px);
+}
+.social-intro .lead{
+  font-size:clamp(18px,1.6vw,26px);
+  line-height:1.45; font-weight:300;
+  max-width:60ch; margin:0;
+}
+.social-intro .lead em{
+  font-family:var(--serif); font-style:italic; font-weight:400; color:var(--lilac);
+}
+.social-facts{ display:flex; flex-wrap:wrap; gap:clamp(28px,4vw,64px); }
+.social-facts div{ display:flex; flex-direction:column; gap:8px; }
+.social-facts b{
+  font-family:var(--serif); font-style:italic; font-weight:400;
+  font-size:clamp(48px,5vw,76px); line-height:1;
+  background:var(--grad-hero);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  padding-right:.1em;
+}
+.social-facts span{
+  font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-dim);
+}
+.social-caps{ list-style:none; margin:0; padding:0; border-top:1px solid var(--hairline); }
+.social-caps li{
+  display:grid; grid-template-columns:118px 1fr; gap:18px;
+  padding:15px 0; border-bottom:1px solid var(--hairline);
+  font-size:14px; line-height:1.45; color:var(--ink);
+}
+.social-caps li span:first-child{
+  font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--ink-dim); padding-top:2px;
+}
+
+.social-grid{
+  list-style:none; margin:0; padding:0;
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0,1fr));
+  gap:clamp(14px,1.8vw,28px);
+}
+.social-card{
+  display:flex; flex-direction:column; gap:16px;
+  width:100%; text-align:left;
+}
+.social-card .media{
+  position:relative; display:block;
+  aspect-ratio:4/5;
+  border-radius:20px; overflow:hidden;
+  background:var(--bg-2);
+  border:1px solid var(--hairline);
+  transform:translateZ(0);
+  transition:transform .6s var(--ease-out), box-shadow .6s var(--ease-out), border-color .4s;
+}
+.social-card .media img,
+.social-card .media video{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover;
+  transition:transform 1.2s var(--ease-out), opacity .5s;
+}
+.social-card .media.contain .bg{ filter:blur(24px) brightness(.6); transform:scale(1.2); }
+.social-card .media.contain .fg{ object-fit:contain; }
+.social-card .media video{ opacity:0; }
+.social-card.playing .media video{ opacity:1; }
+.social-card .media::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(180deg, rgba(13,10,20,.35) 0%, transparent 28%, transparent 62%, rgba(13,10,20,.6) 100%);
+}
+.social-card .count{
+  position:absolute; top:14px; left:14px; right:64px; z-index:2;
+  display:flex; flex-wrap:wrap; gap:5px;
+}
+.sm-item .badge{ position:absolute; top:14px; left:14px; z-index:2; }
+.social-card .count span, .sm-item .badge{
+  white-space:nowrap;
+  font-size:10px; font-weight:500; letter-spacing:.18em; text-transform:uppercase;
+  padding:7px 11px; border-radius:100px;
+  background:rgba(13,10,20,.5);
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.18);
+  color:#fff;
+}
+.social-card .open{
+  position:absolute; right:14px; bottom:14px; z-index:2;
+  width:42px; height:42px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid rgba(255,255,255,.55); color:#fff;
+  background:rgba(13,10,20,.3);
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+  transition:background .4s, color .4s, transform .5s var(--ease-out);
+}
+.social-card .open svg{ width:16px; height:16px; }
+.social-card .meta{ display:flex; flex-direction:column; gap:7px; padding:0 4px; }
+.social-card .name{
+  font-weight:800; font-size:clamp(20px,1.9vw,30px);
+  line-height:1; letter-spacing:-.02em; text-transform:lowercase;
+  padding-right:.2em;
+}
+.social-card .name em{ font-family:var(--serif); font-style:italic; font-weight:400; }
+.social-card .sector{
+  font-size:10.5px; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-dim);
+}
+@media (hover:hover){
+  .social-card:hover .media{
+    transform:translateY(-6px);
+    border-color:rgba(199,125,255,.35);
+    box-shadow:0 34px 64px -26px rgba(232,105,138,.5), 0 18px 36px -20px rgba(155,93,229,.45);
+  }
+  .social-card:hover .media img{ transform:scale(1.04); }
+  .social-card:hover .open{ background:#fff; color:var(--bg); transform:rotate(-45deg); }
+  .social-card:hover .name{
+    background:var(--grad-hero);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+}
+.social-card.cta .media{
+  display:flex; flex-direction:column; justify-content:space-between;
+  padding:clamp(20px,2vw,30px);
+  background:
+    radial-gradient(120% 80% at 100% 100%, rgba(155,93,229,.45), transparent 60%),
+    radial-gradient(90% 70% at 0% 0%, rgba(244,132,95,.35), transparent 60%),
+    var(--bg-2);
+}
+.social-card.cta .media::after{ display:none; }
+.social-card.cta .big{
+  font-family:var(--serif); font-style:italic;
+  font-size:clamp(26px,2.4vw,38px); line-height:1.1; color:var(--ink);
+}
+.social-card.cta .small{
+  font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-dim);
+}
+.social-hint{
+  margin:28px 0 0;
+  font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-faint);
+}
+@media (max-width:1100px){ .social-grid{ grid-template-columns:repeat(3, minmax(0,1fr)); } }
+@media (max-width:860px){ .social-intro{ grid-template-columns:1fr; } }
+@media (max-width:760px){
+  .social-grid{ grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px; }
+  .social-card .media{ border-radius:16px; }
+  .social-card .count{ top:10px; left:10px; right:50px; gap:4px; }
+  .social-card .count span{ font-size:8.5px; padding:5px 8px; letter-spacing:.1em; }
+  .social-card .open{ width:34px; height:34px; right:10px; bottom:10px; }
+  .social-card .sector{ font-size:9.5px; letter-spacing:.14em; }
+  .social-caps li{ grid-template-columns:96px 1fr; gap:12px; font-size:13px; }
+}
+
+
+/* ============================================================
+   14c · DISEÑO GRÁFICO — desplegable por disciplinas
+   ============================================================ */
+.social-kick{
+  font-family:var(--serif); font-style:italic;
+  font-size:clamp(24px,2.6vw,40px); line-height:1.2;
+  color:var(--lilac); margin:-20px 0 40px;
+}
+.design-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:24px; }
+.design-head .section-title{ margin-bottom:24px; }
+.design-toggle{
+  flex-shrink:0; margin-bottom:34px;
+  font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-dim);
+  border:1px solid var(--hairline); border-radius:100px; padding:11px 18px;
+  transition:color .3s, border-color .3s, background .3s;
+}
+@media (hover:hover){ .design-toggle:hover{ color:var(--lilac); border-color:var(--lilac); background:rgba(199,125,255,.06); } }
+.design-lead{
+  font-size:clamp(16px,1.35vw,20px); line-height:1.5; color:var(--ink-dim);
+  max-width:62ch; margin:0 0 44px;
+}
+.design-cats{ border-top:1px solid var(--hairline); }
+.design-cat{ border-bottom:1px solid var(--hairline); }
+.design-cat summary{
+  list-style:none;
+  display:grid; grid-template-columns:40px minmax(0,1fr) auto 28px 42px;
+  align-items:center; gap:clamp(14px,3vw,40px);
+  padding:clamp(18px,2.4vw,30px) 0;
+  cursor:none;
+  -webkit-tap-highlight-color:transparent;
+}
+.design-cat summary::-webkit-details-marker{ display:none; }
+.design-cat summary:focus-visible{ outline:1px solid var(--lilac); outline-offset:4px; border-radius:6px; }
+.design-cat .num{ font-size:12px; letter-spacing:.2em; color:var(--ink-faint); font-variant-numeric:tabular-nums; }
+.design-cat h3{
+  margin:0; font-weight:800;
+  font-size:clamp(26px,3.6vw,58px); line-height:1; letter-spacing:-.02em;
+  text-transform:lowercase;
+  transition:transform .55s var(--ease-out);
+  padding-right:.2em;
+}
+.design-cat h3 em{ font-family:var(--serif); font-style:italic; font-weight:400; }
+.design-cat .names{
+  font-size:11px; font-weight:500; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--ink-dim); text-align:right;
+}
+.design-cat .n{ font-family:var(--serif); font-style:italic; font-size:22px; color:var(--ink-faint); text-align:right; }
+.design-cat .plus{
+  position:relative; width:42px; height:42px; border-radius:50%;
+  border:1px solid var(--hairline);
+  transition:transform .5s var(--ease-out), border-color .3s, background .3s;
+}
+.design-cat .plus::before, .design-cat .plus::after{
+  content:""; position:absolute; left:50%; top:50%;
+  width:14px; height:1px; background:var(--ink);
+  transform:translate(-50%,-50%);
+  transition:transform .5s var(--ease-out);
+}
+.design-cat .plus::after{ transform:translate(-50%,-50%) rotate(90deg); }
+.design-cat[open] .plus{ transform:rotate(180deg); border-color:var(--lilac); background:rgba(199,125,255,.08); }
+.design-cat[open] .plus::after{ transform:translate(-50%,-50%) rotate(0deg); }
+.design-cat[open] h3 em{
+  background:var(--grad-hero);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+@media (hover:hover){
+  .design-cat summary:hover h3{ transform:translateX(12px); }
+  .design-cat summary:hover .plus{ border-color:var(--lilac); }
+  .design-cat summary:hover .num, .design-cat summary:hover .names{ color:var(--ink); }
+}
+.design-grid{
+  display:grid; grid-template-columns:repeat(4, minmax(0,1fr));
+  gap:clamp(14px,1.6vw,24px);
+  padding:4px 0 clamp(28px,3.2vw,44px);
+  animation:dg-in .6s var(--ease-out);
+}
+@keyframes dg-in{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:none; } }
+.design-card{ display:flex; flex-direction:column; gap:12px; width:100%; text-align:left; }
+.design-card .media{
+  position:relative; display:block; aspect-ratio:1/1;
+  border-radius:18px; overflow:hidden;
+  background:var(--bg-2); border:1px solid var(--hairline);
+  transform:translateZ(0);
+  transition:transform .6s var(--ease-out), box-shadow .6s var(--ease-out), border-color .4s;
+}
+.design-card .media img{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  transition:transform 1.2s var(--ease-out);
+}
+.design-card .media.contain{ background:#fff; }
+.design-card .media.contain img{ object-fit:contain; padding:18%; }
+.design-card .name{
+  padding:0 4px; font-weight:800; font-size:clamp(18px,1.5vw,24px);
+  line-height:1; letter-spacing:-.02em; text-transform:lowercase;
+}
+.design-card .name em{ font-family:var(--serif); font-style:italic; font-weight:400; }
+.design-card .meta{
+  padding:0 4px; font-size:10.5px; font-weight:500; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--ink-dim);
+}
+@media (hover:hover){
+  .design-card:hover .media{
+    transform:translateY(-6px); border-color:rgba(199,125,255,.35);
+    box-shadow:0 30px 60px -26px rgba(232,105,138,.5), 0 16px 32px -20px rgba(155,93,229,.45);
+  }
+  .design-card:hover .media img{ transform:scale(1.04); }
+  .design-card:hover .name{
+    background:var(--grad-hero);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+}
+.sm-car{
+  position:absolute; inset:0;
+  display:flex; overflow-x:auto; overflow-y:hidden;
+  scroll-snap-type:x mandatory; scrollbar-width:none; overscroll-behavior-x:contain;
+}
+.sm-car::-webkit-scrollbar{ display:none; }
+.sm-car img{ flex:0 0 100%; scroll-snap-align:start; }
+.sm-car-btn{
+  position:absolute; top:50%; transform:translateY(-50%); z-index:2;
+  width:36px; height:36px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(13,10,20,.45);
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.4); color:#fff;
+  transition:opacity .3s, background .3s;
+}
+.sm-car-btn svg{ width:16px; height:16px; }
+.sm-car-btn.prev{ left:10px; }
+.sm-car-btn.next{ right:10px; }
+.sm-car-btn:disabled{ opacity:0; pointer-events:none; }
+@media (hover:hover){ .sm-car-btn:hover{ background:rgba(13,10,20,.7); } }
+.sm-car-dots{
+  position:absolute; bottom:12px; left:50%; transform:translateX(-50%); z-index:2;
+  display:flex; gap:6px;
+}
+.sm-car-dots span{ width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,.4); transition:background .3s, transform .3s; }
+.sm-car-dots span.on{ background:#fff; transform:scale(1.4); }
+.sm-item.contain{ background:#fff; }
+.sm-item.contain img{ object-fit:contain; padding:12%; background:#fff; }
+.sm-link{
+  display:inline-flex; align-items:center;
+  font-size:11px; font-weight:500; letter-spacing:.2em; text-transform:uppercase;
+  color:#fff; padding:10px 18px; border-radius:100px;
+  background:var(--grad-hero);
+  transition:transform .3s var(--ease-out), box-shadow .3s;
+}
+@media (hover:hover){ .sm-link:hover{ transform:translateY(-2px); box-shadow:0 12px 28px -12px rgba(232,105,138,.6); } }
+@media (max-width:1100px){ .design-grid{ grid-template-columns:repeat(3, minmax(0,1fr)); } }
+@media (max-width:760px){
+  .design-head{ flex-direction:column; align-items:flex-start; gap:0; }
+  .design-toggle{ margin-bottom:24px; }
+  .design-cat summary{ grid-template-columns:26px minmax(0,1fr) 36px; gap:12px; }
+  .design-cat .names, .design-cat .n{ display:none; }
+  .design-cat h3{ font-size:clamp(22px,6.6vw,34px); }
+  .design-cat .plus{ width:36px; height:36px; }
+  .design-grid{ grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px; }
+  .design-card .media{ border-radius:14px; }
+  .design-card .meta{ font-size:9.5px; letter-spacing:.14em; }
+  .social-kick{ margin:-16px 0 32px; }
+}
+
+/* — móvil: tabla de social media como fila deslizable + disciplinas compactas — */
+@media (max-width:760px){
+  .social-intro{ gap:28px; margin-bottom:44px; }
+  .social-intro .lead{ font-size:17px; }
+  .social-caps{
+    display:flex; gap:10px;
+    overflow-x:auto; overflow-y:hidden;
+    scroll-snap-type:x mandatory; scrollbar-width:none;
+    margin:0 calc(-1 * clamp(20px,4vw,56px)); padding:0 clamp(20px,4vw,56px) 4px;
+    scroll-padding-inline:clamp(20px,4vw,56px);
+    border-top:0;
+  }
+  .social-caps::-webkit-scrollbar{ display:none; }
+  .social-caps li{
+    flex:0 0 58%; display:block; scroll-snap-align:start;
+    padding:14px 16px; border:1px solid var(--hairline); border-radius:16px;
+    background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));
+    font-size:13px; line-height:1.4;
+  }
+  .social-caps li span:first-child{ display:block; margin-bottom:6px; font-size:10px; }
+
+  section.skills{ padding-top:72px; padding-bottom:64px; }
+  .skills-head{ flex-direction:column; align-items:flex-start; gap:0; margin-bottom:24px; }
+  .skills-head .section-title{ margin-bottom:12px; }
+  .skills-head > .label{ font-size:10px !important; }
+  .skills-scroll{ grid-auto-columns:78vw; gap:12px; padding-top:4px; }
+  .skill-card{
+    min-height:0; padding:22px 20px 24px; border-radius:20px;
+    justify-content:flex-start; gap:6px;
+  }
+  .skill-card .num{ font-size:28px; }
+  .skill-card h4{ font-size:28px; margin:6px 0 8px; }
+  .skill-card p{ font-size:14px; margin-bottom:16px; }
+  .skill-card ul{ font-size:10px; gap:6px; }
+  .skill-card ul li{ padding:5px 9px; }
+}
+
+/* — social viewer (modal) — */
+.sm-modal{
+  position:fixed; inset:0; z-index:95;
+  opacity:0; pointer-events:none; visibility:hidden;
+  transition:opacity .4s var(--ease-out), visibility 0s .4s;
+}
+.sm-modal.open{
+  opacity:1; pointer-events:auto; visibility:visible;
+  transition:opacity .4s var(--ease-out), visibility 0s 0s;
+}
+.sm-backdrop{
+  position:absolute; inset:0;
+  background:rgba(13,10,20,.9);
+  backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
+}
+.sm-panel{
+  position:relative; height:100%;
+  overflow-y:auto; overscroll-behavior:contain;
+  padding:clamp(20px,3vw,40px) clamp(20px,4vw,56px) clamp(28px,4vw,48px);
+  display:flex; flex-direction:column; gap:clamp(22px,3.5vh,40px);
+  transform:translateY(28px);
+  transition:transform .55s var(--ease-out);
+}
+.sm-modal.open .sm-panel{ transform:none; }
+.sm-head{
+  display:flex; justify-content:space-between; align-items:flex-end; gap:24px;
+  border-bottom:1px solid var(--hairline); padding-bottom:22px;
+}
+.sm-head .label{
+  font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-dim);
+}
+.sm-head h3{
+  font-weight:800; font-size:clamp(36px,5.4vw,88px);
+  line-height:.95; letter-spacing:-.02em; margin:10px 0 0;
+  text-transform:lowercase;
+}
+.sm-head h3 em{
+  font-family:var(--serif); font-style:italic; font-weight:400;
+  background:var(--grad-hero);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  padding-right:.2em;
+}
+.sm-actions{ display:flex; gap:10px; flex-shrink:0; }
+.sm-btn{
+  width:44px; height:44px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid var(--hairline); color:var(--ink);
+  background:rgba(255,255,255,.03);
+  transition:border-color .3s, color .3s, background .3s, opacity .3s;
+}
+.sm-btn svg{ width:16px; height:16px; }
+.sm-btn:disabled{ opacity:.2; pointer-events:none; }
+@media (hover:hover){ .sm-btn:hover{ border-color:var(--lilac); color:var(--lilac); background:rgba(199,125,255,.08); } }
+.sm-body{
+  display:grid;
+  grid-template-columns:minmax(240px,340px) minmax(0,1fr);
+  gap:clamp(24px,4vw,64px);
+  align-items:start;
+}
+.sm-copy .kicker{
+  font-family:var(--serif); font-style:italic;
+  font-size:clamp(20px,2vw,28px); line-height:1.25;
+  color:var(--lilac); margin:0 0 22px;
+}
+.sm-copy p{ font-size:15px; line-height:1.6; margin:0 0 18px; }
+.sm-copy .tag-row{ margin-top:22px; }
+.sm-strip-wrap{ min-width:0; display:flex; flex-direction:column; gap:16px; }
+.sm-strip{
+  --h:min(68vh, 660px);
+  display:flex; gap:16px;
+  overflow-x:auto; overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  scrollbar-width:none;
+  overscroll-behavior-x:contain;
+  padding-bottom:2px;
+}
+.sm-strip::-webkit-scrollbar{ display:none; }
+.sm-item{
+  flex:0 0 auto; position:relative; margin:0;
+  height:var(--h);
+  border-radius:18px; overflow:hidden;
+  background:var(--bg-2);
+  border:1px solid var(--hairline);
+  scroll-snap-align:start;
+}
+.sm-item.wide{ height:auto; width:min(100%, calc(var(--h) * 1.7777)); align-self:center; }
+.sm-item.wide img, .sm-item.wide video{ position:absolute; inset:0; }
+.sm-item img, .sm-item video{
+  display:block; width:100%; height:100%; object-fit:cover; background:#000;
+}
+.sm-play{
+  position:absolute; inset:0; z-index:1;
+  display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(180deg, transparent 45%, rgba(13,10,20,.55));
+}
+.sm-play span{
+  width:66px; height:66px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(255,255,255,.14);
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.55); color:#fff;
+  transition:transform .3s var(--ease-out), background .3s;
+}
+.sm-play svg{ width:22px; height:22px; margin-left:3px; }
+@media (hover:hover){ .sm-item:hover .sm-play span{ transform:scale(1.08); background:rgba(255,255,255,.26); } }
+.sm-item.is-playing .sm-play, .sm-item.is-playing .badge{ display:none; }
+.sm-strip-nav{ display:flex; align-items:center; gap:10px; }
+.sm-strip-nav .sm-count{
+  margin-left:8px;
+  font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-dim);
+}
+@media (max-width:860px){
+  .sm-body{ grid-template-columns:1fr; }
+  .sm-strip{ --h:min(64vh, 560px); gap:12px; }
+  .sm-head{ align-items:flex-start; flex-direction:column-reverse; gap:16px; }
+  .sm-actions{ align-self:flex-end; }
+  .sm-copy p{ font-size:14px; }
+}
+
+/* ============================================================
    15 · UTILS
    ============================================================ */
 @media (prefers-reduced-motion: reduce){
@@ -1202,23 +1679,16 @@ section.contact{
   .mob-break { display: block; }
 }
 </style>
-<link rel="preload" href="assets/animacion.mp4" as="video" type="video/mp4" />
-<link rel="preload" href="assets/berlioz-poster.jpg" as="image" />
-<link rel="preload" href="assets/cheerfy-p0.jpg" as="image" />
-<link rel="preload" href="assets/cheerfy-p1.jpg" as="image" />
-<link rel="preload" href="assets/cheerfy-p2.jpg" as="image" />
-<link rel="preload" href="assets/eye-p0.png" as="image" />
-<link rel="preload" href="assets/hilando-logo.svg" as="image" />
-<link rel="preload" href="assets/hilando-photo1.jpg" as="image" />
-<link rel="preload" href="assets/hilando-photo2.png" as="image" />
-<link rel="preload" href="assets/hilando-photo3.jpg" as="image" />
-<link rel="preload" href="assets/identidad-p0.jpg" as="image" />
-<link rel="preload" href="assets/procesos-p0.jpg" as="image" />
-<link rel="preload" href="assets/moclup_vinilos.jpg" as="image" />
-<link rel="preload" href="assets/mockup_tote_bag.jpg" as="image" />
-<link rel="preload" href="assets/mockup_spoti.jpg" as="image" />
-<link rel="preload" href="assets/smart.mp4" as="video" type="video/mp4" />
-<link rel="preload" href="assets/triptico-p0.jpg" as="image" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Aida Gutiérrez García",
+ "jobTitle":"Diseñadora gráfica y creadora de contenido digital","url":"https://aidagutierrez.com/",
+ "sameAs":["https://es.linkedin.com/in/aida-guti%C3%A9rrez-garc%C3%ADa-100988326"],
+ "worksFor":{"@type":"Organization","name":"Elements Digital"},
+ "address":{"@type":"PostalAddress","addressLocality":"Bilbao","addressRegion":"Bizkaia","addressCountry":"ES"},
+ "alumniOf":[{"@type":"CollegeOrUniversity","name":"UPV/EHU"},{"@type":"CollegeOrUniversity","name":"UNIR · Universidad Internacional de La Rioja"}],
+ "knowsLanguage":["es","eu","en"],
+ "knowsAbout":["Social media","Creación de contenido","Contenido UGC","Reels","TikTok","Copywriting","Paid media","IA generativa","Motion graphics","Branding","Identidad visual","UX/UI","Diseño editorial","Packaging"]}
+</script>
 </head>
 
 <body>
@@ -1244,7 +1714,8 @@ section.contact{
   <a href="#hero" class="mark lc">aida<em>.</em>gutiérrez</a>
   <ul>
     <li><a href="#about" data-i18n="nav.about">sobre mí</a></li>
-    <li><a href="#projects" data-i18n="nav.projects">proyectos</a></li>
+    <li><a href="#social-media" data-i18n="nav.social">social media</a></li>
+    <li><a href="#diseno-grafico" data-i18n="nav.projects">diseño gráfico</a></li>
     <li><a href="#skills" data-i18n="nav.skills">disciplinas</a></li>
     <li><a href="#contact" data-i18n="nav.contact">contacto</a></li>
   </ul>
@@ -1263,7 +1734,8 @@ section.contact{
 <div class="mobile-nav" aria-label="Navegación móvil">
   <ul>
     <li><a href="#about" class="mob-link" data-i18n="nav.about">sobre mí</a></li>
-    <li><a href="#projects" class="mob-link" data-i18n="nav.projects">proyectos</a></li>
+    <li><a href="#social-media" class="mob-link" data-i18n="nav.social">social media</a></li>
+    <li><a href="#diseno-grafico" class="mob-link" data-i18n="nav.projects">diseño gráfico</a></li>
     <li><a href="#skills" class="mob-link" data-i18n="nav.skills">disciplinas</a></li>
     <li><a href="#contact" class="mob-link" data-i18n="nav.contact">contacto</a></li>
   </ul>
@@ -1293,11 +1765,11 @@ section.contact{
   </h1>
 
   <p class="tagline" data-i18n="hero.tag">
-    diseñadora gráfica, especializada en branding, ux/ui y diseño editorial con una base artística que busca el porqué detrás de cada decisión visual.
+    diseñadora gráfica y creadora de contenido. branding, redes sociales y producción audiovisual, con una base artística que busca el porqué detrás de cada decisión visual.
   </p>
 
   <footer class="meta-bottom">
-    <span data-i18n="hero.role"><span>diseñadora gráfica ·</span><span class="mob-break"> 24 años · bilbao</span></span>
+    <span data-i18n="hero.role"><span>diseño &amp; contenido ·</span><span class="mob-break"> 24 años · bilbao</span></span>
     <span class="scroll-hint">
       <span data-i18n="hero.scroll">desliza</span>
       <span class="bar" aria-hidden="true"></span>
@@ -1318,7 +1790,7 @@ section.contact{
   <div class="about-grid">
     <div class="about-copy">
       <p class="big-q reveal" data-i18n="about.quote">
-        “diseño con intención, branding, ux y editorial.”
+        “diseño con intención: de la marca al reel.”
       </p>
       <p class="reveal" data-delay="1" data-i18n="about.p1">
         me formé en la intersección entre el arte y el diseño. graduada en creación
@@ -1331,16 +1803,21 @@ section.contact{
         profundicé en diseño de información, ux/ui, composición tipográfica,
         motion, producción gráfica digital e interacción.
       </p>
+      <p class="reveal" data-delay="3" data-i18n="about.p3">
+        hoy, en elements digital, creo contenido para las redes sociales de marcas e
+        instituciones como gobierno vasco, grupo planeta, koopera o dixie: escribo, diseño,
+        grabo, edito, cubro eventos y pongo cara a las marcas cuando el contenido lo pide.
+      </p>
     </div>
 
     <aside class="about-side reveal" data-delay="2">
       <dl>
         <dt data-i18n="about.meta.now">ahora</dt>
-        <dd>Elements Digital · Bilbao</dd>
+        <dd>Elements Digital · Bilbao<br><span data-i18n="about.meta.role">diseño y contenido digital</span></dd>
         <dt data-i18n="about.meta.edu">formación</dt>
         <dd>UPV/EHU, 2020–2024<br>UNIR, Máster DGD 2025</dd>
         <dt data-i18n="about.meta.focus">foco</dt>
-        <dd data-i18n="about.meta.focus.v">branding · ux/ui · editorial · motion</dd>
+        <dd data-i18n="about.meta.focus.v">branding · redes sociales · contenido audiovisual · ux/ui · editorial</dd>
         <dt data-i18n="about.meta.langs">idiomas</dt>
         <dd>es · en · eu</dd>
       </dl>
@@ -1349,208 +1826,206 @@ section.contact{
 </section>
 
 <!-- =====================================================
-     PROJECTS · big typographic list, future-proof for many more
+     SOCIAL · redes sociales y comunicación (JS rellena el grid)
      ===================================================== -->
-<section id="projects" class="projects" data-screen-label="03 Projects">
-  <div class="eyebrow reveal"><span data-i18n="proj.eyebrow">02 · proyectos seleccionados</span></div>
+<section id="social-media" class="social" data-screen-label="03 Social media">
+  <div class="eyebrow reveal"><span data-i18n="so.eyebrow">02 · social media y creación de contenido</span></div>
   <h2 class="section-title reveal" data-delay="1">
-    <span data-i18n="proj.title.a">trabajo</span> <em data-i18n="proj.title.b">seleccionado</em>
+    <span data-i18n="so.title.a">contenido para</span> <em data-i18n="so.title.b">redes sociales.</em>
   </h2>
+  <p class="social-kick reveal" data-delay="1" data-i18n="so.kick">del brief al reel.</p>
 
-  <ul class="project-list" id="projectList">
-    <li class="project-item reveal" data-preview="hilando">
-      <a href="#featured">
-        <span class="num">001</span>
-        <span class="title">hilando<em> · app</em></span>
-        <span class="cat">ux/ui · research</span>
-        <span class="year">2024</span>
-      </a>
-    </li>
-    <li class="project-item reveal" data-delay="1" data-preview="arboretum">
-      <a href="#">
-        <span class="num">002</span>
-        <span class="title">arboretum<em> · app</em></span>
-        <span class="cat">ux/ui</span>
-        <span class="year">2023</span>
-      </a>
-    </li>
-    <li class="project-item reveal" data-delay="2" data-preview="berlioz">
-      <a href="#">
-        <span class="num">003</span>
-        <span class="title">cartel<em> · berlioz</em></span>
-        <span class="cat">ilustración editorial</span>
-        <span class="year">2025</span>
-      </a>
-    </li>
-    <li class="project-item reveal" data-delay="3" data-preview="cheerfy">
-      <a href="#">
-        <span class="num">004</span>
-        <span class="title">cheerfy<em> · manual</em></span>
-        <span class="cat">branding</span>
-        <span class="year">2026</span>
-      </a>
-    </li>
-    <li class="project-item reveal" data-delay="4" data-preview="identidad">
-      <a href="#">
-        <span class="num">005</span>
-        <span class="title">punto<em> · branding</em></span>
-        <span class="cat">branding</span>
-        <span class="year">2024</span>
-      </a>
-    </li>
-    <li class="project-item reveal" data-delay="0" data-preview="smart">
-      <a href="#">
-        <span class="num">006</span>
-        <span class="title">smartapple<em> · animación</em></span>
-        <span class="cat">animación digital</span>
-        <span class="year">2025</span>
-      </a>
-    </li>
-    <li class="project-item reveal" data-delay="1" data-preview="eye">
-      <a href="#">
-        <span class="num">007</span>
-        <span class="title">la pausa<em> · packaging</em></span>
-        <span class="cat">packaging</span>
-        <span class="year">2024</span>
-      </a>
-    </li>
-    <li class="project-item reveal" data-delay="2" data-preview="procesos">
-      <a href="#">
-        <span class="num">008</span>
-        <span class="title">lettering<em> · creativo</em></span>
-        <span class="cat">lettering</span>
-        <span class="year">2026</span>
-      </a>
-    </li>
-    <li class="project-item reveal" data-delay="3" data-preview="triptico">
-      <a href="#">
-        <span class="num">009</span>
-        <span class="title">helvetica<em> · revista</em></span>
-        <span class="cat">editorial</span>
-        <span class="year">2023</span>
-      </a>
-    </li>
-    <li class="project-item reveal" data-delay="4" data-preview="animacion">
-      <a href="#">
-        <span class="num">010</span>
-        <span class="title">animación<em> · motion</em></span>
-        <span class="cat">motion · digital</span>
-        <span class="year">2025</span>
-      </a>
-    </li>
-    <li class="project-item reveal" data-delay="0" data-preview="portada">
-      <a href="#">
-        <span class="num">011</span>
-        <span class="title">lolita<em> · portada</em></span>
-        <span class="cat">editorial</span>
-        <span class="year">2024</span>
-      </a>
-    </li>
-    <li class="project-item reveal" data-delay="1" data-preview="mercado">
-      <a href="#">
-        <span class="num">012</span>
-        <span class="title">mercado<em> · cartel</em></span>
-        <span class="cat">diseño gráfico</span>
-        <span class="year">2024</span>
-      </a>
-    </li>
-  </ul>
-
-  <!-- floating preview follows cursor on hover -->
-  <div class="floating-preview" id="floatingPreview" aria-hidden="true">
-    <div class="slide" data-key="hilando" style="background:#fff;">
-      <img src="assets/hilando.png" alt="" loading="lazy" decoding="async" style="object-fit:contain; padding:12%;">
-      <div class="ph-label" style="color:#4a3b33;"><span>ux/ui · 2024</span><b>hilando</b></div>
+  <div class="social-intro">
+    <div>
+      <p class="lead reveal" data-delay="1" data-i18n="so.lead">
+        en <em>elements digital</em> creo el contenido de las redes sociales de marcas e instituciones: copies, guion, grabación —también delante de la cámara—, edición, diseño y creatividades para paid media. cubro eventos en directo y uso ia generativa para producir piezas a medida de cada campaña.
+      </p>
     </div>
-    <div class="slide" data-key="arboretum">
-      <img src="assets/arboretum.png" alt="" loading="lazy" decoding="async">
-      <div class="ph-label"><span>ux/ui · 2023</span><b>arboretum</b></div>
-    </div>
-    <div class="slide" data-key="berlioz">
-      <img src="assets/berlioz-poster.jpg" alt="" loading="lazy" decoding="async">
-      <div class="ph-label"><span>ilustración · 2025</span><b>berlioz</b></div>
-    </div>
-    <div class="slide" data-key="cheerfy">
-      <img src="assets/cheerfy.png" alt="" loading="lazy" decoding="async">
-      <div class="ph-label"><span>branding · 2026</span><b>cheerfy</b></div>
-    </div>
-    <div class="slide" data-key="identidad">
-      <img src="assets/identidad-p0.jpg" alt="" loading="lazy" decoding="async">
-      <div class="ph-label"><span>branding · 2024</span><b>punto</b></div>
-    </div>
-    <div class="slide" data-key="smart">
-      <img src="assets/smartapple.png" alt="" loading="lazy" decoding="async">
-      <div class="ph-label"><span>animación · 2025</span><b>smartapple</b></div>
-    </div>
-    <div class="slide" data-key="eye">
-      <img src="assets/eye-p0.png" alt="" loading="lazy" decoding="async">
-      <div class="ph-label"><span>packaging · 2024</span><b>la pausa</b></div>
-    </div>
-    <div class="slide" data-key="procesos">
-      <img src="assets/moclup_vinilos.jpg" alt="" loading="lazy" decoding="async">
-      <div class="ph-label"><span>lettering · 2026</span><b>lettering</b></div>
-    </div>
-    <div class="slide" data-key="mercado">
-      <img src="assets/procesos-p0.jpg" alt="" loading="lazy" decoding="async">
-      <div class="ph-label"><span>diseño gráfico · 2024</span><b>mercado</b></div>
-    </div>
-    <div class="slide" data-key="triptico">
-      <img src="assets/pagina_1_mockup.png" alt="" loading="lazy" decoding="async">
-      <div class="ph-label"><span>editorial · 2023</span><b>helvetica</b></div>
-    </div>
-    <div class="slide" data-key="animacion">
-      <img src="assets/animacion.png" alt="" loading="lazy" decoding="async">
-      <div class="ph-label"><span>motion · 2025</span><b>animación</b></div>
-    </div>
-    <div class="slide" data-key="portada">
-      <img src="assets/lolita-libro.png" alt="" loading="lazy" decoding="async">
-      <div class="ph-label"><span>editorial · 2024</span><b>lolita</b></div>
-    </div>
+    <ul class="social-caps reveal" data-delay="2">
+      <li><span>copywriting</span><span data-i18n="so.c1.v">copies y textos para publicaciones</span></li>
+      <li><span data-i18n="so.c2.k">producción</span><span data-i18n="so.c2.v">guion, grabación, locución y edición de vídeo</span></li>
+      <li><span data-i18n="so.c3.k">formatos</span><span data-i18n="so.c3.v">reels, tiktok, carruseles, stories y posts para linkedin</span></li>
+      <li><span>paid media</span><span data-i18n="so.c4.v">creatividades para campañas de meta y google ads, y para medios digitales y analógicos</span></li>
+      <li><span data-i18n="so.c5.k">eventos</span><span data-i18n="so.c5.v">cobertura en directo y ruedas de prensa</span></li>
+      <li><span data-i18n="so.c6.k">ia</span><span data-i18n="so.c6.v">imagen y vídeo con ia generativa · gemini (nano banana), claude</span></li>
+    </ul>
   </div>
+
+  <ul class="social-grid" id="socialGrid"></ul>
+  <p class="social-hint reveal" data-i18n="so.hint">pulsa una marca para ver sus reels y piezas</p>
 </section>
 
-<!-- =====================================================
-     FEATURED · case study dinámico (JS lo rellena)
-     ===================================================== -->
-<section id="featured" class="featured" data-screen-label="04 Featured">
-  <button class="feat-back" id="featBack">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-    <span>proyectos</span>
-  </button>
-  <div class="featured-head">
-    <div class="feat-head-side">
-      <button class="feat-nav-btn" id="featPrev" aria-label="proyecto anterior">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg>
-      </button>
-      <span class="label" id="featLabel"></span>
-    </div>
-    <h3 id="featTitle"></h3>
-    <div class="feat-head-side">
-      <span class="label" id="featYear"></span>
-      <button class="feat-nav-btn" id="featNext" aria-label="proyecto siguiente">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg>
-      </button>
+<!-- social viewer -->
+<div class="sm-modal" id="smModal" role="dialog" aria-modal="true" aria-labelledby="smTitle" aria-hidden="true">
+  <div class="sm-backdrop" data-sm-close></div>
+  <div class="sm-panel">
+    <header class="sm-head">
+      <div>
+        <span class="label" id="smLabel"></span>
+        <h3 id="smTitle"></h3>
+      </div>
+      <div class="sm-actions">
+        <button class="sm-btn" id="smPrevCase" aria-label="anterior">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="sm-btn" id="smNextCase" aria-label="siguiente">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+        <button class="sm-btn" id="smClose" data-sm-close aria-label="cerrar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+    </header>
+    <div class="sm-body">
+      <div class="sm-copy">
+        <p class="kicker" id="smKicker"></p>
+        <p id="smP"></p>
+        <div class="tag-row" id="smTags"></div>
+      </div>
+      <div class="sm-strip-wrap">
+        <div class="sm-strip" id="smStrip"></div>
+        <div class="sm-strip-nav">
+          <button class="sm-btn" id="smStripPrev" aria-label="anterior">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          </button>
+          <button class="sm-btn" id="smStripNext" aria-label="siguiente">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+          <span class="sm-count" id="smCount"></span>
+        </div>
+      </div>
     </div>
   </div>
+</div>
 
-  <div class="featured-body">
-    <div class="featured-copy">
-      <p class="kicker" id="featKicker"></p>
-      <p id="featP1"></p>
-      <p id="featP2"></p>
-      <div class="tag-row" id="featTags"></div>
-    </div>
+<!-- =====================================================
+     DISEÑO GRÁFICO · desplegable por disciplinas (abre el visor)
+     ===================================================== -->
+<section id="diseno-grafico" class="design" data-screen-label="04 Diseño gráfico">
+  <div class="eyebrow reveal"><span data-i18n="proj.eyebrow">03 · proyectos de diseño gráfico</span></div>
+  <div class="design-head">
+    <h2 class="section-title reveal" data-delay="1">
+      <span data-i18n="proj.title.a">diseño</span> <em data-i18n="proj.title.b">gráfico.</em>
+    </h2>
+    <button class="design-toggle reveal" id="designToggle" type="button">desplegar todo</button>
+  </div>
+  <p class="design-lead reveal" data-i18n="proj.lead">branding, ux/ui, diseño editorial, cartelería, packaging y motion graphics. abre una disciplina para ver sus proyectos.</p>
 
-    <div class="proj-carousel">
-      <div class="carousel-track" id="carTrack"></div>
-      <button class="carousel-btn prev" id="carPrev" aria-label="anterior">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg>
-      </button>
-      <button class="carousel-btn next" id="carNext" aria-label="siguiente">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg>
-      </button>
-      <div class="carousel-dots" id="carDots"></div>
-    </div>
+  <div class="design-cats">
+    <details class="design-cat reveal" open>
+      <summary>
+        <span class="num">01</span>
+        <h3 class="title" data-i18n="dc.1"><em>branding</em> e identidad visual</h3>
+        <span class="names">cheerfy · punto</span>
+        <span class="n">2</span>
+        <span class="plus" aria-hidden="true"></span>
+      </summary>
+      <div class="design-grid">
+        <button class="design-card" data-key="cheerfy">
+          <span class="media"><img src="assets/design/thumb-cheerfy.jpg" alt="Cheerfy: rediseño de logotipo y manual de identidad corporativa" loading="lazy" decoding="async"></span>
+          <span class="name">cheerfy<em> · manual</em></span><span class="meta">2026 · branding</span>
+        </button>
+        <button class="design-card" data-key="identidad">
+          <span class="media"><img style="object-position:50% 62%" src="assets/design/thumb-identidad-p0.jpg" alt="Punto: identidad visual para un restaurante mediterráneo" loading="lazy" decoding="async"></span>
+          <span class="name">punto<em> · branding</em></span><span class="meta">2024 · branding</span>
+        </button>
+      </div>
+    </details>
+    <details class="design-cat reveal">
+      <summary>
+        <span class="num">02</span>
+        <h3 class="title" data-i18n="dc.2">diseño <em>ux/ui</em></h3>
+        <span class="names">hilando · arboretum</span>
+        <span class="n">2</span>
+        <span class="plus" aria-hidden="true"></span>
+      </summary>
+      <div class="design-grid">
+        <button class="design-card" data-key="hilando">
+          <span class="media contain"><img src="assets/design/thumb-hilando.jpg" alt="Hilando: app de moda consciente, diseño UX/UI" loading="lazy" decoding="async"></span>
+          <span class="name">hilando<em> · app</em></span><span class="meta">2024 · ux/ui</span>
+        </button>
+        <button class="design-card" data-key="arboretum">
+          <span class="media"><img src="assets/design/thumb-arboretum.jpg" alt="Arboretum: app guía de la flora de la UPV/EHU, diseño UX/UI" loading="lazy" decoding="async"></span>
+          <span class="name">arboretum<em> · app</em></span><span class="meta">2023 · ux/ui</span>
+        </button>
+      </div>
+    </details>
+    <details class="design-cat reveal">
+      <summary>
+        <span class="num">03</span>
+        <h3 class="title" data-i18n="dc.3">diseño <em>editorial</em></h3>
+        <span class="names">helvetica · lolita</span>
+        <span class="n">2</span>
+        <span class="plus" aria-hidden="true"></span>
+      </summary>
+      <div class="design-grid">
+        <button class="design-card" data-key="triptico">
+          <span class="media"><img src="assets/design/thumb-pagina_1_mockup.jpg" alt="Revista sobre la tipografía Helvetica: maquetación editorial" loading="lazy" decoding="async"></span>
+          <span class="name">helvetica<em> · revista</em></span><span class="meta">2023 · editorial</span>
+        </button>
+        <button class="design-card" data-key="portada">
+          <span class="media"><img src="assets/design/thumb-lolita-libro.jpg" alt="Portada de libro para Lolita de Nabokov" loading="lazy" decoding="async"></span>
+          <span class="name">lolita<em> · portada</em></span><span class="meta">2024 · editorial</span>
+        </button>
+      </div>
+    </details>
+    <details class="design-cat reveal">
+      <summary>
+        <span class="num">04</span>
+        <h3 class="title" data-i18n="dc.4"><em>cartelería</em>, ilustración y lettering</h3>
+        <span class="names">berlioz · mercado · lettering</span>
+        <span class="n">3</span>
+        <span class="plus" aria-hidden="true"></span>
+      </summary>
+      <div class="design-grid">
+        <button class="design-card" data-key="berlioz">
+          <span class="media"><img src="assets/design/thumb-berlioz-poster.jpg" alt="Cartel de concierto de Berlioz con estética Bauhaus" loading="lazy" decoding="async"></span>
+          <span class="name">cartel<em> · berlioz</em></span><span class="meta">2025 · ilustración editorial</span>
+        </button>
+        <button class="design-card" data-key="mercado">
+          <span class="media"><img src="assets/design/thumb-procesos-p0.jpg" alt="Cartel para el mercado agrícola de Portugalete" loading="lazy" decoding="async"></span>
+          <span class="name">mercado<em> · cartel</em></span><span class="meta">2024 · diseño gráfico</span>
+        </button>
+        <button class="design-card" data-key="procesos">
+          <span class="media"><img src="assets/design/thumb-moclup_vinilos.jpg" alt="Lettering creativo aplicado en mockups" loading="lazy" decoding="async"></span>
+          <span class="name">lettering<em> · creativo</em></span><span class="meta">2026 · lettering</span>
+        </button>
+      </div>
+    </details>
+    <details class="design-cat reveal">
+      <summary>
+        <span class="num">05</span>
+        <h3 class="title" data-i18n="dc.5"><em>packaging</em></h3>
+        <span class="names">la pausa</span>
+        <span class="n">1</span>
+        <span class="plus" aria-hidden="true"></span>
+      </summary>
+      <div class="design-grid">
+        <button class="design-card" data-key="eye">
+          <span class="media"><img src="assets/design/thumb-eye-p0.jpg" alt="La Pausa: packaging de chocolates en formato periódico" loading="lazy" decoding="async"></span>
+          <span class="name">la pausa<em> · packaging</em></span><span class="meta">2024 · packaging</span>
+        </button>
+      </div>
+    </details>
+    <details class="design-cat reveal">
+      <summary>
+        <span class="num">06</span>
+        <h3 class="title" data-i18n="dc.6"><em>motion</em> graphics y animación</h3>
+        <span class="names">smartapple · animación</span>
+        <span class="n">2</span>
+        <span class="plus" aria-hidden="true"></span>
+      </summary>
+      <div class="design-grid">
+        <button class="design-card" data-key="smart">
+          <span class="media"><img src="assets/design/thumb-smartapple.jpg" alt="Smartapple: anuncio animado" loading="lazy" decoding="async"></span>
+          <span class="name">smartapple<em> · animación</em></span><span class="meta">2025 · animación digital</span>
+        </button>
+        <button class="design-card" data-key="animacion">
+          <span class="media"><img src="assets/design/thumb-animacion.jpg" alt="Animación digital en Blender" loading="lazy" decoding="async"></span>
+          <span class="name">animación<em> · motion</em></span><span class="meta">2025 · motion · digital</span>
+        </button>
+      </div>
+    </details>
   </div>
 </section>
 
@@ -1560,9 +2035,9 @@ section.contact{
 <section id="skills" class="skills" data-screen-label="05 Skills">
   <div class="skills-head">
     <div>
-      <div class="eyebrow reveal"><span data-i18n="sk.eyebrow">03 · disciplinas</span></div>
+      <div class="eyebrow reveal"><span data-i18n="sk.eyebrow">04 · disciplinas</span></div>
       <h2 class="section-title reveal" data-delay="1">
-        <span data-i18n="sk.title.a">cuatro</span> <em data-i18n="sk.title.b">territorios</em>
+        <span data-i18n="sk.title.a">cinco</span> <em data-i18n="sk.title.b">territorios</em>
       </h2>
     </div>
     <span class="label reveal" data-delay="2" style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-dim);" data-i18n="sk.hint">← desliza horizontal →</span>
@@ -1573,32 +2048,40 @@ section.contact{
       <span class="num">01</span>
       <div>
         <h4 data-i18n="sk.c1.t"><em>branding</em></h4>
-        <p data-i18n="sk.c1.p">mi área principal. sistemas de marca con nombre, voz y criterio. logotipos, identidades visuales, guidelines y aplicaciones.</p>
+        <p data-i18n="sk.c1.p">el punto de partida. sistemas de marca con nombre, voz y criterio. logotipos, identidades visuales, guidelines y aplicaciones.</p>
         <ul><li>naming</li><li>logotype</li><li>sistema</li><li>guidelines</li></ul>
       </div>
     </article>
     <article class="skill-card reveal" data-c="2" data-delay="1">
       <span class="num">02</span>
       <div>
+        <h4 data-i18n="sk.c5.t">contenido <em>&amp; redes</em></h4>
+        <p data-i18n="sk.c5.p">copies, guion, grabación y edición para redes sociales. reels, tiktok, carruseles, ugc y cobertura de eventos, con ia generativa cuando suma.</p>
+        <ul><li>social media</li><li>reels</li><li>ugc</li><li>paid media</li><li>ia generativa</li></ul>
+      </div>
+    </article>
+    <article class="skill-card reveal" data-c="3" data-delay="2">
+      <span class="num">03</span>
+      <div>
         <h4 data-i18n="sk.c2.t">diseño <em>ux / ui</em></h4>
         <p data-i18n="sk.c2.p">investigación con usuarios, arquitectura de información, prototipado y librerías ui. un diseño útil antes que bonito — y también bonito.</p>
         <ul><li>research</li><li>wireframing</li><li>figma</li><li>design systems</li></ul>
       </div>
     </article>
-    <article class="skill-card reveal" data-c="3" data-delay="2">
-      <span class="num">03</span>
+    <article class="skill-card reveal" data-c="4" data-delay="3">
+      <span class="num">04</span>
       <div>
         <h4 data-i18n="sk.c3.t">diseño <em>editorial</em></h4>
         <p data-i18n="sk.c3.p">revistas, maquetación, diseño de información. el placer de una página bien construida: retícula, jerarquía, ritmo tipográfico.</p>
         <ul><li>indesign</li><li>retícula</li><li>tipografía</li><li>data viz</li></ul>
       </div>
     </article>
-    <article class="skill-card reveal" data-c="4" data-delay="3">
-      <span class="num">04</span>
+    <article class="skill-card reveal" data-c="1" data-delay="4">
+      <span class="num">05</span>
       <div>
         <h4 data-i18n="sk.c4.t">motion <em>&amp; 3d</em></h4>
-        <p data-i18n="sk.c4.p">área emergente: dar tiempo al diseño. transiciones, reels de marca y pequeños experimentos 3d que aportan textura.</p>
-        <ul><li>after effects</li><li>blender</li><li>cinema 4d</li><li>reels</li></ul>
+        <p data-i18n="sk.c4.p">dar tiempo al diseño. motion graphics para campañas, transiciones, animación y pequeños experimentos 3d que aportan textura.</p>
+        <ul><li>after effects</li><li>premiere pro</li><li>blender</li><li>cinema 4d</li></ul>
       </div>
     </article>
   </div>
@@ -1612,6 +2095,8 @@ section.contact{
     <span>
       <span>available for work 2026</span><i class="sep"></i>
       <span>branding</span><i class="sep"></i>
+      <span>social media</span><i class="sep"></i>
+      <span>contenido</span><i class="sep"></i>
       <span>ux/ui</span><i class="sep"></i>
       <span>editorial</span><i class="sep"></i>
       <span>motion</span><i class="sep"></i>
@@ -1620,6 +2105,8 @@ section.contact{
     <span>
       <span>available for work 2026</span><i class="sep"></i>
       <span>branding</span><i class="sep"></i>
+      <span>social media</span><i class="sep"></i>
+      <span>contenido</span><i class="sep"></i>
       <span>ux/ui</span><i class="sep"></i>
       <span>editorial</span><i class="sep"></i>
       <span>motion</span><i class="sep"></i>
@@ -1632,7 +2119,7 @@ section.contact{
      CONTACT
      ===================================================== -->
 <section id="contact" class="contact" data-screen-label="06 Contact">
-  <div class="eyebrow reveal"><span data-i18n="ct.eyebrow">04 · contacto</span></div>
+  <div class="eyebrow reveal"><span data-i18n="ct.eyebrow">05 · contacto</span></div>
   <h2 class="reveal" data-delay="1">
     <span data-i18n="ct.title.a">trabajemos</span><br>
     <em data-i18n="ct.title.b">juntas.</em>
@@ -1653,7 +2140,7 @@ section.contact{
 <footer class="footer">
   <span>© 2026 aida gutiérrez</span>
   <span data-i18n="ft.note">hecho en bilbao · con mucho café</span>
-  <span>v1.0</span>
+  <span>v1.2</span>
 </footer>
 
 <!-- =====================================================
@@ -1667,85 +2154,147 @@ const I18N = {
   es: null, /* source-of-truth lives in DOM */
   en: {
     'nav.about':'about',
-    'nav.projects':'projects',
+    'nav.projects':'graphic design',
+    'nav.social':'social media',
     'nav.skills':'disciplines',
     'nav.contact':'contact',
     'hero.avail':'available · 2026',
-    'hero.tag':'graphic designer, specialised in branding, ux/ui and editorial design, with an artistic background that seeks the why behind every visual decision.',
-    'hero.role':'<span>graphic designer ·</span><span class=”mob-break”> 24 · bilbao</span>',
+    'hero.tag':'graphic designer and content creator. branding, social media and video production, with an artistic background that seeks the why behind every visual decision.',
+    'hero.role':'<span>design &amp; content ·</span><span class="mob-break"> <span class="dyn-age">24</span> · bilbao</span>',
     'hero.scroll':'scroll',
     'about.eyebrow':'01 · about',
     'about.title.a':'i think in',
     'about.title.b':'systems',
     'about.title.c':'not loose pieces.',
-    'about.quote':'”i design with intention: branding, ux and editorial.”',
+    'about.quote':'“design with intention: from brand to reel.”',
     'about.p1':'trained at the intersection of art and design. ba in creation & design at the faculty of fine arts of upv/ehu (leioa, 2020–2024), major in graphic design, with an art-school base shared with the fine arts degree in the first two years.',
     'about.p2':'ma in digital graphic design at unir (2025), where i dug into information design, ux/ui, typographic composition, motion, digital production and interaction.',
+    'about.p3':'today, at elements digital, i create social media content for brands and institutions such as the basque government, grupo planeta, koopera and dixie: i write, design, film, edit, cover events and become the face of the brand when the content calls for it.',
+    'about.meta.role':'digital design & content',
     'about.meta.now':'now',
     'about.meta.edu':'education',
     'about.meta.focus':'focus',
-    'about.meta.focus.v':'branding · ux/ui · editorial · motion',
+    'about.meta.focus.v':'branding · social media · video content · ux/ui · editorial',
     'about.meta.langs':'languages',
-    'proj.eyebrow':'02 · selected work',
-    'proj.title.a':'selected',
-    'proj.title.b':'work',
-    'sk.eyebrow':'03 · disciplines',
-    'sk.title.a':'four',
+    'proj.eyebrow':'03 · graphic design projects',
+    'proj.title.a':'graphic',
+    'proj.title.b':'design.',
+    'proj.lead':'branding, ux/ui, editorial design, posters, packaging and motion graphics. open a discipline to see its projects.',
+    'dc.1':'<em>branding</em> &amp; visual identity',
+    'dc.2':'<em>ux/ui</em> design',
+    'dc.3':'<em>editorial</em> design',
+    'dc.4':'<em>posters</em>, illustration &amp; lettering',
+    'dc.5':'<em>packaging</em>',
+    'dc.6':'<em>motion</em> graphics &amp; animation',
+    'so.eyebrow':'02 · social media & content creation',
+    'so.title.a':'social media',
+    'so.title.b':'content.',
+    'so.kick':'from brief to reel.',
+    'so.lead':'at <em>elements digital</em> i create social media content for brands and institutions: copy, scripts, filming —in front of the camera too—, editing, design and paid media creatives. i cover live events and use generative ai to produce pieces tailored to each campaign.',
+    'so.f1':'client accounts',
+    'so.f2':'sectors',
+    'so.f3':'languages · es eu en',
+    'so.c1.v':'copy and captions for posts',
+    'so.c2.k':'production',
+    'so.c2.v':'scripting, filming, voice-over and video editing',
+    'so.c3.k':'formats',
+    'so.c3.v':'reels, tiktok, carousels, stories and linkedin posts',
+    'so.c4.v':'creatives for meta and google ads campaigns, and for digital and traditional media',
+    'so.c5.k':'events',
+    'so.c5.v':'live coverage and press conferences',
+    'so.c6.k':'ai',
+    'so.c6.v':'generative ai for image and video · gemini (nano banana), claude',
+    'so.hint':'tap a brand to see its reels and pieces',
+    'sk.eyebrow':'04 · disciplines',
+    'sk.title.a':'five',
     'sk.title.b':'territories',
     'sk.hint':'← scroll horizontal →',
     'sk.c1.t':'<em>branding</em>',
-    'sk.c1.p':'my main area. brand systems with name, voice and criteria. logotypes, visual identities, guidelines and applications.',
+    'sk.c1.p':'the starting point. brand systems with name, voice and criteria. logotypes, visual identities, guidelines and applications.',
+    'sk.c5.t':'content <em>&amp; social</em>',
+    'sk.c5.p':'copy, scripting, filming and editing for social media. reels, tiktok, carousels, ugc and event coverage, with generative ai when it adds value.',
     'sk.c2.t':'<em>ux / ui</em> design',
     'sk.c2.p':'user research, information architecture, prototyping and ui libraries. useful before pretty — and also pretty.',
     'sk.c3.t':'<em>editorial</em> design',
     'sk.c3.p':'magazines, layout, information design. the pleasure of a well-built page: grid, hierarchy, typographic rhythm.',
     'sk.c4.t':'motion <em>&amp; 3d</em>',
-    'sk.c4.p':'emerging area: giving time to design. transitions, brand reels and small 3d experiments that add texture.',
-    'ct.eyebrow':'04 · contact',
+    'sk.c4.p':'giving time to design. motion graphics for campaigns, transitions, animation and small 3d experiments that add texture.',
+    'ct.eyebrow':'05 · contact',
     'ct.title.a':'let`s work',
     'ct.title.b':'together.',
     'ft.note':'made in bilbao · with plenty of coffee',
   },
   eu: {
     'nav.about':'niri buruz',
-    'nav.projects':'proiektuak',
+    'nav.projects':'diseinu grafikoa',
+    'nav.social':'social media',
     'nav.skills':'diziplinak',
     'nav.contact':'kontaktua',
     'hero.avail':'libre · <span class="dyn-year">2026</span>',
-    'hero.tag':'diseinatzaile grafikoa. branding, <em>ux/ui</em> eta editoriala, erabaki bisual bakoitzaren zergatia bilatzen duen oinarri artistikoarekin.',
-    'hero.role':'<span>diseinatzaile grafikoa ·</span><span class="mob-break"> <span class="dyn-age">24</span> urte · bilbo</span>',
+    'hero.tag':'diseinatzaile grafikoa eta eduki sortzailea. branding, sare sozialak eta ikus-entzunezko ekoizpena, erabaki bisual bakoitzaren zergatia bilatzen duen oinarri artistikoarekin.',
+    'hero.role':'<span>diseinua &amp; edukia ·</span><span class="mob-break"> <span class="dyn-age">24</span> urte · bilbo</span>',
     'hero.scroll':'jaitsi',
     'about.eyebrow':'01 · niri buruz',
     'about.title.a':'sistemetan',
     'about.title.b':'pentsatzen',
     'about.title.c':'dut, ez pieza solteetan.',
-    'about.quote':'“asmoz diseinatzen dut. branding, ux eta editoriala.”',
+    'about.quote':'“asmoz diseinatzen dut: markatik reel-era.”',
     'about.p1':'arte eta diseinuaren arteko bidegurutzean hezi nintzen. sorkuntza eta diseinuko gradua upv/ehuko arte ederren fakultatean (leioa, 2020–2024), diseinu grafikoko aipamenarekin, lehen bi urteetan arte ederren graduarekin partekatutako oinarri artistikoarekin.',
     'about.p2':'ondoren, diseinu grafiko digitaleko masterra egin nuen unir-en (2025), non informazio diseinua, ux/ui, konposizio tipografikoa, motion, ekoizpen grafiko digitala eta interakzioa landu nituen.',
+    'about.p3':'gaur egun, elements digital-en, marka eta erakundeen sare sozialetarako edukia sortzen dut, hala nola eusko jaurlaritza, grupo planeta, koopera edo dixie: idatzi, diseinatu, grabatu, editatu, ekitaldiak estali eta markaren aurpegia jartzen dut edukiak hala eskatzen duenean.',
+    'about.meta.role':'diseinu eta eduki digitala',
     'about.meta.now':'orain',
     'about.meta.edu':'formakuntza',
     'about.meta.focus':'fokua',
-    'about.meta.focus.v':'branding · ux/ui · editoriala · motion',
+    'about.meta.focus.v':'branding · sare sozialak · ikus-entzunezko edukia · ux/ui · editoriala',
     'about.meta.langs':'hizkuntzak',
-    'proj.eyebrow':'02 · lan hautatuak',
-    'proj.title.a':'hautatutako',
-    'proj.title.b':'lanak',
+    'proj.eyebrow':'03 · diseinu grafikoko proiektuak',
+    'proj.title.a':'diseinu',
+    'proj.title.b':'grafikoa.',
+    'proj.lead':'branding-a, ux/ui, diseinu editoriala, kartelak, packaging-a eta motion graphics. zabaldu diziplina bat bere proiektuak ikusteko.',
+    'dc.1':'<em>branding</em>-a eta identitate bisuala',
+    'dc.2':'<em>ux/ui</em> diseinua',
+    'dc.3':'diseinu <em>editoriala</em>',
+    'dc.4':'<em>kartelak</em>, ilustrazioa eta lettering-a',
+    'dc.5':'<em>packaging</em>-a',
+    'dc.6':'<em>motion</em> graphics eta animazioa',
     'feat.kicker':'arroparen bizitza luzatzeko app bat: non konpondu, nola zaindu eta irizpidedun moda aurkitzeko.',
     'feat.p1':'hilando nire gradu amaierako proiektua izan zen, ehungintzaren inpaktua ikertzen (% 20 urarena eta % 10 CO₂arena). sistema osoa diseinatu nuen: erabiltzaile ikerketa, informazio arkitektura, identitate bisuala eta figma prototipoa.',
     'feat.p2':'appak bilboko konponketa tailerren mapa, ehun motaren araberako aholkuak eta moda jasangarriaren gaineko prentsa feed bat biltzen ditu. tipografia epela, krema + urrea + urdin paleta, ikonografia propioa.',
-    'sk.eyebrow':'03 · diziplinak',
-    'sk.title.a':'lau',
+    'so.eyebrow':'02 · social media eta eduki sorkuntza',
+    'so.title.a':'sare sozialetarako',
+    'so.title.b':'edukia.',
+    'so.kick':'briefetik reel-era.',
+    'so.lead':'<em>elements digital</em>-en marka eta erakundeen sare sozialetako edukia sortzen dut: testuak, gidoia, grabaketa —kameraren aurrean ere bai—, edizioa, diseinua eta paid media-rako sormen-piezak. zuzeneko ekitaldiak estaltzen ditut eta ia sortzailea erabiltzen dut kanpaina bakoitzerako pieza neurrikoak ekoizteko.',
+    'so.f1':'bezero kontu',
+    'so.f2':'sektore',
+    'so.f3':'hizkuntza · es eu en',
+    'so.c1.v':'argitalpenetarako testuak eta copy-ak',
+    'so.c2.k':'ekoizpena',
+    'so.c2.v':'gidoia, grabaketa, ahots-lana eta bideo-edizioa',
+    'so.c3.k':'formatuak',
+    'so.c3.v':'reel-ak, tiktok, karruselak, stories eta linkedinerako postak',
+    'so.c4.v':'meta eta google ads kanpainetarako sormen-piezak, baita hedabide digital eta analogikoetarako ere',
+    'so.c5.k':'ekitaldiak',
+    'so.c5.v':'zuzeneko estaldura eta prentsaurrekoak',
+    'so.c6.k':'ia',
+    'so.c6.v':'irudia eta bideoa ia sortzailearekin · gemini (nano banana), claude',
+    'so.hint':'sakatu marka bat bere reel eta piezak ikusteko',
+    'sk.eyebrow':'04 · diziplinak',
+    'sk.title.a':'bost',
     'sk.title.b':'lurralde',
     'sk.hint':'← lerratu alboetara →',
     'sk.c1.t':'<em>branding</em>',
-    'sk.c1.p':'nire arlo nagusia. izena, ahotsa eta irizpidea dituzten marka sistemak. logotipoak, identitate bisualak, gidaliburuak eta aplikazioak.',
+    'sk.c5.t':'edukia <em>&amp; sareak</em>',
+    'sk.c5.p':'sare sozialetarako testuak, gidoia, grabaketa eta edizioa. reel-ak, tiktok, karruselak, ugc eta ekitaldien estaldura, ia sortzailearekin balioa ematen duenean.',
+    'sk.c1.p':'abiapuntua. izena, ahotsa eta irizpidea dituzten marka sistemak. logotipoak, identitate bisualak, gidaliburuak eta aplikazioak.',
     'sk.c2.t':'<em>ux / ui</em> diseinua',
     'sk.c2.p':'erabiltzaile ikerketa, informazio arkitektura, prototipoak eta ui liburutegiak. baliagarria lehenik, ederra gero — eta ederra ere bai.',
     'sk.c3.t':'diseinu <em>editoriala</em>',
     'sk.c3.p':'aldizkariak, maketa, informazio diseinua. ondo eraikitako orri baten plazera: sareta, hierarkia, erritmo tipografikoa.',
     'sk.c4.t':'motion <em>&amp; 3d</em>',
-    'sk.c4.p':'arlo berria: diseinuari denbora ematea. trantsizioak, markaren reel-ak eta ehundura gehitzen duten 3d esperimentu txikiak.',
-    'ct.eyebrow':'04 · kontaktua',
+    'sk.c4.p':'diseinuari denbora ematea. kanpainetarako motion graphics-ak, trantsizioak, animazioa eta ehundura gehitzen duten 3d esperimentu txikiak.',
+    'ct.eyebrow':'05 · kontaktua',
     'ct.title.a':'elkar',
     'ct.title.b':'gaitezen.',
     'ft.note':'bilbon egina · kafe askorekin',
@@ -1789,35 +2338,11 @@ function setLang(code){
   });
   updateDynamics();
   
-  // Update project list sub and label dynamically based on language
-  document.querySelectorAll('.project-item').forEach(item => {
-    const key = item.dataset.preview;
-    const p = PROJECTS[key];
-    if(p) {
-        const lang = document.documentElement.lang || 'es';
-        const getLoc = (prop) => (prop && typeof prop === 'object') ? (prop[lang] || prop['es']) : prop;
-        
-        // title em
-        const titleEl = item.querySelector('.title em');
-        if(titleEl) {
-            titleEl.textContent = ' · ' + getLoc(p.sub);
-        }
-        
-        // cat
-        const catEl = item.querySelector('.cat');
-        if(catEl) {
-            const labelParts = getLoc(p.label).split(' · ');
-            if(labelParts.length > 1) {
-                catEl.textContent = labelParts[1];
-            }
-        }
-    }
-  });
-  
-  // Re-open current project to translate it instantly
-  if(typeof currentProjectKey !== 'undefined') {
-      openProject(currentProjectKey, false);
-  }
+  // Social section: re-translate cards + open viewer
+  if(typeof socialLang === 'function') socialLang();
+
+  // Diseño gráfico: re-translate cards
+  if(typeof designLang === 'function') designLang();
 
 }
 document.querySelectorAll('.lang button').forEach(b=>{
@@ -1907,6 +2432,12 @@ document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
   tick();
 
   const hoverables = 'a, button, .project-item, .skill-card, .phone, .tag, .email';
+  window.bindCursorHover = (root) => {
+    root.querySelectorAll(hoverables).forEach(el=>{
+      el.addEventListener('mouseenter', ()=> document.body.classList.add('hovering'));
+      el.addEventListener('mouseleave', ()=> document.body.classList.remove('hovering'));
+    });
+  };
   document.querySelectorAll(hoverables).forEach(el=>{
     el.addEventListener('mouseenter', ()=> document.body.classList.add('hovering'));
     el.addEventListener('mouseleave', ()=> document.body.classList.remove('hovering'));
@@ -1930,36 +2461,6 @@ document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
       const d = parseFloat(l.dataset.depth) * 140;
       l.style.transform = `translate(${cx*d}px, ${cy*d}px)`;
     });
-    requestAnimationFrame(loop);
-  }
-  loop();
-})();
-
-/* ========== 20 · PROJECT HOVER PREVIEW =================== */
-(function previewer(){
-  const preview = document.getElementById('floatingPreview');
-  const slides = preview.querySelectorAll('.slide');
-  const list = document.getElementById('projectList');
-  let mx = 0, my = 0, px = 0, py = 0, running = false, on = false;
-
-  function show(key){
-    slides.forEach(s=> s.classList.toggle('on', s.dataset.key === key));
-    preview.classList.add('on'); on = true;
-  }
-  function hide(){ preview.classList.remove('on'); on = false; }
-
-  list.querySelectorAll('.project-item').forEach(item=>{
-    item.addEventListener('mouseenter', ()=> show(item.dataset.preview));
-    item.addEventListener('mouseleave', ()=>{});
-  });
-  list.addEventListener('mouseleave', hide);
-
-  addEventListener('mousemove', e=>{ mx = e.clientX; my = e.clientY; });
-
-  function loop(){
-    px += (mx - px) * 0.12;
-    py += (my - py) * 0.12;
-    if(on) preview.style.left = px + 'px', preview.style.top = py + 'px';
     requestAnimationFrame(loop);
   }
   loop();
@@ -2105,159 +2606,6 @@ const PROJECTS = {
   }
 };
 
-/* ========== 25 · CAROUSEL ============================== */
-let carIdx = 0, carTotal = 0;
-let currentProjectKey = 'hilando';
-
-function goTo(i){
-  carIdx = Math.max(0, Math.min(i, carTotal - 1));
-  document.getElementById('carTrack').style.transform = `translateX(-${carIdx * 100}%)`;
-  document.querySelectorAll('.carousel-dot').forEach((d,j) => d.classList.toggle('active', j === carIdx));
-  document.getElementById('carPrev').classList.toggle('hidden', carIdx === 0);
-  document.getElementById('carNext').classList.toggle('hidden', carIdx === carTotal - 1);
-  document.querySelectorAll('#carTrack video').forEach((v, vi) => {
-    vi === carIdx ? v.play().catch(() => {}) : v.pause();
-  });
-}
-
-function buildCarousel(slides){
-  carTotal = slides.length; carIdx = 0;
-  const track = document.getElementById('carTrack');
-  const dots  = document.getElementById('carDots');
-  track.innerHTML = ''; dots.innerHTML = '';
-  track.style.transform = 'translateX(0)';
-
-  slides.forEach((s, i) => {
-    const div = document.createElement('div');
-    if(s.type === 'logo'){
-      div.className = 'carousel-slide is-logo';
-      div.innerHTML = `<div class="logo-display">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 214.060 214.940" fill="none">
-          <path d="M 141.071 2.503 L 152.737 10.965 L 134.61 35.813 L 130.302 41.713 L 136.883 38.435 C 139.097 37.363 141.729 36.767 144.541 36.767 C 149.028 36.767 153.695 38.257 157.344 40.938 C 167.156 48.029 167.754 61.616 158.72 74.011 L 147.712 89.087 L 146.276 91.053 L 148.609 91.828 L 211.786 112.267 L 207.299 125.973 L 177.984 116.498 L 170.985 114.234 L 176.19 119.478 C 180.856 124.185 182.471 132.468 180.138 139.619 C 177.446 147.961 169.788 152.967 159.797 152.967 C 156.327 152.967 152.678 152.371 149.028 151.179 L 131.2 145.399 L 128.867 144.624 L 128.867 213.272 L 114.389 213.272 L 114.389 175.254 L 110.978 181.749 C 107.927 187.589 100.509 191.7 92.971 191.7 C 80.826 191.7 72.33 181.034 72.33 165.779 L 72.33 144.684 L 69.997 145.459 L 6.82 165.898 L 2.333 152.192 L 31.648 142.718 L 38.648 140.453 L 31.409 139.261 C 24.888 138.189 18.726 132.468 16.333 125.317 C 12.564 113.817 20.162 102.494 34.699 97.727 L 52.528 91.947 L 54.861 91.172 L 53.425 89.206 L 14.418 35.575 L 26.084 27.113 L 44.212 51.962 L 48.519 57.862 L 47.443 50.651 C 46.485 44.096 50.015 36.469 56.117 32.059 C 59.408 29.676 63.057 28.484 67.006 28.484 C 74.604 28.484 82.322 33.013 88.125 40.998 L 99.133 56.074 L 100.569 58.04 L 102.004 56.074 L 141.071 2.503 Z M 46.126 135.09 C 40.084 135.09 35.118 131.932 33.323 126.688 C 31.289 120.431 35.178 114.472 42.656 112.088 L 63.117 105.474 L 64.493 104.997 L 79.091 100.29 L 81.125 99.634 L 79.689 97.608 L 70.835 85.511 L 69.997 84.379 L 58.57 68.707 C 53.365 61.556 53.964 53.035 59.946 48.685 C 61.801 47.314 63.895 46.659 65.989 46.659 C 69.818 46.659 73.826 48.864 76.817 52.975 L 89.441 70.316 L 90.278 71.448 L 100.09 84.856 L 100.569 85.571 L 101.047 84.915 L 110.799 71.508 L 111.696 70.316 L 123.123 54.644 C 126.533 49.996 131.26 47.493 135.747 47.493 C 138.2 47.493 140.593 48.208 142.687 49.757 C 147.951 53.631 148.37 60.722 143.763 67.039 L 131.14 84.379 L 130.302 85.511 L 121.388 97.787 L 120.012 99.634 L 121.508 100.111 L 136.644 104.997 L 138.08 105.474 L 156.566 111.433 C 165.062 114.174 169.549 121.444 167.275 128.416 C 165.78 133.064 161.652 135.686 156.507 135.686 C 154.772 135.686 152.977 135.388 151.062 134.792 L 130.661 128.178 L 129.345 127.761 L 112.654 122.338 L 112.654 160.595 C 112.654 169.473 107.09 176.028 99.731 176.028 C 93.21 176.028 88.663 170.486 88.663 162.68 L 88.663 122.397 L 71.971 127.761 L 70.595 128.178 L 52.109 134.137 C 50.075 134.792 48.101 135.09 46.186 135.09 L 46.126 135.09 Z" fill="#7bafd1" fill-rule="nonzero"/>
-        </svg>
-        <span class="logo-text">hilando</span>
-      </div>`;
-    } else if(s.video){
-      div.className = 'carousel-slide is-video';
-      div.innerHTML = `<video src="${s.video}" autoplay playsinline muted loop preload="auto"></video>`;
-    } else if(s.img && s.type === 'logo-poster'){
-      div.className = 'carousel-slide is-logo-poster';
-      div.innerHTML = `<img src="${s.img}" alt="" loading="lazy" decoding="async">`;
-    } else if(s.img && s.type === 'phone'){
-      div.className = 'carousel-slide is-phone';
-      div.innerHTML = `<figure class="phone"><div class="notch"></div><img src="${s.img}" alt="" loading="lazy" decoding="async"></figure>`;
-    } else if(s.img){
-      div.className = 'carousel-slide is-poster';
-      div.innerHTML = `<img src="${s.img}" alt="" loading="lazy" decoding="async">`;
-    } else {
-      div.className = 'carousel-slide is-grad';
-      div.innerHTML = `<div class="ph-grad ${s.grad}"></div>`;
-    }
-    track.appendChild(div);
-
-    if(slides.length > 1){
-      const dot = document.createElement('button');
-      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-      dot.setAttribute('aria-label', `slide ${i + 1}`);
-      dot.addEventListener('click', () => goTo(i));
-      dots.appendChild(dot);
-    }
-  });
-
-  document.getElementById('carPrev').classList.toggle('hidden', carTotal <= 1);
-  document.getElementById('carNext').classList.toggle('hidden', carTotal <= 1 || carIdx === carTotal - 1);
-}
-
-/* touch swipe */
-(function carouselTouch(){
-  const el = document.querySelector('.proj-carousel');
-  if(!el) return;
-  let sx = 0;
-  el.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, {passive:true});
-  el.addEventListener('touchend',   e => {
-    const dx = sx - e.changedTouches[0].clientX;
-    if(Math.abs(dx) > 40) dx > 0 ? goTo(carIdx + 1) : goTo(carIdx - 1);
-  }, {passive:true});
-})();
-
-document.getElementById('carPrev').addEventListener('click', () => goTo(carIdx - 1));
-document.getElementById('carNext').addEventListener('click', () => goTo(carIdx + 1));
-
-document.getElementById('featBack').addEventListener('click', () => {
-  document.getElementById('projects').scrollIntoView({behavior:'smooth'});
-});
-
-document.getElementById('featPrev').addEventListener('click', () => {
-  const keys = Object.keys(PROJECTS);
-  const idx = keys.indexOf(currentProjectKey);
-  if(idx > 0) openProject(keys[idx - 1], false);
-});
-document.getElementById('featNext').addEventListener('click', () => {
-  const keys = Object.keys(PROJECTS);
-  const idx = keys.indexOf(currentProjectKey);
-  if(idx < keys.length - 1) openProject(keys[idx + 1], false);
-});
-
-/* ========== 26 · OPEN PROJECT ========================== */
-function openProject(key, scroll){
-  const p = PROJECTS[key];
-  if(!p) return;
-  const lang = document.documentElement.lang || 'es';
-  
-  const getLoc = (prop) => (prop && typeof prop === 'object') ? (prop[lang] || prop['es']) : prop;
-  
-  document.getElementById('featLabel').textContent  = p.num + ' / case study';
-  const sub = getLoc(p.sub);
-  document.getElementById('featTitle').innerHTML    = sub ? `${p.title}<em> — ${sub}</em>` : p.title;
-  document.getElementById('featYear').textContent   = getLoc(p.label);
-  document.getElementById('featKicker').textContent = getLoc(p.kicker);
-  document.getElementById('featP1').textContent     = getLoc(p.p1);
-  const p2Loc = getLoc(p.p2);
-  const p2 = document.getElementById('featP2');
-  p2.textContent = p2Loc; p2.style.display = p2Loc ? '' : 'none';
-  document.getElementById('featTags').innerHTML = getLoc(p.tags).map(t => `<span class="tag">${t}</span>`).join('');
-  const ratio = p.ratio || '4/5';
-  const carousel = document.querySelector('.proj-carousel');
-  carousel.style.aspectRatio = ratio;
-  
-  // Limitar altura a 80vh conservando el aspect ratio
-  const [rw, rh] = ratio.split('/').map(Number);
-  carousel.style.maxWidth = `calc(80vh * (${rw} / ${rh}))`;
-
-  buildCarousel(p.slides);
-
-  currentProjectKey = key;
-  const keys = Object.keys(PROJECTS);
-  const idx = keys.indexOf(key);
-  document.getElementById('featPrev').disabled = idx === 0;
-  document.getElementById('featNext').disabled = idx === keys.length - 1;
-
-  const existingOverlay = carousel.querySelector('.carousel-link-overlay');
-  if(existingOverlay) existingOverlay.remove();
-  if(p.link){
-    const overlay = document.createElement('a');
-    overlay.className = 'carousel-link-overlay';
-    overlay.href = p.link;
-    overlay.target = '_blank';
-    overlay.rel = 'noopener';
-    overlay.innerHTML = '<span>ver prototipo →</span>';
-    carousel.appendChild(overlay);
-  }
-
-  if(scroll) document.getElementById('featured').scrollIntoView({behavior:'smooth'});
-}
-
-/* click handlers on project list */
-document.querySelectorAll('.project-item').forEach(item => {
-  item.querySelector('a').addEventListener('click', e => {
-    e.preventDefault();
-    openProject(item.dataset.preview, true);
-  });
-});
-
-/* default on load */
-openProject('hilando', false);
-
 /* ========== 23 · MOBILE HAMBURGER MENU =================== */
 (function mobileMenu(){
   const btn     = document.querySelector('.hamburger');
@@ -2333,24 +2681,491 @@ openProject('hilando', false);
   });
 })();
 
-/* ========== 29 · ASYNC PRELOADER ========================== */
-window.addEventListener('load', () => {
-  // Preload en segundo plano una vez que la página ha cargado por completo
-  setTimeout(() => {
-    Object.values(PROJECTS).forEach(p => {
-      p.slides.forEach(s => {
-        if (s.img) {
-          const img = new Image();
-          img.src = s.img;
-        } else if (s.video) {
-          const vid = document.createElement('video');
-          vid.preload = 'auto';
-          vid.src = s.video;
-        }
+/* ========== 30 · SOCIAL · cuentas cliente (redes y comunicación) ==========
+   v: vídeo vertical 9:16 (assets/social/<x>.mp4 + póster .jpg)
+   i: imagen (assets/social/<x>.jpg) · r: aspect-ratio                     */
+const SO = 'assets/social/';
+const SOCIAL = [
+  {
+    key:'koollective', name:'koollective', sub:{es:'koopera', en:'koopera', eu:'koopera'},
+    sector:{es:'moda circular · eventos', en:'circular fashion · events', eu:'moda zirkularra · ekitaldiak'},
+    cover:{img:'koollective/desfile.jpg', video:'koollective/desfile'},
+    kicker:{
+      es:'comunicación del ecosistema de Koollective, una iniciativa de Koopera.',
+      en:'communication for the Koollective ecosystem, an initiative by Koopera.',
+      eu:'Koollective ekosistemaren komunikazioa, Kooperaren ekimen bat.'},
+    p:{
+      es:'cobertura de eventos en directo (desfile, exposición y mesa redonda), reels de tienda con un tono fresco y cercano, dinámicas de participación como el sobre escondido de Armario Karma y carruseles de ponentes para las jornadas. guion, grabación, locución —soy la voz de los reels—, edición, diseño y, a menudo, también delante de la cámara.',
+      en:'live event coverage (fashion show, exhibition and panel talk), in-store reels with a fresh, approachable tone, engagement activations like the Armario Karma hidden-envelope hunt and speaker carousels for the conference. scripting, filming, voice-over —i’m the voice of the reels—, editing, design — and often in front of the camera too.',
+      eu:'ekitaldien zuzeneko estaldura (desfilea, erakusketa eta mahai-ingurua), denda barruko reel fresko eta hurbilak, Armario Karmako gutun-azal ezkutua bezalako parte-hartze dinamikak eta jardunaldietarako hizlarien karruselak. gidoia, grabaketa, ahots-lana —ni naiz reel-en ahotsa—, edizioa, diseinua eta, askotan, kameraren aurrean ere bai.'},
+    tags:{
+      es:['cobertura de eventos','reels','locución','carruseles','imagen de marca'],
+      en:['event coverage','reels','voice-over','carousels','brand face'],
+      eu:['ekitaldien estaldura','reel-ak','ahots-lana','karruselak','markaren aurpegia']},
+    items:[
+      {v:'koollective/desfile'},{v:'koollective/cartel'},{v:'koollective/armario-karma'},
+      {carousel:['koollective/jornadas-1','koollective/jornadas-2','koollective/jornadas-3','koollective/jornadas-4',
+                 'koollective/jornadas-5','koollective/jornadas-6','koollective/jornadas-7','koollective/jornadas-8'], badge:'carrusel · 8'},
+      {i:'koollective/jornadas-13'},
+      {v:'koollective/sobre'},{v:'koollective/probandonos'},{v:'koollective/repara'}
+    ]
+  },
+  {
+    key:'diptron', name:'diptron', sub:{es:'ganadería', en:'livestock', eu:'abeltzaintza'},
+    sector:{es:'campaña creativa · ia generativa', en:'creative campaign · generative ai', eu:'sormen kanpaina · ia sortzailea'},
+    cover:{img:'diptron/masterfly-kit.jpg', video:'diptron/masterfly-vaca'},
+    kicker:{
+      es:'campaña de Masterfly Bait: tono irónico y estética rococó, con los animales de la granja convertidos en reyes que por fin duermen sin moscas.',
+      en:'Masterfly Bait campaign: an ironic tone and rococo aesthetic, with farm animals crowned as royalty who can finally sleep fly-free.',
+      eu:'Masterfly Bait kanpaina: tonu ironikoa eta estetika rokokoa, baserriko animaliak errege bihurtuta, azkenean euli barik lo egiten dutenak.'},
+    p:{
+      es:'un cebo para moscas contado como un cuento de palacio: reel, kit visual y estáticos para paid media generados con ia generativa (Gemini · Nano Banana y Claude). además, campaña de marca, piezas educativas sobre producto y estacionalidad, posts para LinkedIn y comunicación de ferias como EuroTier 2026 en Hannover, siempre dentro de la identidad de la marca y con las advertencias legales del sector.',
+      en:'a fly bait told like a palace tale: reel, visual kit and paid media statics created with generative ai (Gemini · Nano Banana and Claude). plus a brand campaign, educational pieces on product and seasonality, LinkedIn posts and trade-fair communication such as EuroTier 2026 in Hannover — always within the brand identity and the sector’s legal disclaimers.',
+      eu:'jauregiko ipuin baten moduan kontatutako euli-amua: reel-a, kit bisuala eta paid media-rako estatikoak, ia sortzailearekin (Gemini · Nano Banana eta Claude) sortuak. horrez gain, marka kanpaina, produktuari eta urtaroari buruzko pieza hezitzaileak, LinkedInerako postak eta Hannoverko EuroTier 2026 bezalako azoken komunikazioa, beti markaren identitatearen barruan eta sektoreko lege-oharrekin.'},
+    tags:{
+      es:['campaña creativa','dirección de arte','ia generativa','paid media','reels','linkedin'],
+      en:['creative campaign','art direction','generative ai','paid media','reels','linkedin'],
+      eu:['sormen kanpaina','arte zuzendaritza','ia sortzailea','paid media','reel-ak','linkedin']},
+    items:[
+      {v:'diptron/masterfly-vaca', badge:'masterfly · reel'},{i:'diptron/masterfly-kit', badge:'masterfly · kit visual'},
+      {i:'diptron/masterfly-paid-1', badge:'masterfly · paid'},{i:'diptron/masterfly-paid-2', badge:'masterfly · paid'},{i:'diptron/masterfly-paid-3', badge:'masterfly · paid'},
+      {v:'diptron/paid-marca-1'},{carousel:['diptron/marca-1','diptron/marca-3','diptron/marca-4','diptron/marca-5','diptron/marca-2'], badge:'carrusel · 5'},
+      {v:'diptron/paid-marca-2'},{v:'diptron/en-mayo'},{i:'diptron/apunta-fecha'},{v:'diptron/masterfly'},
+      {v:'diptron/estabulacion'},{v:'diptron/viribiol'},{i:'diptron/eurotier'},{i:'diptron/one-health'},{i:'diptron/linkedin'}
+    ]
+  },
+  {
+    key:'bfr', name:'bfr', sub:{es:'grupo planeta', en:'grupo planeta', eu:'grupo planeta'},
+    sector:{es:'editorial · derechos audiovisuales', en:'publishing · film rights', eu:'argitalpena · ikus-entzunezko eskubideak'},
+    cover:{img:'bfr/lorca-1.jpg', video:'bfr/marian-rojas'},
+    kicker:{
+      es:'contenido internacional para Book & Film Rights, la agencia de derechos de Grupo Planeta: libros, autores y adaptaciones a cine y series.',
+      en:'international content for Book & Film Rights, Grupo Planeta’s rights agency: books, authors and film and TV adaptations.',
+      eu:'nazioarteko edukia Book & Film Rights-entzat, Grupo Planetaren eskubide agentziarentzat: liburuak, egileak eta zinema eta telesail egokitzapenak.'},
+    p:{
+      es:'carruseles para Instagram y LinkedIn, en inglés y castellano: próximas adaptaciones audiovisuales, derechos vendidos a otros países, monográficos de autor y especiales temáticos como el dedicado a Federico García Lorca. también reels con títulos del catálogo, como el de Marian Rojas publicado en China.',
+      en:'carousels for Instagram and LinkedIn, in English and Spanish: upcoming screen adaptations, rights sold abroad, author spotlights and themed specials such as the one on Federico García Lorca. plus reels featuring catalogue titles, like Marian Rojas’s book now published in China.',
+      eu:'Instagram eta LinkedInerako karruselak, ingelesez eta gazteleraz: datozen ikus-entzunezko egokitzapenak, beste herrialde batzuei saldutako eskubideak, egile monografikoak eta Federico García Lorcari eskainitakoa bezalako berezi tematikoak. baita katalogoko liburuekin egindako reel-ak ere, Txinan argitaratutako Marian Rojasen liburuarena kasu.'},
+    tags:{
+      es:['carruseles','linkedin','reels','inglés','sector editorial'],
+      en:['carousels','linkedin','reels','english','publishing'],
+      eu:['karruselak','linkedin','reel-ak','ingelesa','argitalpen sektorea']},
+    items:[
+      {carousel:['bfr/lorca-1','bfr/lorca-2','bfr/lorca-3','bfr/lorca-4','bfr/lorca-5','bfr/lorca-6','bfr/lorca-7','bfr/lorca-8'], badge:'carrusel · 8'},
+      {v:'bfr/marian-rojas'},
+      {carousel:['bfr/derechos-1','bfr/derechos-2','bfr/derechos-3','bfr/derechos-4','bfr/derechos-5'], badge:'carrusel · 5'},
+      {carousel:['bfr/adaptaciones-1','bfr/adaptaciones-2','bfr/adaptaciones-3','bfr/adaptaciones-4'], badge:'carrusel · 4'},
+      {carousel:['bfr/isaac-rosa-1','bfr/isaac-rosa-2','bfr/isaac-rosa-3','bfr/isaac-rosa-4','bfr/isaac-rosa-5'], badge:'carrusel · 5'}
+    ]
+  },
+  {
+    key:'dixie', name:'dixie', sub:{es:'ugc', en:'ugc', eu:'ugc'},
+    sector:{es:'cuidado de mascotas · ugc', en:'pet care · ugc', eu:'maskoten zainketa · ugc'},
+    cover:{img:'dixie/portada-lluvia.jpg', video:'dixie/lluvia'},
+    kicker:{
+      es:'contenido de calle y formato creator para una marca de higiene y antiparasitarios para perros y gatos.',
+      en:'street-style, creator-format content for a dog and cat hygiene and antiparasitic brand.',
+      eu:'kale-edukia eta creator formatua txakur eta katuentzako higiene eta antiparasitarioen marka baterako.'},
+    p:{
+      es:'soy la cara de la marca en redes: entrevistas en la calle con preguntas tipo quiz y retos por capítulos, rutas por supermercados buscando el producto y el lanzamiento de la nueva web, con portadas diseñadas para cada reel. contenido natural y con ritmo, pensado para enganchar en los primeros segundos y sonar a persona, no a anuncio.',
+      en:'i’m the face of the brand on social: street interviews with quiz-style questions and multi-part challenges, supermarket runs hunting for the product and the launch of the new website, with a designed cover for every reel. natural, fast-paced content built to hook in the first seconds and sound like a person, not an ad.',
+      eu:'markaren aurpegia naiz sare sozialetan: kaleko elkarrizketak quiz moduko galderekin eta ataletan banatutako erronkak, supermerkatuetan produktuaren bila egindako ibilbideak eta web berriaren aurkezpena, reel bakoitzerako diseinatutako azalekin. eduki natural eta erritmoduna, lehen segundoetan harrapatzeko eta pertsona baten antzera entzuteko, ez iragarki baten antzera.'},
+    tags:{
+      es:['ugc','imagen de marca','street content','locución a cámara','edición'],
+      en:['ugc','brand face','street content','on-camera presenting','editing'],
+      eu:['ugc','markaren aurpegia','kale-edukia','kamera aurrean','edizioa']},
+    items:[
+      {v:'dixie/lluvia', poster:'dixie/portada-lluvia.jpg'},{v:'dixie/julio-gatos', poster:'dixie/portada-julio-gatos.jpg'},
+      {v:'dixie/agosto', poster:'dixie/portada-reto-1.jpg'},{v:'dixie/septiembre', poster:'dixie/portada-reto-2.jpg'},
+      {v:'dixie/junio', poster:'dixie/portada-pipetas.jpg'},{v:'dixie/julio'},{v:'dixie/web', poster:'dixie/portada-web.jpg'}
+    ]
+  },
+  {
+    key:'educacion', name:{es:'educación', en:'education', eu:'hezkuntza'}, sub:{es:'gobierno vasco', en:'basque government', eu:'eusko jaurlaritza'},
+    sector:{es:'institucional · infografía', en:'institutional · infographics', eu:'instituzionala · infografia'},
+    cover:{img:'educacion/infografia-fp-1.jpg', video:'educacion/congreso-lcamp'},
+    kicker:{
+      es:'comunicación institucional del Departamento de Educación: datos complejos convertidos en piezas claras y bilingües.',
+      en:'institutional communication for the Department of Education: complex data turned into clear, bilingual pieces.',
+      eu:'Hezkuntza Sailaren komunikazio instituzionala: datu konplexuak pieza argi eta elebidun bihurtuta.'},
+    p:{
+      es:'carruseles y piezas infográficas sobre la oferta de Formación Profesional y el Bachillerato Internacional, y cobertura en formato reel de ruedas de prensa, congresos y visitas a centros educativos, con los datos clave animados en euskera y castellano.',
+      en:'infographic carousels and posts on the Vocational Training offer and the International Baccalaureate, plus reel coverage of press conferences, congresses and school visits, with key figures animated in Basque and Spanish.',
+      eu:'Lanbide Heziketaren eta Nazioarteko Batxilergoaren eskaintzari buruzko karrusel eta pieza infografikoak, eta prentsaurrekoen, kongresuen eta ikastetxeetako bisiten estaldura reel formatuan, datu nagusiak euskaraz eta gazteleraz animatuta.'},
+    tags:{
+      es:['infografía','cobertura de eventos','diseño de información','reels','euskera · castellano'],
+      en:['infographics','event coverage','information design','reels','basque · spanish'],
+      eu:['infografia','ekitaldien estaldura','informazio diseinua','reel-ak','euskara · gaztelania']},
+    items:[
+      {v:'educacion/congreso-lcamp'},
+      {carousel:['educacion/infografia-fp-1','educacion/infografia-fp-2','educacion/infografia-fp-3','educacion/infografia-fp-4','educacion/infografia-fp-5'], badge:'carrusel · 5'},
+      {v:'educacion/legutio'},
+      {carousel:['educacion/bachillerato-1','educacion/bachillerato-2'], badge:'carrusel · 2'},
+      {v:'educacion/evaluacion'},{v:'educacion/ekoetxea-urdaibai'},
+      {i:'educacion/fp-empleabilidad'},{i:'educacion/fp-mujeres'},{i:'educacion/post-congreso'}
+    ]
+  },
+  {
+    key:'getxo', name:'getxo', sub:{es:'turismo', en:'tourism', eu:'turismoa'},
+    sector:{es:'turismo · travel content', en:'tourism · travel content', eu:'turismoa · travel edukia'},
+    cover:{img:'getxo/portu-zaharra.jpg', video:'getxo/portu-zaharra'},
+    kicker:{
+      es:'contenido travel para posicionar Getxo como destino en la costa vasca.',
+      en:'travel content positioning Getxo as a destination on the Basque coast.',
+      eu:'travel edukia, Getxo euskal kostaldeko helmuga gisa kokatzeko.'},
+    p:{
+      es:'grabación y edición de reels en el Puente Bizkaia, Portu Zaharra y el puerto: luz natural, ritmo pausado y textos en euskera, castellano e inglés para llegar a público local e internacional.',
+      en:'filming and editing reels at the Bizkaia Bridge, Portu Zaharra and the harbour: natural light, unhurried pacing and on-screen copy in Basque, Spanish and English to reach local and international audiences.',
+      eu:'reel-en grabaketa eta edizioa Bizkaiko Zubian, Portu Zaharran eta portuan: argi naturala, erritmo lasaia eta testuak euskaraz, gazteleraz eta ingelesez, tokiko zein nazioarteko publikoarengana iristeko.'},
+    tags:{
+      es:['travel content','vídeo','fotografía','storytelling','trilingüe'],
+      en:['travel content','video','photography','storytelling','trilingual'],
+      eu:['travel edukia','bideoa','argazkigintza','storytelling','hiru hizkuntzatan']},
+    items:[ {v:'getxo/kaixo'},{v:'getxo/portu-zaharra'},{v:'getxo/puente'},{v:'getxo/basque-coast'} ]
+  },
+  {
+    key:'juventud', name:{es:'juventud', en:'youth', eu:'gazteria'}, sub:{es:'gobierno vasco', en:'basque government', eu:'eusko jaurlaritza'},
+    sector:{es:'institucional · motion graphics', en:'institutional · motion graphics', eu:'instituzionala · motion graphics'},
+    cover:{img:'juventud/mupi-metro.jpg', video:'juventud/mupi-metro', pos:'50% 50%'},
+    kicker:{
+      es:'campañas de servicio público contadas con animación y motion graphics.',
+      en:'public-service campaigns told through animation and motion graphics.',
+      eu:'zerbitzu publikoko kanpainak, animazio eta motion graphics bidez kontatuak.'},
+    p:{
+      es:'campaña del V Plan de Ayuda a Familias —en reels y en las pantallas mupi del metro—, además de piezas sobre las ayudas a familias, la financiación del sistema de dependencia y el Día del Orgullo en Bilbao. en euskera y castellano.',
+      en:'campaign for the 5th Family Support Plan —on reels and on the metro’s digital mupi screens—, plus pieces on family allowances, funding of the long-term care system and Pride Day in Bilbao. in Basque and Spanish.',
+      eu:'Familiei Laguntzeko V. Planaren kanpaina —reel-etan eta metroko mupi pantailetan—, baita familientzako laguntzei, mendekotasun sistemaren finantzaketari eta Bilboko Harrotasun Egunari buruzko piezak ere. euskaraz eta gazteleraz.'},
+    tags:{
+      es:['motion graphics','animación','campaña institucional','exterior · mupi','euskera · castellano'],
+      en:['motion graphics','animation','public campaign','outdoor · mupi','basque · spanish'],
+      eu:['motion graphics','animazioa','kanpaina instituzionala','kanpoko euskarria · mupi','euskara · gaztelania']},
+    items:[ {v:'juventud/mupi-metro', r:'16/9', badge:'mupi · metro'},{v:'juventud/plan-familias'},{v:'juventud/mupi'},{v:'juventud/ayudas'},{v:'juventud/dependencia'},{v:'juventud/orgullo'} ]
+  },
+  {
+    key:'adaka', name:'adaka', sub:{es:'campaña', en:'campaign', eu:'kanpaina'},
+    sector:{es:'tercer sector · campaña de medios', en:'non-profit · media campaign', eu:'hirugarren sektorea · hedabide kanpaina'},
+    cover:{img:'adaka/mupi-portugalete.jpg', pos:'24% 50%'},
+    kicker:{
+      es:'campaña de medios para el Encuentro de Aprendizaje y Servicio 2026 en Portugalete.',
+      en:'media campaign for the 2026 Service-Learning Meeting in Portugalete.',
+      eu:'hedabide kanpaina Portugaleteko 2026ko Ikaskuntza eta Zerbitzua Topaketarako.'},
+    p:{
+      es:'diseño de la creatividad principal y sus adaptaciones a medios digitales y físicos, incluidas las pantallas mupi de ciudadanía de Portugalete: una pieza bilingüe con jerarquía clara que reúne a todas las entidades organizadoras.',
+      en:'design of the key visual and its adaptations for digital and physical media, including Portugalete’s public mupi screens: a bilingual piece with clear hierarchy that brings together all the organising bodies.',
+      eu:'irudi nagusiaren diseinua eta euskarri digital eta fisikoetarako egokitzapenak, Portugaleteko herritarrentzako mupi pantailak barne: hierarkia argiko pieza elebiduna, antolatzaile guztiak biltzen dituena.'},
+    tags:{
+      es:['campaña de medios','key visual','digital','exterior','bilingüe'],
+      en:['media campaign','key visual','digital','outdoor','bilingual'],
+      eu:['hedabide kanpaina','key visual','digitala','kanpoko euskarria','elebiduna']},
+    items:[ {i:'adaka/mupi-portugalete', r:'1600/893', badge:'mupi · portugalete'},{i:'adaka/encuentro-portugalete', r:'1365/768'} ]
+  }
+];
+
+const SO_UI = {
+  es:{ car:'carrusel', cars:'carruseles', video:'vídeo', videos:'vídeos', reel:'reel', piece:'creatividad', reels:'reels', pieces:'creatividades', label:'social media · caso', play:'reproducir con sonido', close:'cerrar',
+       ctaBig:'¿tu marca necesita contenido?', ctaSmall:'hablemos →', of:'de' },
+  en:{ car:'carousel', cars:'carousels', video:'video', videos:'videos', reel:'reel', piece:'creative', reels:'reels', pieces:'creatives', label:'social media · case', play:'play with sound', close:'close',
+       ctaBig:'does your brand need content?', ctaSmall:'let’s talk →', of:'of' },
+  eu:{ car:'karrusel', cars:'karrusel', video:'bideo', videos:'bideo', reel:'reel', piece:'sormen-pieza', reels:'reel', pieces:'sormen-pieza', label:'social media · kasua', play:'soinuarekin erreproduzitu', close:'itxi',
+       ctaBig:'zure markak edukia behar du?', ctaSmall:'hitz egin dezagun →', of:'/' }
+};
+
+let socialKey = null;
+let smSet = 'social';                       // 'social' | 'design'
+const smList = () => smSet === 'design' ? DESIGN : SOCIAL;
+const soLang = () => document.documentElement.lang || 'es';
+const soLoc  = (v) => (v && typeof v === 'object' && !Array.isArray(v)) ? (v[soLang()] || v.es) : v;
+const soUI   = (k) => (SO_UI[soLang()] || SO_UI.es)[k];
+function soCount(c){
+  const isV = x => x.v || x.vsrc;
+  const nv = c.items.filter(x => isV(x) && !x.r).length;   // reels = vídeos verticales
+  const nw = c.items.filter(x => isV(x) && x.r).length;    // otros vídeos (mupi, motion...)
+  const nc = c.items.filter(x => x.carousel).length;  // carruseles (una pieza)
+  const ni = c.items.length - nv - nw - nc;
+  return [
+    nv ? `${nv} ${soUI(nv === 1 ? 'reel' : 'reels')}` : '',
+    nw ? `${nw} ${soUI(nw === 1 ? 'video' : 'videos')}` : '',
+    nc ? `${nc} ${soUI(nc === 1 ? 'car' : 'cars')}` : '',
+    ni ? `${ni} ${soUI(ni === 1 ? 'piece' : 'pieces')}` : ''
+  ].filter(Boolean);
+}
+const SO_ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+const SO_PLAY  = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>';
+
+(function buildSocialGrid(){
+  const grid = document.getElementById('socialGrid');
+  if(!grid) return;
+  const canHover = matchMedia('(hover:hover)').matches;
+
+  SOCIAL.forEach((c, i) => {
+    const li = document.createElement('li');
+    li.className = 'reveal';
+    li.dataset.delay = String(i % 4);
+    const img = SO + c.cover.img;
+    const pos = c.cover.pos ? ` style="object-position:${c.cover.pos}"` : '';
+    const media = c.cover.contain
+      ? `<img class="bg" src="${img}" alt="" loading="lazy" decoding="async"><img class="fg" src="${img}" alt="" loading="lazy" decoding="async">`
+      : `<img src="${img}" alt="" loading="lazy" decoding="async"${pos}>` +
+        (c.cover.video ? `<video muted loop playsinline preload="none" data-src="${SO + c.cover.video}.mp4"${pos}></video>` : '');
+    li.innerHTML = `
+      <button class="social-card" data-key="${c.key}">
+        <span class="media${c.cover.contain ? ' contain' : ''}">
+          ${media}
+          <span class="count"></span>
+          <span class="open" aria-hidden="true">${SO_ARROW}</span>
+        </span>
+        <span class="meta">
+          <span class="name"></span>
+          <span class="sector"></span>
+        </span>
+      </button>`;
+    grid.appendChild(li);
+
+    const card = li.querySelector('.social-card');
+    card.addEventListener('click', () => openSocial(c.key));
+    const v = card.querySelector('video');
+    if(v && canHover){
+      card.addEventListener('mouseenter', () => {
+        if(!v.src) v.src = v.dataset.src;
+        v.play().then(() => card.classList.add('playing')).catch(() => {});
       });
+      card.addEventListener('mouseleave', () => { v.pause(); card.classList.remove('playing'); });
+    }
+  });
+
+  grid.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  if(window.bindCursorHover) bindCursorHover(grid);
+  socialLang();
+})();
+
+function socialLang(){
+  document.querySelectorAll('#socialGrid .social-card[data-key]').forEach(card => {
+    const c = SOCIAL.find(x => x.key === card.dataset.key);
+    card.querySelector('.name').innerHTML = `${soLoc(c.name)}<em> · ${soLoc(c.sub)}</em>`;
+    card.querySelector('.sector').textContent = soLoc(c.sector);
+    card.querySelector('.count').innerHTML = soCount(c).map(t => `<span>${t}</span>`).join('');
+  });
+  document.querySelectorAll('#socialGrid [data-so]').forEach(el => el.textContent = soUI(el.dataset.so));
+  if(socialKey) fillSocial(socialKey, true);
+}
+
+function fillSocial(key, keepStrip){
+  const list = smList();
+  const idx = list.findIndex(x => x.key === key);
+  const c = list[idx];
+  if(!c) return;
+  socialKey = key;
+  const setLabel = smSet === 'design' ? dsUI('label') : soUI('label');
+  document.getElementById('smLabel').textContent = `${String(idx + 1).padStart(2,'0')} / ${setLabel} · ${soLoc(c.sector)}`;
+  document.getElementById('smTitle').innerHTML = `${soLoc(c.name)}<em> — ${soLoc(c.sub)}</em>`;
+  document.getElementById('smKicker').textContent = soLoc(c.kicker);
+  document.getElementById('smP').textContent = soLoc(c.p);
+  document.getElementById('smTags').innerHTML = soLoc(c.tags).map(t => `<span class="tag">${t}</span>`).join('') +
+    (c.link ? `<a class="sm-link" href="${c.link}" target="_blank" rel="noopener">${dsUI('proto')}</a>` : '');
+  if(c.link && window.bindCursorHover) bindCursorHover(document.getElementById('smTags'));
+  document.getElementById('smCount').textContent = soCount(c).join(' · ');
+  document.getElementById('smPrevCase').disabled = idx === 0;
+  document.getElementById('smNextCase').disabled = idx === list.length - 1;
+  document.getElementById('smClose').setAttribute('aria-label', soUI('close'));
+
+  const strip = document.getElementById('smStrip');
+  if(keepStrip){
+    strip.querySelectorAll('.sm-play').forEach(b => b.setAttribute('aria-label', soUI('play')));
+    return;
+  }
+  stopSocialVideos();
+  strip.innerHTML = c.items.map(it => {
+    const badge = it.badge ? `<span class="badge">${it.badge}</span>` : '';
+    if(it.v || it.vsrc){
+      const vsrc = it.vsrc || `${SO + it.v}.mp4`;
+      const poster = it.vsrc ? (it.poster || '') : SO + (it.poster || it.v + '.jpg');
+      const vr = it.r || '9/16';
+      const [vw, vh] = vr.split('/').map(Number);
+      return `<figure class="sm-item${vw / vh > 1 ? ' wide' : ''}" style="aspect-ratio:${vr}">
+        <video src="${vsrc}" poster="${poster}" preload="none" playsinline></video>
+        ${badge || (it.vsrc ? '' : '<span class="badge">reel</span>')}
+        <button class="sm-play" aria-label="${soUI('play')}"><span>${SO_PLAY}</span></button>
+      </figure>`;
+    }
+    if(it.carousel){
+      const alt = `${soLoc(c.name)} · ${soLoc(c.sub)}`;
+      return `<figure class="sm-item is-carousel" style="aspect-ratio:${it.r || '4/5'}">
+        <div class="sm-car">${it.carousel.map((x, i) => `<img src="${SO + x}.jpg" alt="${alt} · ${i + 1}/${it.carousel.length}" loading="lazy" decoding="async">`).join('')}</div>
+        ${badge}
+        <button class="sm-car-btn prev" aria-label="anterior" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <button class="sm-car-btn next" aria-label="siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 18l6-6-6-6"/></svg></button>
+        <div class="sm-car-dots">${it.carousel.map((_, i) => `<span${i ? '' : ' class="on"'}></span>`).join('')}</div>
+      </figure>`;
+    }
+    const r = it.r || '4/5';
+    const [rw, rh] = r.split('/').map(Number);
+    const isrc = it.src || `${SO + it.i}.jpg`;
+    return `<figure class="sm-item${rw / rh > 1 ? ' wide' : ''}${it.contain ? ' contain' : ''}" style="aspect-ratio:${r}">
+      <img src="${isrc}" alt="${soLoc(c.name)} · ${soLoc(c.sub)}" loading="lazy" decoding="async">
+      ${badge}
+    </figure>`;
+  }).join('');
+  strip.scrollLeft = 0;
+
+  // carruseles dentro del visor (una pieza = varias slides)
+  strip.querySelectorAll('.sm-item.is-carousel').forEach(fig => {
+    const car = fig.querySelector('.sm-car');
+    const prev = fig.querySelector('.sm-car-btn.prev'), next = fig.querySelector('.sm-car-btn.next');
+    const dots = [...fig.querySelectorAll('.sm-car-dots span')];
+    const sync = () => {
+      const i = Math.round(car.scrollLeft / car.clientWidth);
+      dots.forEach((d, j) => d.classList.toggle('on', j === i));
+      prev.disabled = i <= 0;
+      next.disabled = i >= dots.length - 1;
+    };
+    prev.addEventListener('click', () => car.scrollBy({ left: -car.clientWidth, behavior:'smooth' }));
+    next.addEventListener('click', () => car.scrollBy({ left:  car.clientWidth, behavior:'smooth' }));
+    car.addEventListener('scroll', () => requestAnimationFrame(sync), { passive:true });
+  });
+
+  strip.querySelectorAll('.sm-item').forEach(fig => {
+    const v = fig.querySelector('video');
+    if(!v) return;
+    fig.querySelector('.sm-play').addEventListener('click', () => {
+      stopSocialVideos(v);
+      fig.classList.add('is-playing');
+      v.controls = true;
+      v.muted = false;
+      v.play().catch(() => {});
     });
-  }, 1000); // 1 segundo después del load para no competir con los recursos vitales
+  });
+  if(window.bindCursorHover) bindCursorHover(strip);
+}
+
+function stopSocialVideos(except){
+  document.querySelectorAll('#smStrip video').forEach(v => { if(v !== except) v.pause(); });
+}
+
+function openSocial(key, set){
+  smSet = set || 'social';
+  const modal = document.getElementById('smModal');
+  fillSocial(key, false);
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.documentElement.style.overflow = 'hidden';
+  document.body.classList.remove('hovering');
+  modal.querySelector('.sm-panel').scrollTop = 0;
+  setTimeout(() => document.getElementById('smClose').focus({preventScroll:true}), 50);
+}
+
+function closeSocial(){
+  const modal = document.getElementById('smModal');
+  if(!modal.classList.contains('open')) return;
+  stopSocialVideos();
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+  document.documentElement.style.overflow = '';
+  document.body.classList.remove('hovering');
+  const card = document.querySelector(`.social-card[data-key="${socialKey}"], .design-card[data-key="${socialKey}"]`);
+  socialKey = null;
+  if(card) card.focus({preventScroll:true});
+}
+
+(function socialModalControls(){
+  const modal = document.getElementById('smModal');
+  if(!modal) return;
+  const strip = document.getElementById('smStrip');
+  modal.querySelectorAll('[data-sm-close]').forEach(el => el.addEventListener('click', closeSocial));
+  const step = dir => {
+    const list = smList();
+    const idx = list.findIndex(x => x.key === socialKey);
+    const next = list[idx + dir];
+    if(next){ fillSocial(next.key, false); modal.querySelector('.sm-panel').scrollTop = 0; }
+  };
+  document.getElementById('smPrevCase').addEventListener('click', () => step(-1));
+  document.getElementById('smNextCase').addEventListener('click', () => step(1));
+  const scrollStrip = dir => strip.scrollBy({ left: dir * strip.clientWidth * 0.8, behavior:'smooth' });
+  document.getElementById('smStripPrev').addEventListener('click', () => scrollStrip(-1));
+  document.getElementById('smStripNext').addEventListener('click', () => scrollStrip(1));
+  strip.addEventListener('wheel', e => {
+    if(Math.abs(e.deltaY) > Math.abs(e.deltaX) && strip.scrollWidth > strip.clientWidth){
+      const atStart = strip.scrollLeft <= 0 && e.deltaY < 0;
+      const atEnd = strip.scrollLeft + strip.clientWidth >= strip.scrollWidth - 1 && e.deltaY > 0;
+      if(!atStart && !atEnd){ e.preventDefault(); strip.scrollLeft += e.deltaY; }
+    }
+  }, { passive:false });
+  addEventListener('keydown', e => {
+    if(!modal.classList.contains('open')) return;
+    if(e.key === 'Escape') closeSocial();
+    else if(e.key === 'ArrowRight') scrollStrip(1);
+    else if(e.key === 'ArrowLeft') scrollStrip(-1);
+  });
+})();
+
+/* ========== 31 · DISEÑO GRÁFICO · desplegable + visor compartido ==========
+   Los textos salen de PROJECTS; las imágenes, de assets/design (optimizadas). */
+const DESIGN_ORDER = ['cheerfy','identidad','hilando','arboretum','triptico','portada','berlioz','mercado','procesos','eye','smart','animacion'];
+const DS_DIMS = {
+  'hilando':'334/340','arboretum':'459/787','berlioz-poster':'1357/1920','cheerfy':'4219/3375','identidad-p0':'2778/3912',
+  'eye-p0':'1440/810','moclup_vinilos':'7494/5402','mockup_tote_bag':'5000/3730','mockup_spoti':'1920/1080',
+  'procesos-p0':'1684/2382','pagina_1_mockup':'4500/3000','pagina_2_mockup':'4500/3000','pagina_3_mockup':'4500/3000',
+  'lolita-libro':'3375/4219','smart-video':'1080/1920','animacion-video':'2400/2304'
+};
+const DS_UI = {
+  es:{ label:'diseño gráfico · proyecto', proto:'ver prototipo en figma →', open:'desplegar todo', close:'plegar todo' },
+  en:{ label:'graphic design · project', proto:'view figma prototype →', open:'expand all', close:'collapse all' },
+  eu:{ label:'diseinu grafikoa · proiektua', proto:'figma prototipoa ikusi →', open:'dena zabaldu', close:'dena itxi' }
+};
+const dsUI = (k) => (DS_UI[soLang()] || DS_UI.es)[k];
+const dsBase = (path) => path.split('/').pop().replace(/\.\w+$/, '');
+
+const DESIGN = DESIGN_ORDER.map(key => {
+  const p = PROJECTS[key];
+  const text = (l) => [p.p1 && p.p1[l], p.p2 && p.p2[l]].filter(Boolean).join(' ');
+  return {
+    key, name: p.title, sub: p.sub, sector: p.label, kicker: p.kicker,
+    p: { es: text('es'), en: text('en'), eu: text('eu') },
+    tags: p.tags, link: p.link,
+    items: p.slides.map(sl => {
+      if(sl.video){
+        const b = dsBase(sl.video);
+        return { vsrc: sl.video, poster: `assets/design/${b}-poster.jpg`, r: DS_DIMS[b + '-video'] };
+      }
+      const b = dsBase(sl.img);
+      return { src: `assets/design/${b}.jpg`, r: DS_DIMS[b] || p.ratio, contain: sl.type === 'logo-poster' };
+    })
+  };
 });
+
+function designLang(){
+  document.querySelectorAll('.design-card').forEach(card => {
+    const p = PROJECTS[card.dataset.key];
+    if(!p) return;
+    card.querySelector('.name').innerHTML = `${p.title}<em> · ${soLoc(p.sub)}</em>`;
+    card.querySelector('.meta').textContent = soLoc(p.label);
+  });
+  updateDesignToggle();
+}
+function updateDesignToggle(){
+  const btn = document.getElementById('designToggle');
+  if(!btn) return;
+  const cats = [...document.querySelectorAll('.design-cat')];
+  btn.textContent = cats.every(d => d.open) ? dsUI('close') : dsUI('open');
+}
+
+(function designUI(){
+  const btn = document.getElementById('designToggle');
+  if(!btn) return;
+  const cats = [...document.querySelectorAll('.design-cat')];
+  btn.addEventListener('click', () => {
+    const all = cats.every(d => d.open);
+    cats.forEach(d => d.open = !all);
+    updateDesignToggle();
+  });
+  cats.forEach(d => d.addEventListener('toggle', updateDesignToggle));
+  document.querySelectorAll('.design-card').forEach(card =>
+    card.addEventListener('click', () => openSocial(card.dataset.key, 'design')));
+  document.querySelectorAll('.design-cat summary').forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+  });
+  designLang();
+})();
 
 </script>
 </body>
